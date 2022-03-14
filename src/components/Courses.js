@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Courses() {
+export default function Courses() {
   return (
     <div>
       <header>
