@@ -7,11 +7,11 @@ li {
   margin: 2%;
   font-size: 175%;
 
-  font-family: meny-font;
+  font-family: roboto;
 }
 ul {
   width: 100%;
-  background-color: rgb(123, 173, 128, 1);
+  background-color: rgb(13, 97, 97);
   height: 100px;
   display: flex;
   flex-direction: row;
@@ -19,6 +19,13 @@ ul {
 }
 
 .link {
-  color: #532b05;
+  color: #0ed4d4;
   text-decoration: none;
+}
+
+.headerBackgroundImg {
+  background-image: url("../img/binary.jpg");
+
+  height: 200px;
+  margin-bottom: -20px;
 }

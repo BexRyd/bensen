@@ -5,6 +5,7 @@ import "../css/Header.css";
 export default function Header() {
   return (
     <div>
+      <div className="headerBackgroundImg"></div>
       <header>
         <ul>
           <li>
