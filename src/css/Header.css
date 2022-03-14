@@ -4,18 +4,21 @@ body {
 li {
   display: inline;
   list-style-type: none;
-  margin: 2%;
+
+  margin-left: 5%;
   font-size: 175%;
 
-  font-family: roboto;
+  font-family: lora Regular;
 }
 ul {
   width: 100%;
   background-color: rgb(13, 97, 97);
-  height: 100px;
+  height: 70px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  padding-bottom: 20px;
+  position: relative;
 }
 
 .link {
@@ -28,4 +31,10 @@ ul {
 
   height: 200px;
   margin-bottom: -20px;
+}
+
+.logo {
+  position: absolute;
+  top: -100px;
+  right: 100px;
 }

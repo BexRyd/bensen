@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../css/Header.css";
+import bensenLogo from "../img/bensenLogo.png";
 
 export default function Header() {
   return (
@@ -33,6 +34,7 @@ export default function Header() {
               Ansökan
             </Link>
           </li>
+          <img className="logo" src={bensenLogo} alt="logo" />
         </ul>
       </header>
     </div>
