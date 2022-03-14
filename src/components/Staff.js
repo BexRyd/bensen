@@ -5,6 +5,7 @@ function Staff() {
   return (
     <div>
       <Header />
+      <Footer />
     </div>
   );
 }
