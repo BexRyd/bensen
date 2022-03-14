@@ -17,7 +17,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link className="link" to="/Course">
+            <Link className="link" to="/Courses">
               Kurser
             </Link>
           </li>
