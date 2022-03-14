@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Education from "./components/Education";
+import Courses from "./components/Courses";
+import Staff from "./components/Staff";
+import Apply from "./components/Apply";
 
 ReactDOM.render(
   <React.StrictMode>
