@@ -1,12 +1,12 @@
 import React from "react";
 
-function Education() {
+function Home() {
   return (
     <div>
       <header>
         <ul>
           <li>
-            <Link className="link" to="/">
+            <Link className="currentPage" to="/">
               Hem
             </Link>
           </li>
@@ -21,7 +21,7 @@ function Education() {
             </Link>
           </li>
           <li>
-            <Link className="currentPage" to="/Education">
+            <Link className="link" to="/Education">
               Utbildning
             </Link>
           </li>
@@ -35,5 +35,3 @@ function Education() {
     </div>
   );
 }
-
-export default Education
