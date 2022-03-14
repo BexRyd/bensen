@@ -34,7 +34,10 @@ ul {
 }
 
 .logo {
+  width: 450px;
+  height: 300px;
   position: absolute;
   top: -100px;
-  right: 100px;
+  right: 10px;
+ 
 }
