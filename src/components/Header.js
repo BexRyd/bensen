@@ -8,7 +8,7 @@ export default function Header() {
     <div>
       <div className="headerBackgroundImg"></div>
       <header>
-        <ul>
+        <ul className="headerList">
           <li>
             <Link className="link" to="/">
               Hem
