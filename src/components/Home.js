@@ -8,7 +8,10 @@ function Home() {
   return (
     <div>
       <Header />
-      <div className="homeContainer"></div>
+      <div className="homeContainer">
+        <p id="textAnimation">Bensen Education</p>
+      </div>
+
       <Footer />
     </div>
   );
