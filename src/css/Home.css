@@ -10,3 +10,8 @@ body {
   margin-top: 0;
   padding-top: 0px;
 }
+
+#textAnimation {
+  color: azure;
+  position: absolute;
+}
