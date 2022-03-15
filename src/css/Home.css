@@ -10,8 +10,39 @@ body {
   margin-top: 0;
   padding-top: 0px;
 }
+@keyframes textFlow {
+  from {
+    color: black;
+    left: -50%;
+    top: 35%;
+  }
+  to {
+    display: block;
+    left: 12%;
+    top: 35%;
+    color: white;
+  }
+}
 
-#textAnimation {
-  color: azure;
+.textAnimation {
+  color: white;
   position: absolute;
+  display: list-item;
+  list-style-type: circle;
+  width: 50%;
+  animation: textFlow 5s ease;
+  display: hidden;
+  left: 12%;
+  top: 35%;
+
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: relative;
+
+  font-size: 120%;
+  background-color: black;
+  font-family: "Lora", serif;
 }

@@ -9,7 +9,13 @@ function Home() {
     <div>
       <Header />
       <div className="homeContainer">
-        <p id="textAnimation">Bensen Education</p>
+        <ul className="textAnimation">
+          <li className="textAnimation">Frontend</li>
+          <li className="textAnimation">Backend</li>
+          <li className="textAnimation">UX/UI</li>
+          <li className="textAnimation">Designer</li>
+          <li className="textAnimation">Graisk Design</li>
+        </ul>
       </div>
 
       <Footer />
