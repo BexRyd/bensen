@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "./Header"
-import Footer from "./Footer"
+import Header from "./Header";
+import Footer from "./Footer";
+import guy from "../img/guy.png";
 
 function Education() {
   return (
     <div>
-   <Header />
-   <Footer />
+      <Header />
+      <img className="girlImg" src={guy} alt="computer" />
+      <Footer />
     </div>
   );
 }
