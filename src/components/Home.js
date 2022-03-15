@@ -10,8 +10,8 @@ function Home() {
     <div className="container">
       <Header />
 
-      <img className="co" src={Co} alt="computer" />
       <div classN1ame="homeContainer">
+        <img className="co" src={Co} alt="computer" />
         <ul className="textAnimation">
           <li className="textAnimation">Frontend</li>
           <li className="textAnimation">Backend</li>
