@@ -1,0 +1,12 @@
+body {
+  background-color: black;
+}
+.homeContainer {
+  background-image: url(../img/co.2.png);
+  height: 130vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-top: 0;
+  padding-top: 0px;
+}
