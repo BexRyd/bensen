@@ -1,14 +1,17 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import Co from "../img/co.3.png";
 
 import "../css/Home.css";
 
 function Home() {
   return (
-    <div>
+    <div className="container">
       <Header />
-      <div className="homeContainer">
+
+      <img className="co" src={Co} alt="computer" />
+      <div classN1ame="homeContainer">
         <ul className="textAnimation">
           <li className="textAnimation">Frontend</li>
           <li className="textAnimation">Backend</li>
