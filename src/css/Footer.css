@@ -2,7 +2,7 @@ body {
   position: relative;
 }
 footer {
-  position: absolute;
+  position: fixed;
   text-align: center;
   bottom: 0;
 
