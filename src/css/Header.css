@@ -10,7 +10,7 @@ li {
 
   font-family: "Lora", serif;
 }
-ul {
+.headerList {
   width: 100%;
   background-color: rgb(13, 97, 97);
   height: 70px;

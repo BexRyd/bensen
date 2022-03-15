@@ -1,0 +1,8 @@
+body {
+  box-sizing: border-box;
+}
+
+.coursesMainSection {
+  height: 130vh;
+  color: white;
+}
