@@ -1,13 +1,14 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Computer from "../img/co.jpg";
+
+import "../css/Home.css";
 
 function Home() {
   return (
     <div>
       <Header />
-      <img src={Computer} alt="Computer" className="frontPageImg" />
+      <div className="homeContainer"></div>
       <Footer />
     </div>
   );

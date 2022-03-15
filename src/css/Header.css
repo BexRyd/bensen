@@ -19,6 +19,8 @@ ul {
   align-items: center;
   padding-bottom: 20px;
   position: relative;
+  margin-bottom: 0px;
+  box-shadow: 0 0 5px 0 rgb(5, 5, 5);
 }
 
 .link {
@@ -39,5 +41,4 @@ ul {
   position: absolute;
   top: -130px;
   right: 10px;
- 
 }
