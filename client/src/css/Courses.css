@@ -6,3 +6,15 @@ body {
   height: 130vh;
   color: white;
 }
+.teacherSelect {
+  background-color: white;
+  color: black;
+  width: 20%;
+}
+
+.addedCoursesList {
+  height: 40vh;
+  width: 20%;
+  background-color: white;
+  color: black;
+}

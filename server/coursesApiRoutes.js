@@ -1,29 +1,87 @@
 const express = require("express");
 
-const coursesRoutes = express.Router();
+const routes = express.Router();
+
+let teachersArray = ["Janne Andersson", "Kalle Pettersson", "Pelle Svensson"];
+
+let courses = [];
+
 // om jag ska hämta lärare från Staff, är de då den routen jag ska ha här eller Courses
-coursesRoutes.get("/Courses", (req, res) => {
+routes.get("/Courses", (req, res) => {
   console.log({
     method: req.method,
-    teacher: "first and lastname",
   });
   res.json({
     status: "success",
     method: req.method,
-    teacher: "first and lastname",
+    data: teachersArray,
   });
 });
 
-// coursesRoutes.post("/Courses", (req, res) => {
-//     console.log({
-//       method: req.method,
-//       teacher: "first and lastname",
-//     });
-//     res.json({
-//       status: "success",
-//       method: req.method,
-//       teacher: "first and lastname",
-//     });
-//   });
+routes.post("/Courses", (req, res) => {
+  console.log({
+    method: req.method,
+    body: req.body,
+  });
+  const course = {
+    id: req.body.id,
+    coursename: req.body.coursename,
+    teacher: teachersArray,
+    courselength: req.body.courselength,
+    description: req.body.coursedescription,
+  };
 
-module.exports = coursesRoutes;
+  courses.push(course);
+
+  res.json({
+    status: "successfully created new course",
+    method: req.method,
+    data: course,
+  });
+});
+
+routes.put("/Courses/:courseId", (req, res) => {
+  const courseId = req.params.courseId;
+  const coursename = req.body.coursename;
+  const teacher = teachersArray;
+  const courselength = req.body.courselength;
+  const description = req.body.coursedescription;
+
+  const newCourse = {
+    id: courseId,
+    coursename: coursename,
+    teacher: teacher,
+    courselength: courselength,
+    coursedescription: description,
+  };
+
+  const courseIndex = courses.findIndex((course) => course.id == courseId);
+  courses[courseIndex].coursename = coursename;
+  courses[courseIndex].teacher = teacher;
+  courses[courseIndex].courselength = courselength;
+  courses[courseIndex].description = coursedescription;
+
+  res.json({
+    status: "successfully updated course",
+    method: req.method,
+    data: newCourse,
+  });
+});
+
+routes.delete("/Courses/:courseId", (req, res) => {
+  const courseId = req.params.courseId;
+
+  const courseIndex = courses.findIndex((course) => course.id == courseId);
+
+  //removes amount of elements (1 in this case)
+  courses.splice(courseIndex, 1);
+
+  //sends back the response that we have removed the course
+  res.json({
+    status: "deleted course",
+    method: req.method,
+    data: newCourse,
+  });
+});
+
+module.exports = routes;
