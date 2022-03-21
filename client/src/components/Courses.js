@@ -13,36 +13,54 @@ import { useState } from "react";
 
 function Courses() {
   const [teacher, setTeacher] = useState();
-  const [courseName, setCourseName] = useState();
-  const [courseLength, setCourseLenght] = useState();
-  const [courseDescription, setCourseDescription] = useState();
-
+  const [course, setCourse] = useState();
+  const [description, setDescription] = useState();
+  const [length, setLength] = useState();
   const choosenTeacher = (e) => setTeacher(e.target.value);
+  const addedCourse = (e) => setCourse(e.value);
+  const addedDescription = (e) => setDescription(e.value);
+  const addedLength = (e) => setLength(e.value);
+
   return (
     <div>
       <Header />
-      <section className="coursesMainSection">
-        <input placeholder="Kursnamn" value={courseName}></input>
-        <input placeholder="Kursbeskrivning" value={courseDescription}></input>
-        <select value={teacher} onChange={choosenTeacher}>
-          <option>Janne Karlsson</option>
-          <option>Kalle Göransson</option>
-          <option>Pelle Svensson</option>
-          placeholder="Välj Utbildningsledare"
-        </select>
-        <input placeholder="Kurslängd" value={courseLength}></input>
+      <div className="coursesMainSection">
+        <form className="createCourseForm">
+          <input
+            className="inputField"
+            value={course}
+            placeholder="Kursnamn"
+            onClick={addedCourse}
+          ></input>
+          <input
+            value={description}
+            placeholder="Kursbeskrivning"
+            onClick={addedDescription}
+          ></input>
+          <select value={teacher} onChange={choosenTeacher}>
+            <option>Välj lärare.....</option>
+            <option>Janne Karlsson</option>
+            <option>Kalle Göransson</option>
+            <option>Pelle Svensson</option>
+            placeholder="Välj Lärare"
+          </select>
+          <input
+            className="inputLength"
+            value={length}
+            placeholder="Kurslängd i veckor"
+            onClick={addedLength}
+          ></input>
 
-        <button>Lägg till kurs</button>
-
+          <button type="submit">Skapa ny kurs</button>
+        </form>
         <div className="addedCoursesList">
           <h3>TILLGÄNGLIGA KURSER</h3>
-          <h4>{courseName}</h4>
-          <p>{courseDescription}</p>
-          <p>{teacher}</p>
-          <p>{courseLength}</p>
+          <h4>Kursnamn: {course}</h4>
+          <p>Kursbeskrivning: {description}</p>
+          <p>Lärare: {teacher}</p>
+          <p>Kurslängd: {length} veckor</p>
         </div>
-      </section>
-
+      </div>
       <Footer />
     </div>
   );
