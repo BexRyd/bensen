@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../css/Courses.css";
+import { get, post } from "../utility/apiCourses";
 
 import { useState } from "react";
 // const teachersArray = [
@@ -12,6 +13,15 @@ import { useState } from "react";
 // ];
 
 function Courses() {
+  get("/Courses").then((data) => console.log(data));
+  post("/Courses", {
+    id: 1,
+    coursename: "testcoursename",
+    teacher: "testteacher",
+    courselength: "testlength",
+    coursedescription: "testdescription",
+  });
+
   const [teacher, setTeacher] = useState();
   const [course, setCourse] = useState();
   const [description, setDescription] = useState();

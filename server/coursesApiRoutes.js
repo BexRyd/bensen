@@ -28,7 +28,7 @@ routes.post("/Courses", (req, res) => {
     coursename: req.body.coursename,
     teacher: teachersArray,
     courselength: req.body.courselength,
-    description: req.body.coursedescription,
+    coursedescription: req.body.coursedescription,
   };
 
   courses.push(course);
@@ -45,21 +45,21 @@ routes.put("/Courses/:courseId", (req, res) => {
   const coursename = req.body.coursename;
   const teacher = teachersArray;
   const courselength = req.body.courselength;
-  const description = req.body.coursedescription;
+  const coursedescription = req.body.coursedescription;
 
   const newCourse = {
     id: courseId,
     coursename: coursename,
     teacher: teacher,
     courselength: courselength,
-    coursedescription: description,
+    coursedescription: coursedescription,
   };
 
   const courseIndex = courses.findIndex((course) => course.id == courseId);
   courses[courseIndex].coursename = coursename;
   courses[courseIndex].teacher = teacher;
   courses[courseIndex].courselength = courselength;
-  courses[courseIndex].description = coursedescription;
+  courses[courseIndex].coursedescription = coursedescription;
 
   res.json({
     status: "successfully updated course",
@@ -80,7 +80,7 @@ routes.delete("/Courses/:courseId", (req, res) => {
   res.json({
     status: "deleted course",
     method: req.method,
-    data: newCourse,
+    data: courseId,
   });
 });
 
