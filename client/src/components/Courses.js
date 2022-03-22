@@ -2,15 +2,8 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../css/Courses.css";
-import { get, post } from "../utility/apiCourses";
-
+import { get, post } from "../utility/apiCourses"; // get the same from Rebecca to add api to teacher
 import { useState } from "react";
-// const teachersArray = [
-//   { label: "Janne Andersson", value: 2 },
-//   { label: "Kalle Pettersson", value: 4 },
-//   { lable: "Pelle Svensson", value: 3 },
-//   { lable: "Palle Svensson", value: 1 },
-// ];
 
 function Courses() {
   get("/Courses").then((data) => console.log(data));
@@ -77,4 +70,3 @@ function Courses() {
 }
 
 export default Courses;
-// fetch('/api/create', {method: 'POST',body: JSON.stringify([1,2,3,4,5]),headers: {'Content-Type': 'application/json'}}).then((response) => response.json()).then((data) => console.log(data))
