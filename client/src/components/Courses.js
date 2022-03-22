@@ -2,21 +2,25 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../css/Courses.css";
-import { get, post } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
+import { get, post, put, remove } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
 import { useState, useEffect } from "react";
 
 function Courses() {
-  const [teacher, setTeacher] = useState();
-  const [course, setCourse] = useState();
-  const [description, setDescription] = useState();
-  const [length, setLength] = useState();
-  const choosenTeacher = (e) => setTeacher(e.target.value);
-  const addedCourse = (e) => setCourse(e.value);
-  const addedDescription = (e) => setDescription(e.value);
-  const addedLength = (e) => setLength(e.value);
+  const [teacher, setTeacher] = useState([]);
+  const [counter, setcounter] = useState(Date.now());
+  const [courseName, setCourseName] = useState();
+  const [courseDescription, setCourseDescription] = useState();
+  const [courseLength, setCourseLength] = useState();
+
+  // const choosenTeacher = (e) => setTeacher(e.target.value);
+  const addedCourse = (e) => setCourseName(e.target.value);
+  const addedDescription = (e) => setCourseDescription(e.target.value);
+  const addedLength = (e) => setCourseLength(e.target.value);
+  useEffect(() => {
+    get("/Courses").then((response) => setCourseName(response.data));
+  }, []);
   useEffect(() => {
     get("/Staff").then((response) => setTeacher(response.data));
-    get("/Courses").then((response) => setCourse(response.data));
   }, []);
 
   post("/Courses", {
@@ -33,47 +37,57 @@ function Courses() {
       <div className="coursesMainSection">
         <form className="createCourseForm">
           <input
+            value={courseName}
             className="inputField"
-            value={course}
             placeholder="Kursnamn"
-            onClick={addedCourse}
+            onChange={addedCourse}
           ></input>
           <input
-            value={description}
+            value={courseDescription}
             placeholder="Kursbeskrivning"
-            onClick={addedDescription}
+            onChange={addedDescription}
           ></input>
-          <select value={teacher} onChange={choosenTeacher}>
-            <option>Välj lärare.....</option>
-            {teacher.map((teacher) => {
+          <div>
+            {teacher.map((teachers) => {
               return (
-                <div>
-                  <option className="staffName" key={teacher.id}>
-                    {`${teacher.firstName} ${teacher.lastName}`}
+                <div key={teachers.id}>
+                  <option className="staffName">
+                    {`${teachers.firstName} ${teachers.lastName}`}
                   </option>
                 </div>
               );
             })}
-            <option>Janne Karlsson</option>
-            <option>Kalle Göransson</option>
-            <option>Pelle Svensson</option>
-            placeholder="Välj Lärare"
-          </select>
+          </div>
+
           <input
             className="inputLength"
-            value={length}
+            value={courseLength}
             placeholder="Kurslängd i veckor"
-            onClick={addedLength}
+            on={addedLength}
           ></input>
 
-          <button type="submit">Skapa ny kurs</button>
+          <button
+            onClick={() => {
+              post("/Courses", {
+                id: counter,
+                coursename: courseName,
+                courselength: courseLength,
+                coursedescription: courseDescription,
+              });
+
+              setcounter(Date.now());
+              get("/Courses").then((response) => setCourseName(response.data));
+            }}
+          >
+            Skapa ny kurs
+          </button>
         </form>
         <div className="addedCoursesList">
           <h3>TILLGÄNGLIGA KURSER</h3>
-          <h4>Kursnamn: {course}</h4>
-          <p>Kursbeskrivning: {description}</p>
-          <p>Lärare: {teacher}</p>
-          <p>Kurslängd: {length} veckor</p>
+          <h4>Kursnamn: {courseName}</h4>
+          <p>Kursbeskrivning: {courseDescription}</p>
+          <p>Lärare: {teacher.firstName}</p>
+          <p>Kurslängd: {courseLength} veckor</p>
         </div>
       </div>
       <Footer />
