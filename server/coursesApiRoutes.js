@@ -1,9 +1,21 @@
 const express = require("express");
-
 const routes = express.Router();
-
-let teachersArray = ["Janne Andersson", "Kalle Pettersson", "Pelle Svensson"];
-
+let coursesArray = [
+  {
+    id: Date.now(),
+    coursename: "Frontend",
+    coursedescription: "LoremIpsum",
+    teacher: "Dan Kingbrandt",
+    courselength: "5weeks",
+  },
+  {
+    id: Date.now(),
+    coursename: "Backend",
+    coursedescription: "LoremIpsum",
+    teacher: "Rebecca Rydgran",
+    courselength: "200weeks",
+  },
+];
 let courses = [];
 
 // om jag ska hämta lärare från Staff, är de då den routen jag ska ha här eller Courses
@@ -14,7 +26,7 @@ routes.get("/Courses", (req, res) => {
   res.json({
     status: "success",
     method: req.method,
-    data: teachersArray,
+    data: coursesArray,
   });
 });
 
@@ -23,10 +35,10 @@ routes.post("/Courses", (req, res) => {
     method: req.method,
     body: req.body,
   });
+
   const course = {
     id: req.body.id,
     coursename: req.body.coursename,
-    teacher: teachersArray,
     courselength: req.body.courselength,
     coursedescription: req.body.coursedescription,
   };
@@ -41,16 +53,14 @@ routes.post("/Courses", (req, res) => {
 });
 
 routes.put("/Courses/:courseId", (req, res) => {
-  const courseId = req.params.courseId;
+  const courseId = Number(req.params.courseId);
   const coursename = req.body.coursename;
-  const teacher = teachersArray;
   const courselength = req.body.courselength;
   const coursedescription = req.body.coursedescription;
 
   const newCourse = {
     id: courseId,
     coursename: coursename,
-    teacher: teacher,
     courselength: courselength,
     coursedescription: coursedescription,
   };
@@ -60,6 +70,12 @@ routes.put("/Courses/:courseId", (req, res) => {
   courses[courseIndex].teacher = teacher;
   courses[courseIndex].courselength = courselength;
   courses[courseIndex].coursedescription = coursedescription;
+
+  console.log({
+    method: req.method,
+    body: req.body,
+    data: newCourse,
+  });
 
   res.json({
     status: "successfully updated course",
