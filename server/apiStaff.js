@@ -2,18 +2,26 @@ const express = require("express");
 const router = express.Router();
 
 let staffs = [];
+const excistingStaff = {
+  id: Date.now(),
+  firstName: "Gargamel",
+  lastName: "Bishop",
+  email: "Gargamel@bishop123",
+  account: 1245 - 65412378,
+};
 
-router.get("/Staff", (request, response) => {
-  console.log({
-    method: request.method,
-  });
+staff.push(excistingStaff),
+  router.get("/Staff", (request, response) => {
+    console.log({
+      method: request.method,
+    });
 
-  response.json({
-    status: "success",
-    method: request.method,
-    data: staffs,
+    response.json({
+      status: "success",
+      method: request.method,
+      data: staffs,
+    });
   });
-});
 
 router.post("/Staff", (request, response) => {
   console.log({
