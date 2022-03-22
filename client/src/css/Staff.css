@@ -1,5 +1,41 @@
 .girlImg {
-  margin-left: 10%;
   margin-top: 5%;
   margin-bottom: 40%;
+}
+
+.staffName {
+  color: aliceblue;
+  display: block;
+  list-style-type: none;
+
+  font-family: "Lora", serif;
+}
+
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.staffForm {
+  padding-top: 200px;
+}
+.staffList {
+  margin: auto;
+  border: solid;
+  border-color: aliceblue;
+  width: 1200px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  width: 200px;
+  margin-left: 50px;
+}
+
+.inputBtn {
+  margin: 50px;
 }

@@ -13,6 +13,12 @@ const handleStaticFiles = express.static(
 );
 app.use(handleStaticFiles);
 app.use("", routes);
+const router = require("./apiStaff");
+const educationApi = require("./apiEducation");
+
+app.use(educationApi);
+
+app.use(router);
 
 app.listen(8080, () => {
   console.log("Server started on Port ");
