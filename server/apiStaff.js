@@ -10,7 +10,7 @@ const excistingStaff = {
   account: 1245 - 65412378,
 };
 
-staff.push(excistingStaff),
+staffs.push(excistingStaff),
   router.get("/Staff", (request, response) => {
     console.log({
       method: request.method,
