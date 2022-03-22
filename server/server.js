@@ -7,7 +7,7 @@ const educationApi = require('./apiEducation')
 const app = express()
 app.use(bodyParser.json())
 
-app.use('/education',educationApi)
+app.use(educationApi)
 
 const handleStaticFiles = express.static(path.join(__dirname, '..', 'client', 'build'))
 app.use(handleStaticFiles)
