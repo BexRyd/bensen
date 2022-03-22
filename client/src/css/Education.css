@@ -1,0 +1,17 @@
+.getLi{
+    color: white; 
+    display: block;
+}
+
+.liBox{
+   
+    border: 2px solid white;
+    margin-top: 150px;
+   
+}
+
+.Box{
+    display: flexbox;
+    flex-direction: row;
+
+}

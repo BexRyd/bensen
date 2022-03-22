@@ -1,7 +1,8 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const path = require("path");
 const router = require("./apiStaff");
-const bodyParser = require("body-parser");
+const educationApi = require("./apiEducation");
 
 const app = express();
 
@@ -10,6 +11,8 @@ const handleStaticFiles = express.static(
 );
 app.use(handleStaticFiles);
 app.use(bodyParser.json());
+
+app.use(educationApi);
 
 app.use(router);
 
