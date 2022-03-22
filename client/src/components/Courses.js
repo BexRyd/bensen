@@ -2,8 +2,10 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../css/Courses.css";
-import { get, post } from "../utility/apiCourses"; // get the same from Rebecca to add api to teacher
+import { get, post } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
 import { useState } from "react";
+
+
 
 function Courses() {
   get("/Courses").then((data) => console.log(data));
@@ -24,6 +26,9 @@ function Courses() {
   const addedDescription = (e) => setDescription(e.value);
   const addedLength = (e) => setLength(e.value);
 
+
+
+
   return (
     <div>
       <Header />
@@ -42,6 +47,15 @@ function Courses() {
           ></input>
           <select value={teacher} onChange={choosenTeacher}>
             <option>Välj lärare.....</option>
+            {staff.map((staff) => {
+                  return (
+                    <div>
+                      <li className="staffName" key={staff.id}>
+                        { Id:${staff.id}   ${staff.firstName}      ${staff.lastName}       ${staff.email}    ${staff.account}}
+                      </li>{" "}
+                    </div>
+                  );
+                })}
             <option>Janne Karlsson</option>
             <option>Kalle Göransson</option>
             <option>Pelle Svensson</option>
