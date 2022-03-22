@@ -8,9 +8,15 @@ const app = express()
 
 app.use(bodyParser.json())
 
-let educationLists = []   // todos
+let educationLists = [
+  {
+    utbildning:"Frontend Utveckling",
+    utbildningsledare:"Dan Kingbrant"
+  }
+] 
+  // todos
 
-router.get('/read', (request, response)=>{
+router.get('/Education', (request, response)=>{
     console.log({
         method: request.method,
 
@@ -22,16 +28,17 @@ router.get('/read', (request, response)=>{
     })
 })
 
-router.post('/create',(request,response)=>{            // bodyparser behövs för att rendera text vi vill posta in
+router.post('/Education',(request,response)=>{            // bodyparser behövs för att rendera text vi vill posta in
   console.log({
       method: request.method,
       body: request.body,
+      
 
   })
   const educationList = {
     id: request.body.id,
     utbildningsledare: request.body.utbildningsledare,
-    beskrivning: request.body.beskrivning,
+    utbildning: request.body.utbildning,
 
   }
 educationLists.push(educationList)
@@ -44,16 +51,16 @@ educationLists.push(educationList)
 
 })
 // fetch('/api/update/7') // frontend
-router.put('/update/:educationListId', (request,response)=>{
+router.put('/Education/:educationListId', (request,response)=>{
   const educationListId = Number (request.params.educationListId)
 
   const utbildningsledare = request.body.utbildningsledare
-  const beskrivning = request.body.beskrivning
+  const utbildning = request.body.utbildning
   
   const newEducationList ={
     id:educationListId,
     utbildningsledare: utbildningsledare,
-    beskrivning:beskrivning,
+    utbildning:utbildning,
   }
 
   const educationListIndex = educationLists.findIndex((educationList)=>educationList.id === educationListId) // hämtar ut index för todo vi vill uppdatera
@@ -69,7 +76,7 @@ router.put('/update/:educationListId', (request,response)=>{
 })
 
 
-router.delete('/delete/:educationListId', (request,response)=>{
+router.delete('/Education/:educationListId', (request,response)=>{
   const educationListId = request.params.educationListId
 
   const  educationListIndex = educationLists.findIndex((educationList)=>educationList.id == educationListId)
