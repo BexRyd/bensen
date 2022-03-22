@@ -3,20 +3,9 @@ import Header from "./Header";
 import Footer from "./Footer";
 import "../css/Courses.css";
 import { get, post } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
-import { useState } from "react";
-
-
+import { useState, useEffect } from "react";
 
 function Courses() {
-  get("/Courses").then((data) => console.log(data));
-  post("/Courses", {
-    id: 1,
-    coursename: "testcoursename",
-    teacher: "testteacher",
-    courselength: "testlength",
-    coursedescription: "testdescription",
-  });
-
   const [teacher, setTeacher] = useState();
   const [course, setCourse] = useState();
   const [description, setDescription] = useState();
@@ -25,9 +14,18 @@ function Courses() {
   const addedCourse = (e) => setCourse(e.value);
   const addedDescription = (e) => setDescription(e.value);
   const addedLength = (e) => setLength(e.value);
+  useEffect(() => {
+    get("/Staff").then((response) => setTeacher(response.data));
+    get("/Courses").then((response) => setCourse(response.data));
+  }, []);
 
-
-
+  post("/Courses", {
+    id: 1,
+    coursename: "testcoursename",
+    teacher: "testteacher",
+    courselength: "testlength",
+    coursedescription: "testdescription",
+  });
 
   return (
     <div>
@@ -47,15 +45,15 @@ function Courses() {
           ></input>
           <select value={teacher} onChange={choosenTeacher}>
             <option>Välj lärare.....</option>
-            {staff.map((staff) => {
-                  return (
-                    <div>
-                      <li className="staffName" key={staff.id}>
-                        { Id:${staff.id}   ${staff.firstName}      ${staff.lastName}       ${staff.email}    ${staff.account}}
-                      </li>{" "}
-                    </div>
-                  );
-                })}
+            {teacher.map((teacher) => {
+              return (
+                <div>
+                  <option className="staffName" key={teacher.id}>
+                    {`${teacher.firstName} ${teacher.lastName}`}
+                  </option>
+                </div>
+              );
+            })}
             <option>Janne Karlsson</option>
             <option>Kalle Göransson</option>
             <option>Pelle Svensson</option>
