@@ -11,7 +11,14 @@
 }
 
 .Box{
+    margin-top: 200px;
     display: flexbox;
     flex-direction: row;
+
+}
+
+.CourseLi{
+    color: white; 
+    display: block;
 
 }
