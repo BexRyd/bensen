@@ -3,23 +3,26 @@ const router = express.Router();
 
 let staffs = [
   {
-    id: Date.now(),
+    id: 98573215314,
     firstName: "Gargamel",
     lastName: "Bishop",
+    profession: "lärare",
     email: "Gargamel@bishop123",
     account: 1245 - 65412378,
   },
   {
-    id: Date.now(),
+    id: 789452487568,
     firstName: "Sara",
     lastName: "Greveholm",
+    profession: "lärare",
     email: "greven_Sara@.gmail",
     account: 3456 - 7895486,
   },
   {
-    id: Date.now(),
+    id: 75412457842,
     firstName: "Beder",
     lastName: "Plantage",
+    profession: "Utbildningsledare",
     email: "cotton_King@plantagen.com",
     account: 7894 - 9632584,
   },
@@ -47,6 +50,7 @@ router.post("/Staff", (request, response) => {
     id: request.body.id,
     firstName: request.body.firstName,
     lastName: request.body.lastName,
+    profession: request.body.profession,
     email: request.body.email,
     account: request.body.account,
   };
@@ -64,6 +68,7 @@ router.put("/Staff/:staffId", (request, response) => {
   const staffId = Number(request.params.staffId);
   const firstName = request.body.firstName;
   const lastName = request.body.lastName;
+  const profession = request.body.profession;
   const email = request.body.email;
   const account = request.body.account;
 
@@ -71,6 +76,7 @@ router.put("/Staff/:staffId", (request, response) => {
     id: staffId,
     firstName,
     lastName,
+    profession,
     email,
     account,
   };
