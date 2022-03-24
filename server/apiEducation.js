@@ -12,9 +12,10 @@ let educationLists = [
   {
     ID: 52512562161216,
     utbildning:"Frontend Utveckling",
-    utbildningsledare:"Dan Kingbrant",
+   
     kurs: " Avancerad Javascript "
   },
+ 
 ] 
   // todos
 
@@ -60,10 +61,12 @@ router.put('/Education/:educationListId', (request,response)=>{
   const utbildning = request.body.utbildning
   
   const newEducationList ={
-    id:educationListId,
+    educationid:educationListId,
     utbildningsledare: utbildningsledare,
     utbildning:utbildning,
   }
+
+ 
 
   const educationListIndex = educationLists.findIndex((educationList)=>educationList.id === educationListId) // hämtar ut index för todo vi vill uppdatera
   educationLists[educationListIndex] = newEducationList                                   // i det index vi hämtar ut vill vi skriva över med newTodo

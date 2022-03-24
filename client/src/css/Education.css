@@ -1,7 +1,9 @@
 .getLi{
   
     display: block;
-    color: white;
+    color: black;
+    background-color: white;
+    width: 500px;
 }
 .createdEducationBox{
     background-color: rgba(21, 170, 170, 0.6);
@@ -55,6 +57,9 @@ display: flex;
 
 .bottomBox{
     margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   
 }
 
