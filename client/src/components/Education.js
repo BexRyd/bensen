@@ -9,19 +9,109 @@ import "../css/Education.css"
 function Education() {
   const [id, setId] = useState(0)
  
-  // const [staff, setStaff] = useState([])
+  const [leaders, setLeaders] = useState([])
   const [courses, setCourses] = useState([])
- 
   const [eventLists, seteventLists] = useState([])
+  
   const [chooseCourse, setChooseCourse] = useState("")
+  const [chooseEvent, setChooseEvent] = useState("")
+  const [chooseLeader, setChooseLeader] = useState("")
+  
+ 
+  
+     
+  
+  
+
+
   
   return (
     <div>
      <Header />
-     <div  className="Box">
-     <input value={id} onChange={(event) => setId(event.target.value)}></input>
+     
+   <div  className="Box">
+   
+        
+        
+    <div className="createdEducationBox">
+      
+      <div className="liBox">
+       <div className="topBox">
+          <div className="bottomBox">
+            {eventLists.map((eventList)=> {
+            return( 
+            <li className="getLi" key={eventList.id}>
+            
+            <p>
+              <b>ID:</b> {eventList.id}
+            </p>
+            
+            <p>
+             <b>Utbildning:</b> {chooseEvent}
+            </p>
+           
+            <p>
+             <b>Utbildningsledare:</b> {chooseLeader}
+            </p>
+            
+            <p>
+             <b>Kurs:</b> {chooseCourse}
+            </p>
+
+            
+            
+            
+            
+            
+            </li>
+            
+            ) })} 
+          </div>
+        </div>
+      </div>
+    
+        
+     </div> 
+     <input  className="input1Id" value={id} onChange={(event) => setId(event.target.value)}></input>
+     <div className="createEducationbox">
+     <select
+                className="leader1select"
+                value={leaders}
+                onChange={(event) => setChooseLeader(event.target.value)}
+               
+              > <option> Utbildningar </option>
+                {leaders.map((leader) => { 
+                 if (leader.profession === "Utbildningsledare"){
+                  return (
+                   
+                    <option className="educationLi" key={leaders.id}>
+                      {`${leader.firstName} ${leader.lastName} `}
+                    </option>
+                  );}
+                })}
+              </select>
+
+        
+        <select
+                className="event1select"
+                value={eventLists}
+                onChange={(event) => setChooseEvent(event.target.value)}
+               
+              > <option> Utbildningar </option>
+                {eventLists.map((eventList) => { 
+                 
+                  return (
+                   
+                    <option className="educationLi" key={eventList.id}>
+                      {`${eventList.utbildning} ${eventList.utbildningsledare} ${eventList.kurs} ${eventList.ID} `}
+                    </option>
+                  );
+                })}
+              </select>
+
+     
       <select
-                className="select"
+                className="course1select"
                 value={courses}
                 onChange={(event) => setChooseCourse(event.target.value)}
                
@@ -37,22 +127,10 @@ function Education() {
                 })}
         </select>
 
-        <select
-                className="select"
-                value={courses}
-                onChange={(event) => seteventLists(event.target.value)}
-               
-              > <option> Utbildningar </option>
-                {eventLists.map((eventList) => { 
-                 
-                  return (
-                   
-                    <option className="educationLi" key={eventList.id}>
-                      {`${eventList.utbildning} `}
-                    </option>
-                  );
-                })}
-              </select>
+        <textarea id="beskrivning" className="beskrivningBox" rows="10" cols="30"> </textarea>
+
+       
+
         
 
      <button onClick= {()=>{
@@ -66,27 +144,19 @@ function Education() {
         }}>CREATE</button>
         
        <button onClick= {()=>{
+         
           get('/Education').then((response)=>seteventLists(response.data))
            get('/Courses').then((response)=>setCourses(response.data))
+           get('/Staff').then((response)=>setLeaders(response.data))
+           
+         
         }}>READ</button>
         
-         
+        </div>
       
       
       {/* <img className="girlImg" src={guy} alt="computer" /> */}
-      <div className="liBox">
-      {eventLists.map((eventList)=> {
-         return( 
-           <li className="getLi" key={eventList.id}>{`${eventList.utbildning} ${chooseCourse}`}</li>
-          
-       ) })} 
-
-
-      
-
-
-
-     </div>
+     
      </div>
       <Footer />
     </div>
