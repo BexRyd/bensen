@@ -2,7 +2,7 @@ const express = require("express");
 const routes = express.Router();
 let coursesArray = [
   {
-    id:36748940392840 ,
+    id: 36748940392840,
     coursename: "Frontend",
     coursedescription: "LoremIpsum",
     teacher: "Dan Kingbrandt",
@@ -37,7 +37,7 @@ routes.post("/Courses", (req, res) => {
   });
 
   const course = {
-    id: req.body.id,
+    courseid: req.body.courseid,
     coursename: req.body.coursename,
     courselength: req.body.courselength,
     coursedescription: req.body.coursedescription,
@@ -59,7 +59,7 @@ routes.put("/Courses/:courseId", (req, res) => {
   const coursedescription = req.body.coursedescription;
 
   const newCourse = {
-    id: courseId,
+    courseid: courseId,
     coursename: coursename,
     courselength: courselength,
     coursedescription: coursedescription,

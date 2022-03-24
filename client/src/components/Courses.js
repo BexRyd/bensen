@@ -6,31 +6,29 @@ import { get, post, put, remove } from "../utilities/apiCourses"; // get the sam
 import { useState, useEffect } from "react";
 
 function Courses() {
+  const [courseId, setCourseId] = useState(Date.now());
   const [teacher, setTeacher] = useState([]);
-  const [counter, setCounter] = useState(Date.now());
   const [courseName, setCourseName] = useState([]);
-  const [courseDescription, setCourseDescription] = useState([]);
-  const [courseLength, setCourseLength] = useState([]);
+  const [courseDescription, setCourseDescription] = useState("");
+  const [courseLength, setCourseLength] = useState("");
   // useEffect(() => {
-  //   get("/Courses").then((response) => setCourseName(response.data));
+  //   get("/Courses").then((res) => setCourseName(res.data));
   // }, []);
   useEffect(() => {
     get("/Staff").then((response) => setTeacher(response.data));
   }, []);
 
-  // const choosenTeacher = (e) => setTeacher(e.target.value);
-  const addedCourse = (e) => setCourseName(e.target.value);
-  const addedDescription = (e) => setCourseDescription(e.target.value);
-  const addedLength = (e) => setCourseLength(e.target.value);
-  // const staffDropdown =
+  const addedId = (e) => setCourseId(e.target.value);
 
-  // post("/Courses", {
-  //   id: Date.now(),
-  //   coursename: "testcoursename",
-  //   teacher: "testteacher",
-  //   courselength: "testlength",
-  //   coursedescription: "testdescription",
-  // });
+  const courseTeacher = teacher.map((teachers) => {
+    return (
+      <div>
+        <option className="courseStaffName">
+          {`${teachers.firstName} ${teachers.lastName}`}
+        </option>
+      </div>
+    );
+  });
 
   return (
     <div className="courseContainer">
@@ -41,42 +39,35 @@ function Courses() {
             value={courseName}
             className="inputField"
             placeholder="Kursnamn"
-            onChange={addedCourse}
+            onChange={(e) => setCourseName(e.target.value)}
           ></input>
           <input
             value={courseDescription}
             placeholder="Kursbeskrivning"
-            onChange={addedDescription}
+            onChange={(e) => setCourseDescription(e.target.value)}
           ></input>
-          <div>
-            {teacher.map((teachers) => {
-              return (
-                <div key={teachers.id}>
-                  <option className="courseStaffName">
-                    {`${teachers.firstName} ${teachers.lastName}`}
-                  </option>
-                </div>
-              );
-            })}
-          </div>
-
+          <div>{courseTeacher}</div>
+          <select onChange={{ courseTeacher }}>
+            <option>{courseTeacher}</option>
+          </select>
           <input
             className="inputLength"
             value={courseLength}
             placeholder="Kurslängd i veckor"
-            onChange={addedLength}
+            onChange={(e) => setCourseLength(e.target.value)}
           ></input>
 
           <button
             onClick={() => {
               post("/Courses", {
-                id: counter,
+                courseId: courseId,
                 coursename: courseName,
+                teacher: teacher,
                 courselength: courseLength,
                 coursedescription: courseDescription,
               });
 
-              setCounter(counter);
+              setCourseId(Date.now());
               get("/Courses").then((res) => setCourseName(res.data));
             }}
           >
@@ -87,7 +78,7 @@ function Courses() {
           <h3>TILLGÄNGLIGA KURSER</h3>
           <h4>Kursnamn: {courseName}</h4>
           <p>Kursbeskrivning: {courseDescription}</p>
-          <p>Lärare:</p>
+          <p>Lärare: {courseTeacher}</p>
           <p>Kurslängd: {courseLength} veckor</p>
         </div>
       </div>
