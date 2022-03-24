@@ -74,7 +74,7 @@
   font-weight: bold;
 }
 
-input {
+.inputClass {
   width: 200px;
   height: 30px;
   margin: 2%;
