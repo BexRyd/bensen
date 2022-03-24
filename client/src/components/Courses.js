@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 function Courses() {
   const [courseId, setCourseId] = useState(Date.now());
   const [teacher, setTeacher] = useState([]);
+  const [chooseTeacher, setChooseTeacher] = useState("");
   const [courseName, setCourseName] = useState([]);
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
@@ -18,17 +19,17 @@ function Courses() {
     get("/Staff").then((response) => setTeacher(response.data));
   }, []);
 
-  const addedId = (e) => setCourseId(e.target.value);
+  // const addedId = (e) => setCourseId(e.target.value);
 
-  const courseTeacher = teacher.map((teachers) => {
-    return (
-      <div>
-        <option className="courseStaffName">
-          {`${teachers.firstName} ${teachers.lastName}`}
-        </option>
-      </div>
-    );
-  });
+  // const courseTeacher = teacher.map((teachers) => {
+  //   return (
+  //     <div>
+  //       <option className="courseStaffName">
+  //         {`${teachers.firstName} ${teachers.lastName}`}
+  //       </option>
+  //     </div>
+  //   );
+  // });
 
   return (
     <div className="courseContainer">
@@ -46,9 +47,19 @@ function Courses() {
             placeholder="Kursbeskrivning"
             onChange={(e) => setCourseDescription(e.target.value)}
           ></input>
-          <div>{courseTeacher}</div>
-          <select onChange={{ courseTeacher }}>
-            <option>{courseTeacher}</option>
+
+          <select
+            className="teachersselect"
+            value={chooseTeacher}
+            onChange={(event) => setChooseTeacher(event.target.value)}
+          >
+            {teacher.map((teachers) => {
+              return (
+                <option className="option" key={Date.now()}>
+                  {`${teachers.firstName}  `}
+                </option>
+              );
+            })}
           </select>
           <input
             className="inputLength"
@@ -62,7 +73,7 @@ function Courses() {
               post("/Courses", {
                 courseId: courseId,
                 coursename: courseName,
-                teacher: teacher,
+                teacher: chooseTeacher,
                 courselength: courseLength,
                 coursedescription: courseDescription,
               });
@@ -78,7 +89,10 @@ function Courses() {
           <h3>TILLGÄNGLIGA KURSER</h3>
           <h4>Kursnamn: {courseName}</h4>
           <p>Kursbeskrivning: {courseDescription}</p>
-          <p>Lärare: {courseTeacher}</p>
+          <p>
+            Lärare: {teacher.firstName} {teacher.lastName}
+          </p>
+
           <p>Kurslängd: {courseLength} veckor</p>
         </div>
       </div>
