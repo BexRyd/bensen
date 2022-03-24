@@ -1,24 +1,111 @@
 .getLi{
-    color: white; 
+  
     display: block;
+    color: black;
+    background-color: white;
+    width: 400px;
+}
+.createdEducationBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(21, 170, 170, 0.6);
+    margin-right: 50%;
+   
+    margin-top:10%;
+    height: 600px;
+    width: 500px;
 }
 
+.createEducationbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 650px;
+
+  
+}
 .liBox{
-   
-    border: 2px solid white;
-    margin-top: 150px;
+display: block;
+display: flex;
+flex-direction: row;
+justify-content:center ;
+align-items:center;
+
+
+margin-top: 10%;
+margin-left: 120px;
+border-radius: 25px;
+position: relative;
+padding-left: 20px;
+
+
+background-color: rgb(13, 97, 97);
+font-family: 'Courier New', Courier, monospace;
+font-weight: bold;
+
+
+height: 300px;
+width: 250px;
+
+box-shadow: 0 2px 5px #ccc;
+text-align: left;
+}
+
+.topBox {
+border-radius: 20px 20px 0 0;
+height: 70px;
+width: 100%;
+background-color:rgb(13, 97, 97);;
+position: absolute;
+top: 0;
+left: 0;
+display: flex;
    
 }
 
+.bottomBox{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+}
+
+.leader1select,
+.course1select,
+.event1select{
+    width: 250px;
+    margin-right: 10px;
+}
+.input1Id{
+   
+    width: 220px;
+}
+
+.beskrivningBox{
+    width: 250px;
+    margin-right: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
 .Box{
-    margin-top: 200px;
-    display: flexbox;
-    flex-direction: row;
+    margin-bottom: 800px;
+    margin-right: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+   
+   
+    row-gap: 10px;
+
 
 }
 
 .CourseLi{
-    color: white; 
+   
     display: block;
 
 }
