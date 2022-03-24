@@ -12,7 +12,7 @@ let educationLists = [
   {
     utbildning:"Frontend Utveckling",
     utbildningsledare:"Dan Kingbrant"
-  }
+  },
 ] 
   // todos
 
