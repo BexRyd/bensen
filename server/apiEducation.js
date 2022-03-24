@@ -10,8 +10,10 @@ app.use(bodyParser.json())
 
 let educationLists = [
   {
+    ID: 52512562161216,
     utbildning:"Frontend Utveckling",
-    utbildningsledare:"Dan Kingbrant"
+    utbildningsledare:"Dan Kingbrant",
+    kurs: " Avancerad Javascript "
   },
 ] 
   // todos
