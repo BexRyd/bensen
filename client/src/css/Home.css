@@ -13,7 +13,7 @@ body {
   }
   to {
     display: block;
-    left: 15%;
+    left: 180px;
     top: -650%;
 
     color: white;
@@ -28,7 +28,7 @@ body {
   width: 50%;
   animation: textFlow 5s ease;
   display: hidden;
-  left: 15%;
+  left: 180px;
   top: -650%;
 
   height: 70px;
@@ -44,5 +44,5 @@ body {
 }
 
 .co {
-  margin-left: 35vh;
+  margin-left: 400px;
 }

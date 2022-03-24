@@ -32,7 +32,7 @@ function Courses() {
   // });
 
   return (
-    <div>
+    <div className="courseContainer">
       <Header />
       {/* <div className="coursesMainSection">
         <form className="createCourseForm">
