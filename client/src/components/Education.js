@@ -35,51 +35,79 @@ function Education() {
         
     <div className="createdEducationBox">
       
-      <div className="liBox">
-       <div className="topBox">
+      
+       
           <div className="bottomBox">
             {eventLists.map((eventList)=> {
             return( 
-            <li className="getLi" key={eventList.id}>
+              <div>
+          
             
-            <p>
-              <b>ID:</b> {eventList.id}
-            </p>
-            
-            <p>
-             <b>Utbildning:</b> {chooseEvent}
+           
+           
+             {leaders.map((leader)=>{
+               if(leader.profession === "Utbildningsledare"){
+               return(
+                 <div>
+                {courses.map((course)=>{
+                return(
+              <div>
+              <li className="getLi" key={eventList.id}>
+              
+                  <p>
+             <b>Utbildning:</b> {eventList.utbildning}
             </p>
            
             <p>
-             <b>Utbildningsledare:</b> {chooseLeader}
+             <b>Utbildningsledare:</b> {`${leader.firstName} ${leader.lastName}`}
             </p>
             
             <p>
-             <b>Kurs:</b> {chooseCourse}
+             <b>Kurs Namn:</b> {course.coursename}
             </p>
-
-            
-            
-            
-            
-            
             </li>
+           </div>
+         
+           )
+            })}  
+                
+             </div>
+            
+               )
+              }
+           
+         
+           
+            })}  
+
+{/*             
+            id: 36748940392840,
+    coursename: "Frontend",
+    coursedescription: "LoremIpsum",
+    teacher: "Dan Kingbrandt",
+    courselength: "5weeks", */}
+            
+            
+            
+           
+            </div>
             
             ) })} 
           </div>
-        </div>
-      </div>
+        
+     
     
         
      </div> 
+    
+     <div className="createEducationbox"> 
      <input  className="input1Id" value={id} onChange={(event) => setId(event.target.value)}></input>
-     <div className="createEducationbox">
      <select
                 className="leader1select"
-                value={leaders}
+                value={chooseLeader}
                 onChange={(event) => setChooseLeader(event.target.value)}
                
-              > <option> Utbildningar </option>
+              > <option> Utbildnings Ledare </option>
                 {leaders.map((leader) => { 
                  if (leader.profession === "Utbildningsledare"){
                   return (
@@ -103,7 +131,7 @@ function Education() {
                   return (
                    
                     <option className="educationLi" key={eventList.id}>
-                      {`${eventList.utbildning} ${eventList.utbildningsledare} ${eventList.kurs} ${eventList.ID} `}
+                      {`${eventList.utbildning} ${eventList.utbildningledare} ${eventList.kurs} ${eventList.ID} `}
                     </option>
                   );
                 })}
