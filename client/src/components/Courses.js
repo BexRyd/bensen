@@ -48,6 +48,7 @@ function Courses() {
             onChange={(e) => setCourseDescription(e.target.value)}
           ></input>
 
+          {/* varför skriver den in listan om och om igen varje gång man klickar */}
           <select
             className="teachersselect"
             value={chooseTeacher}
