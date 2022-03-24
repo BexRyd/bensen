@@ -26,6 +26,14 @@ let staffs = [
     email: "cotton_King@plantagen.com",
     account: 7894 - 9632584,
   },
+  {
+    id: 754124451240,
+    firstName: "Maria",
+    lastName: "Andersson",
+    profession: "Utbildningsledare",
+    email: "mia_andersson@learn_more.com",
+    account: 7894 - 9632584,
+  },
 ];
 
 router.get("/Staff", (request, response) => {
