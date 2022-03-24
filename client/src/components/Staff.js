@@ -87,22 +87,26 @@ function Staff() {
               </select>
 
               <input
+                className="inputClass"
                 value={firstName}
                 onChange={(event) => setFirstName(event.target.value)}
                 placeholder="First Name"
               ></input>
               <input
+                className="inputClass"
                 value={lastName}
                 onChange={(event) => setLastName(event.target.value)}
                 placeholder="Last Name"
               ></input>
               <input
+                className="inputClass"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
                 placeholder="Email"
                 type="email"
               ></input>
               <input
+                className="inputClass"
                 value={account}
                 onChange={(event) => setAccount(event.target.value)}
                 placeholder="Bank konto"
