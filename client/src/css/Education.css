@@ -3,17 +3,27 @@
     display: block;
     color: black;
     background-color: white;
-    width: 500px;
+    width: 400px;
 }
 .createdEducationBox{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     background-color: rgba(21, 170, 170, 0.6);
-    margin-right: 40%;
-    margin-top:30%;
+    margin-right: 50%;
+   
+    margin-top:10%;
     height: 600px;
     width: 500px;
 }
 
 .createEducationbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: 650px;
+
   
 }
 .liBox{

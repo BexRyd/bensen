@@ -35,8 +35,8 @@ function Education() {
         
     <div className="createdEducationBox">
       
-      <div className="liBox">
-       <div className="topBox">
+      
+       
           <div className="bottomBox">
             {eventLists.map((eventList)=> {
             return( 
@@ -46,6 +46,7 @@ function Education() {
            
            
              {leaders.map((leader)=>{
+               if(leader.profession === "Utbildningsledare"){
                return(
                  <div>
                 {courses.map((course)=>{
@@ -58,7 +59,7 @@ function Education() {
             </p>
            
             <p>
-             <b>Utbildningsledare:</b> {leader.profession}
+             <b>Utbildningsledare:</b> {`${leader.firstName} ${leader.lastName}`}
             </p>
             
             <p>
@@ -73,6 +74,7 @@ function Education() {
              </div>
             
                )
+              }
            
          
            
@@ -92,19 +94,20 @@ function Education() {
             
             ) })} 
           </div>
-        </div>
-      </div>
+        
+     
     
         
      </div> 
+    
+     <div className="createEducationbox"> 
      <input  className="input1Id" value={id} onChange={(event) => setId(event.target.value)}></input>
-     <div className="createEducationbox">
      <select
                 className="leader1select"
-                value={leaders}
+                value={chooseLeader}
                 onChange={(event) => setChooseLeader(event.target.value)}
                
-              > <option> Utbildningar </option>
+              > <option> Utbildnings Ledare </option>
                 {leaders.map((leader) => { 
                  if (leader.profession === "Utbildningsledare"){
                   return (
