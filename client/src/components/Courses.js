@@ -6,35 +6,35 @@ import { get, post, put, remove } from "../utilities/apiCourses"; // get the sam
 import { useState, useEffect } from "react";
 
 function Courses() {
-  const [teacher, setTeacher] = useState([]);
-  const [counter, setcounter] = useState(Date.now());
-  const [courseName, setCourseName] = useState();
-  const [courseDescription, setCourseDescription] = useState();
-  const [courseLength, setCourseLength] = useState();
+  // const [teacher, setTeacher] = useState([]);
+  // const [counter, setCounter] = useState(Date.now());
+  // const [courseName, setCourseName] = useState([]);
+  // const [courseDescription, setCourseDescription] = useState([]);
+  // const [courseLength, setCourseLength] = useState([]);
+  // useEffect(() => {
+  //   get("/Courses").then((response) => setCourseName(response.data));
+  // }, []);
+  // useEffect(() => {
+  //   get("/Staff").then((response) => setTeacher(response.data));
+  // }, []);
 
   // const choosenTeacher = (e) => setTeacher(e.target.value);
-  const addedCourse = (e) => setCourseName(e.target.value);
-  const addedDescription = (e) => setCourseDescription(e.target.value);
-  const addedLength = (e) => setCourseLength(e.target.value);
-  useEffect(() => {
-    get("/Courses").then((response) => setCourseName(response.data));
-  }, []);
-  useEffect(() => {
-    get("/Staff").then((response) => setTeacher(response.data));
-  }, []);
+  // const addedCourse = (e) => setCourseName(e.target.value);
+  // const addedDescription = (e) => setCourseDescription(e.target.value);
+  // const addedLength = (e) => setCourseLength(e.target.value);
 
-  post("/Courses", {
-    id: 1,
-    coursename: "testcoursename",
-    teacher: "testteacher",
-    courselength: "testlength",
-    coursedescription: "testdescription",
-  });
+  // post("/Courses", {
+  //   id: Date.now(),
+  //   coursename: "testcoursename",
+  //   teacher: "testteacher",
+  //   courselength: "testlength",
+  //   coursedescription: "testdescription",
+  // });
 
   return (
     <div>
       <Header />
-      <div className="coursesMainSection">
+      {/* <div className="coursesMainSection">
         <form className="createCourseForm">
           <input
             value={courseName}
@@ -47,7 +47,7 @@ function Courses() {
             placeholder="Kursbeskrivning"
             onChange={addedDescription}
           ></input>
-          <div>
+          {/* <div>
             {teacher.map((teachers) => {
               return (
                 <div key={teachers.id}>
@@ -57,13 +57,13 @@ function Courses() {
                 </div>
               );
             })}
-          </div>
-
+          </div> */}
+      {/* 
           <input
             className="inputLength"
             value={courseLength}
             placeholder="Kurslängd i veckor"
-            on={addedLength}
+            onChange={addedLength}
           ></input>
 
           <button
@@ -75,8 +75,8 @@ function Courses() {
                 coursedescription: courseDescription,
               });
 
-              setcounter(Date.now());
-              get("/Courses").then((response) => setCourseName(response.data));
+              setCounter(counter);
+              get("/Courses").then((res) => setCourseName(res.data));
             }}
           >
             Skapa ny kurs
@@ -86,10 +86,10 @@ function Courses() {
           <h3>TILLGÄNGLIGA KURSER</h3>
           <h4>Kursnamn: {courseName}</h4>
           <p>Kursbeskrivning: {courseDescription}</p>
-          <p>Lärare: {teacher.firstName}</p>
+          <p>Lärare:</p>
           <p>Kurslängd: {courseLength} veckor</p>
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */} *
       <Footer />
     </div>
   );
