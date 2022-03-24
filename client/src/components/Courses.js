@@ -7,10 +7,10 @@ import { useState, useEffect } from "react";
 
 function Courses() {
   // const [teacher, setTeacher] = useState([]);
-  // const [counter, setCounter] = useState(Date.now());
-  // const [courseName, setCourseName] = useState([]);
-  // const [courseDescription, setCourseDescription] = useState([]);
-  // const [courseLength, setCourseLength] = useState([]);
+  const [counter, setCounter] = useState(Date.now());
+  const [courseName, setCourseName] = useState([]);
+  const [courseDescription, setCourseDescription] = useState([]);
+  const [courseLength, setCourseLength] = useState([]);
   // useEffect(() => {
   //   get("/Courses").then((response) => setCourseName(response.data));
   // }, []);
@@ -19,9 +19,9 @@ function Courses() {
   // }, []);
 
   // const choosenTeacher = (e) => setTeacher(e.target.value);
-  // const addedCourse = (e) => setCourseName(e.target.value);
-  // const addedDescription = (e) => setCourseDescription(e.target.value);
-  // const addedLength = (e) => setCourseLength(e.target.value);
+  const addedCourse = (e) => setCourseName(e.target.value);
+  const addedDescription = (e) => setCourseDescription(e.target.value);
+  const addedLength = (e) => setCourseLength(e.target.value);
 
   // post("/Courses", {
   //   id: Date.now(),
@@ -34,7 +34,7 @@ function Courses() {
   return (
     <div className="courseContainer">
       <Header />
-      {/* <div className="coursesMainSection">
+      <div className="coursesMainSection">
         <form className="createCourseForm">
           <input
             value={courseName}
@@ -58,7 +58,7 @@ function Courses() {
               );
             })}
           </div> */}
-      {/* 
+
           <input
             className="inputLength"
             value={courseLength}
@@ -88,8 +88,8 @@ function Courses() {
           <p>Kursbeskrivning: {courseDescription}</p>
           <p>Lärare:</p>
           <p>Kurslängd: {courseLength} veckor</p>
-        </div> */}
-      {/* </div> */} *
+        </div>
+      </div>
       <Footer />
     </div>
   );
