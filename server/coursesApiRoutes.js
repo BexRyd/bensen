@@ -37,10 +37,10 @@ routes.post("/Courses", (req, res) => {
   });
 
   const course = {
-    courseid: req.body.courseid,
-    coursename: req.body.coursename,
-    courselength: req.body.courselength,
-    coursedescription: req.body.coursedescription,
+    courseid: req.body.courseId,
+    coursename: req.body.courseName,
+    courselength: req.body.courseLength,
+    coursedescription: req.body.courseDescription,
   };
 
   courses.push(course);
@@ -54,9 +54,9 @@ routes.post("/Courses", (req, res) => {
 
 routes.put("/Courses/:courseId", (req, res) => {
   const courseId = Number(req.params.courseId);
-  const coursename = req.body.coursename;
-  const courselength = req.body.courselength;
-  const coursedescription = req.body.coursedescription;
+  const coursename = req.body.courseName;
+  const courselength = req.body.courseLength;
+  const coursedescription = req.body.courseDescription;
 
   const newCourse = {
     courseid: courseId,
@@ -66,10 +66,10 @@ routes.put("/Courses/:courseId", (req, res) => {
   };
 
   const courseIndex = courses.findIndex((course) => course.id == courseId);
-  courses[courseIndex].coursename = coursename;
+  courses[courseIndex].courseName = courseName;
   courses[courseIndex].teacher = teacher;
-  courses[courseIndex].courselength = courselength;
-  courses[courseIndex].coursedescription = coursedescription;
+  courses[courseIndex].courseLength = courseLength;
+  courses[courseIndex].courseDescription = courseDescription;
 
   console.log({
     method: req.method,
