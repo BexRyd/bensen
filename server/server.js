@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 
 const routes = require("./coursesApiRoutes");
+const routerApply = require("./apiApply");
 
 const app = express();
 
@@ -17,6 +18,7 @@ const router = require("./apiStaff");
 const educationApi = require("./apiEducation");
 
 app.use(educationApi);
+app.use(routerApply);
 
 app.use(router);
 
