@@ -48,7 +48,7 @@ routes.post("/Courses", (req, res) => {
   res.json({
     status: "successfully created new course",
     method: req.method,
-    data: course,
+    data: courses,
   });
 });
 
