@@ -1,26 +1,12 @@
 const express = require("express");
 const routes = express.Router();
-let courses = [
-  {
-    id: 36748940392840,
-    courseName: "Frontend",
-    courseDescription: "LoremIpsum",
-    teacher: "Dan Kingbrandt",
-    courseLength: "5weeks",
-  },
-  {
-    id: 13323242428769,
-    courseName: "Backend",
-    courseDescription: "LoremIpsum",
-    teacher: "Rebecca Rydgran",
-    courseLength: "200weeks",
-  },
-];
+let courses = [];
 
 // om jag ska hämta lärare från Staff, är de då den routen jag ska ha här eller Courses
 routes.get("/Courses", (req, res) => {
   console.log({
     method: req.method,
+    data: courses,
   });
   res.json({
     status: "success",
@@ -43,8 +29,9 @@ routes.post("/Courses", (req, res) => {
     courseDescription: req.body.courseDescription,
   };
 
-  course.push(courses);
+  courses.push(course);
 
+  // console.log("Hey", courses.push(course));
   res.json({
     status: "successfully created new course",
     method: req.method,
