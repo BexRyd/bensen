@@ -6,15 +6,17 @@ import { get, post, put, remove } from "../utilities/apiCourses"; // get the sam
 import { useState, useEffect } from "react";
 
 function Courses() {
-  const [courseId, setCourseId] = useState(Date.now());
+  const [id, setId] = useState("");
+  const [counter, setCounter] = useState(Date.now());
   const [teacher, setTeacher] = useState([]);
   const [chooseTeacher, setChooseTeacher] = useState("");
-  const [courseName, setCourseName] = useState([]);
+  const [course, setCourse] = useState([]);
+  const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
-  // useEffect(() => {
-  //   get("/Courses").then((res) => setCourseName(res.data));
-  // }, []);
+  useEffect(() => {
+    get("/Courses").then((response) => setCourse(response.data));
+  }, []);
   useEffect(() => {
     get("/Staff").then((response) => setTeacher(response.data));
   }, []);
@@ -35,7 +37,40 @@ function Courses() {
     <div className="courseContainer">
       <Header />
       <div className="coursesMainSection">
+        <div className="addedCoursesList">
+          <h3>Kurslista</h3>
+          <ul>
+            {course.map((course) => {
+              return (
+                <div>
+                  <li key={course.id}>
+                    <p>KursID: {course.id}</p>
+                    <p>Kursnamn: {course.courseName}</p>
+                    <p>Kursbeskrivning: {course.courseDescription}</p>
+                    <p>Lärare:{teacher.firstName} </p>
+                    <p>Kurslängd: {course.courseLength}</p>
+                  </li>
+                </div>
+              );
+            })}
+          </ul>
+        </div>
         <form className="createCourseForm">
+          {/* <select
+            className="selectCourseID"
+            value={id}
+            onChange={(event) => setId(event.target.value)}
+            placeholder="Id "
+          >
+            {course.map((course) => {
+              return (
+                <option className="option" key={course.id}>
+                  {`${course.id}  `}
+                </option>
+              );
+            })}
+          </select> */}
+
           <input
             value={courseName}
             className="inputField"
@@ -44,20 +79,20 @@ function Courses() {
           ></input>
           <input
             value={courseDescription}
+            className="inputField"
             placeholder="Kursbeskrivning"
             onChange={(e) => setCourseDescription(e.target.value)}
           ></input>
-
-          {/* varför skriver den in listan om och om igen varje gång man klickar */}
+          {/* varför skriver den in lit om och om igen varje gång man klickar */}
           <select
-            className="teachersselect"
+            className="teacherSelect"
             value={chooseTeacher}
             onChange={(event) => setChooseTeacher(event.target.value)}
           >
             {teacher.map((teachers) => {
               return (
                 <option className="option" key={Date.now()}>
-                  {`${teachers.firstName}  `}
+                  {`${teachers.firstName} ${teachers.lastName}  `}
                 </option>
               );
             })}
@@ -68,34 +103,30 @@ function Courses() {
             placeholder="Kurslängd i veckor"
             onChange={(e) => setCourseLength(e.target.value)}
           ></input>
-
+          <input
+            className="inputField"
+            value={id}
+            placeholder="KursID"
+            onChange={(e) => setId(e.target.value)}
+          ></input>
           <button
+            className="postCourse"
             onClick={() => {
               post("/Courses", {
-                courseId: courseId,
-                coursename: courseName,
+                id: counter,
+                courseName: courseName,
                 teacher: chooseTeacher,
-                courselength: courseLength,
-                coursedescription: courseDescription,
+                courseLength: courseLength,
+                courseDescription: courseDescription,
               });
 
-              setCourseId(Date.now());
-              get("/Courses").then((res) => setCourseName(res.data));
+              setCounter(Date.now());
+              get("/Courses").then((response) => setCourse(response.data));
             }}
           >
             Skapa ny kurs
           </button>
         </form>
-        <div className="addedCoursesList">
-          <h3>TILLGÄNGLIGA KURSER</h3>
-          <h4>Kursnamn: {courseName}</h4>
-          <p>Kursbeskrivning: {courseDescription}</p>
-          <p>
-            Lärare: {teacher.firstName} {teacher.lastName}
-          </p>
-
-          <p>Kurslängd: {courseLength} veckor</p>
-        </div>
       </div>
       <Footer />
     </div>
