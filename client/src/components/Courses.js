@@ -40,37 +40,24 @@ function Courses() {
         <div className="addedCoursesList">
           <h3>Kurslista</h3>
           <ul>
-            {course.map((course) => {
+            {course.map((courses) => {
               return (
                 <div>
-                  <li key={course.id}>
-                    <p>KursID: {course.id}</p>
-                    <p>Kursnamn: {course.courseName}</p>
-                    <p>Kursbeskrivning: {course.courseDescription}</p>
-                    <p>Lärare:{teacher.firstName} </p>
-                    <p>Kurslängd: {course.courseLength}</p>
+                  <li key={courses.courseId}>
+                    <p>KursID: {courses.courseId}</p>
+
+                    <p>Kursnamn: {courses.courseName}</p>
+                    <p>Kursbeskrivning: {courses.courseDescription}</p>
+                    <p>Lärare:</p>
+                    <p>Kurslängd: {courses.courseLength}</p>
                   </li>
                 </div>
               );
             })}
           </ul>
         </div>
-        <form className="createCourseForm">
-          {/* <select
-            className="selectCourseID"
-            value={id}
-            onChange={(event) => setId(event.target.value)}
-            placeholder="Id "
-          >
-            {course.map((course) => {
-              return (
-                <option className="option" key={course.id}>
-                  {`${course.id}  `}
-                </option>
-              );
-            })}
-          </select> */}
 
+        <form className="createCourseForm">
           <input
             value={courseName}
             className="inputField"
