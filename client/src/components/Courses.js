@@ -47,7 +47,7 @@ function Courses() {
                     <p>KursID: {course.id}</p>
                     <p>Kursnamn: {course.courseName}</p>
                     <p>Kursbeskrivning: {course.courseDescription}</p>
-                    <p>Lärare:{teacher.firstName} </p>
+                    <p>Lärare:{course.chooseTeacher} </p>
                     <p>Kurslängd: {course.courseLength}</p>
                   </li>
                 </div>
