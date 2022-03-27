@@ -15,7 +15,7 @@ function Apply() {
   const [email, setEmail] = useState("");
   const [getEducation, setGetEducation] = useState([]);
 
-  let loggedIn = true;
+  let loggedIn = false;
 
   useEffect(() => {
     get("/Apply").then((response) => setApply(response.data));
@@ -58,7 +58,7 @@ function Apply() {
         ) : null}
 
         <div className="formApply">
-          <div>
+          <div className="formToApply">
             <div className="inputApply">
               {!loggedIn ? (
                 <h1 className="h1Apply">Ansökan till Utbildning</h1>
@@ -103,29 +103,27 @@ function Apply() {
                 </div>
               ) : null}
 
-              {!loggedIn ? (
-                <div>
-                  <input
-                    className="inputApply"
-                    value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
-                    placeholder="First Name"
-                  ></input>
-                  <input
-                    className="inputApply"
-                    value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                    placeholder="Last Name"
-                  ></input>
-                  <input
-                    className="inputApply"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder="Email"
-                    type="email"
-                  ></input>
-                </div>
-              ) : null}
+              <div className="inputApply">
+                <input
+                  className="inputFieldApply"
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                  placeholder="First Name"
+                ></input>
+                <input
+                  className="inputFieldApply"
+                  value={lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                  placeholder="Last Name"
+                ></input>
+                <input
+                  className="inputFieldApply"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="Email"
+                  type="email"
+                ></input>
+              </div>
             </div>
 
             {loggedIn ? (
