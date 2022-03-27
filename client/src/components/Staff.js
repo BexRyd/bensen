@@ -15,6 +15,8 @@ function Staff() {
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
 
+  let loggedIn = false;
+
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
   }, []);
@@ -31,25 +33,27 @@ function Staff() {
                 return (
                   <div>
                     <li className="staffName" key={staff.id}>
-                      <p>
-                        <b>id:</b> {staff.id}
-                      </p>{" "}
+                      {loggedIn ? (
+                        <p>
+                          <b>id:</b> {staff.id}
+                        </p>
+                      ) : null}
                       <p>
                         {" "}
-                        <b>Förnamn:</b> {staff.firstName}{" "}
-                      </p>{" "}
-                      <p>
-                        <b>Efternamn:</b> {staff.lastName}
+                        <b>Namn: </b>
+                        {staff.firstName} {staff.lastName}
                       </p>{" "}
                       <p>
                         <b>Yrke:</b> {staff.profession}
-                      </p>{" "}
+                      </p>
                       <p>
                         <b>Mejl:</b> {staff.email}
-                      </p>{" "}
-                      <p>
-                        <b>Bank-konto:</b> {staff.account}
                       </p>
+                      {loggedIn ? (
+                        <p>
+                          <b>Bank-konto:</b> {staff.account}
+                        </p>
+                      ) : null}
                     </li>
                   </div>
                 );

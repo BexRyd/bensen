@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: absolute;
+  position: relative;
 
   top: 100px;
   right: 50px;
@@ -24,6 +24,7 @@
 
   border-radius: 30px;
   width: 600px;
+
   background-color: rgba(127, 255, 212, 0.356);
 }
 .applyName {
@@ -45,14 +46,14 @@
 }
 
 .formApply {
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: center;
   justify-items: center;
 
-  right: 700px;
-  top: 100px;
+  margin-right: 100px;
+  margin-top: 100px;
   border-radius: 50px;
 
   background-color: rgba(127, 255, 212, 0.356);

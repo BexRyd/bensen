@@ -15,7 +15,7 @@ function Apply() {
   const [email, setEmail] = useState("");
   const [getEducation, setGetEducation] = useState([]);
 
-  let loggedIn = false;
+  let loggedIn = true;
 
   useEffect(() => {
     get("/Apply").then((response) => setApply(response.data));
