@@ -70,7 +70,7 @@ export default function Header() {
               required
               placeholder="Lösenord"
             ></input>
-            <button onClick={() => setLoggaIn(false)} className="btnHeader">
+            <button onSubmit={() => setLoggaIn(false)} className="btnHeader">
               Logga in
             </button>
           </form>
