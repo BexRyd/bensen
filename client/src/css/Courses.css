@@ -8,6 +8,7 @@ body {
   display: flex;
   margin-top: 20px;
   margin-left: 20px;
+  width: 100vw;
 }
 .courseListHeader {
   text-align: center;
