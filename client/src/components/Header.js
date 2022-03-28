@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/Header.css";
 import bensenLogo from "../img/bensenLogo.png";
-import { get } from "../util/apiStaffUtil";
+import { get, post } from "../util/apiStaffUtil";
 
 export default function Header() {
-  let loggedIn = false;
   const [loggaIn, setLoggaIn] = useState(false);
   const [user, setUser] = useState("");
   const [passWord, setPassWord] = useState("");
+  const [authorized, setAuthorized] = useState(false);
   return (
     <div>
       <div className="headerBackgroundImg"></div>
@@ -21,7 +21,7 @@ export default function Header() {
           </li>
           <li>
             <Link className="link" to="/Staff">
-              Personal
+              4 Personal
             </Link>
           </li>
           <li>
@@ -39,7 +39,7 @@ export default function Header() {
               Ansökan
             </Link>
           </li>
-          {!loggedIn ? (
+          {!authorized ? (
             <button
               className="inloggBtnHeader"
               onClick={() => setLoggaIn(true)}
@@ -54,7 +54,7 @@ export default function Header() {
       </header>
       {loggaIn ? (
         <div>
-          <form className="formHeader">
+          <div className="formHeader">
             <h1>Logga in</h1>
             <input
               className="inputHeader"
@@ -70,10 +70,22 @@ export default function Header() {
               required
               placeholder="Lösenord"
             ></input>
-            <button onSubmit={() => setLoggaIn(false)} className="btnHeader">
+            <button
+              onClick={() => {
+                post("/Loggin", {
+                  user: user,
+                  passWord: passWord,
+                });
+                get("/Loggin").then((response) => setAuthorized(response.data));
+
+                setLoggaIn(false);
+                console.log(authorized);
+              }}
+              className="btnHeader"
+            >
               Logga in
             </button>
-          </form>
+          </div>
         </div>
       ) : null}
     </div>

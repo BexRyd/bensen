@@ -15,7 +15,7 @@ function Staff() {
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
 
-  let loggedIn = false;
+  let loggedIn = true;
 
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
@@ -42,7 +42,7 @@ function Staff() {
                         {" "}
                         <b>Namn: </b>
                         {staff.firstName} {staff.lastName}
-                      </p>{" "}
+                      </p>
                       <p>
                         <b>Yrke:</b> {staff.profession}
                       </p>
