@@ -26,7 +26,7 @@ function Courses() {
       <Header />
       <div className="coursesMainSection">
         <div className="addedCoursesList">
-          <h3>Kurslista</h3>
+          <h2 className="courseListHeader">Kurslista</h2>
           <ul>
             {course.map((courses) => {
               return (
@@ -45,6 +45,7 @@ function Courses() {
         </div>
 
         <div className="createCourseForm">
+          <h2 className="courseListHeader">Skapa kurs</h2>
           <input
             value={courseName}
             className="inputField"
