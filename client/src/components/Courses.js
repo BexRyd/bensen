@@ -21,18 +21,6 @@ function Courses() {
     get("/Staff").then((response) => setTeacher(response.data));
   }, []);
 
-  // const addedId = (e) => setCourseId(e.target.value);
-
-  // const courseTeacher = teacher.map((teachers) => {
-  //   return (
-  //     <div>
-  //       <option className="courseStaffName">
-  //         {`${teachers.firstName} ${teachers.lastName}`}
-  //       </option>
-  //     </div>
-  //   );
-  // });
-
   return (
     <div className="courseContainer">
       <Header />
@@ -45,10 +33,9 @@ function Courses() {
                 <div>
                   <li key={courses.courseId}>
                     <p>KursID: {courses.courseId}</p>
-
                     <p>Kursnamn: {courses.courseName}</p>
                     <p>Kursbeskrivning: {courses.courseDescription}</p>
-                    <p>Lärare:</p>
+                    <p>Lärare: {courses.teacher} </p>
                     <p>Kurslängd: {courses.courseLength}</p>
                   </li>
                 </div>
@@ -57,7 +44,7 @@ function Courses() {
           </ul>
         </div>
 
-        <form className="createCourseForm">
+        <div className="createCourseForm">
           <input
             value={courseName}
             className="inputField"
@@ -76,12 +63,17 @@ function Courses() {
             value={chooseTeacher}
             onChange={(event) => setChooseTeacher(event.target.value)}
           >
+            <option value="" selected disabled hidden>
+              Välj
+            </option>
             {teacher.map((teachers) => {
-              return (
-                <option className="option" key={Date.now()}>
-                  {`${teachers.firstName} ${teachers.lastName}  `}
-                </option>
-              );
+              if (teachers.profession === "lärare") {
+                return (
+                  <option className="option" key={teachers.id}>
+                    {`${teachers.firstName} ${teachers.lastName}  `}
+                  </option>
+                );
+              }
             })}
           </select>
           <input
@@ -94,10 +86,13 @@ function Courses() {
             className="inputField"
             value={id}
             placeholder="KursID"
-            onChange={(e) => setId(e.target.value)}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setId(e.target.value);
+            }}
           ></input>
           <button
-            className="postCourse"
+            className="btnCourse"
             onClick={() => {
               post("/Courses", {
                 id: counter,
@@ -113,7 +108,32 @@ function Courses() {
           >
             Skapa ny kurs
           </button>
-        </form>
+          <button
+            className="btnCourse"
+            onClick={() => {
+              console.log("hej", id);
+              put(`/Courses/${id}`, {
+                id: id,
+                courseName: courseName,
+                teacher: chooseTeacher,
+                courseLength: courseLength,
+                courseDescription: courseDescription,
+              }).then((response) => console.log(response));
+              get("/Courses").then((response) => setCourse(response.data));
+            }}
+          >
+            Uppdatera
+          </button>
+          <button
+            className="btnCourse"
+            onClick={() => {
+              remove(`/Courses/${id}`);
+              get("/Courses").then((response) => setCourse(response.data));
+            }}
+          >
+            Ta bort
+          </button>
+        </div>
       </div>
       <Footer />
     </div>
