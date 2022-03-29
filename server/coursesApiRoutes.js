@@ -24,14 +24,13 @@ routes.post("/Courses", (req, res) => {
   const course = {
     courseId: req.body.id,
     courseName: req.body.courseName,
-    teacher: req.body.chooseTeacher,
+    teacher: req.body.teacher,
     courseLength: req.body.courseLength,
     courseDescription: req.body.courseDescription,
   };
 
   courses.push(course);
 
-  // console.log("Hey", courses.push(course));
   res.json({
     status: "successfully created new course",
     method: req.method,
@@ -41,24 +40,24 @@ routes.post("/Courses", (req, res) => {
 
 routes.put("/Courses/:courseId", (req, res) => {
   const courseId = Number(req.params.courseId);
+  console.log(courseId);
   const courseName = req.body.courseName;
-  const teacher = req.body.chooseTeacher;
+  const teacher = req.body.teacher;
   const courseLength = req.body.courseLength;
   const courseDescription = req.body.courseDescription;
 
   const newCourse = {
-    id: courseId,
+    courseId: courseId,
     courseName: courseName,
-    teacher: chooseTeacher,
+    teacher: teacher,
     courseLength: courseLength,
     courseDescription: courseDescription,
   };
 
-  const courseIndex = courses.findIndex((course) => course.id == courseId);
-  courses[courseIndex].courseName = courseName;
-  courses[courseIndex].chooseTeacher = teacher;
-  courses[courseIndex].courseLength = courseLength;
-  courses[courseIndex].courseDescription = courseDescription;
+  const courseIndex = courses.findIndex(
+    (course) => course.courseId == courseId
+  );
+  courses[courseIndex] = newCourse;
 
   console.log({
     method: req.method,
@@ -76,10 +75,17 @@ routes.put("/Courses/:courseId", (req, res) => {
 routes.delete("/Courses/:courseId", (req, res) => {
   const courseId = req.params.courseId;
 
-  const courseIndex = courses.findIndex((course) => course.id == courseId);
+  const courseIndex = courses.findIndex(
+    (course) => course.courseId == courseId
+  );
   //removes amount of elements (1 in this case)
-  courses.splice(courseIndex, 1);
-
+  if (courseIndex > -1) {
+    courses.splice(courseIndex, 1);
+  }
+  console.log({
+    method: req.method,
+    body: req.body,
+  });
   //sends back the response that we have removed the course
   res.json({
     status: "deleted course",
