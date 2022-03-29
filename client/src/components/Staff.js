@@ -5,7 +5,7 @@ import girl from "../img/girl.png";
 import "../css/Staff.css";
 import { get, post, put, taBort } from "../util/apiStaffUtil";
 
-function Staff() {
+function Staff({ sharedState }) {
   const [id, setId] = useState(0);
   const [counter, setcounter] = useState(Date.now());
   const [staff, setStaff] = useState([]);
@@ -15,7 +15,7 @@ function Staff() {
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
 
-  let loggedIn = true;
+  /*  let loggedIn = true; */
 
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
@@ -33,7 +33,7 @@ function Staff() {
                 return (
                   <div>
                     <li className="staffName" key={staff.id}>
-                      {loggedIn ? (
+                      {sharedState ? (
                         <p>
                           <b>id:</b> {staff.id}
                         </p>
@@ -49,7 +49,7 @@ function Staff() {
                       <p>
                         <b>Mejl:</b> {staff.email}
                       </p>
-                      {loggedIn ? (
+                      {sharedState ? (
                         <p>
                           <b>Bank-konto:</b> {staff.account}
                         </p>
@@ -61,7 +61,7 @@ function Staff() {
             </ul>
           </div>
         </div>
-        {loggedIn ? (
+        {sharedState ? (
           <div className="form">
             <div>
               <div className="input">
