@@ -4,6 +4,7 @@ const path = require("path");
 
 const routes = require("./coursesApiRoutes");
 const routerApply = require("./apiApply");
+const routerLoggin = require("./loggin");
 
 const app = express();
 
@@ -19,7 +20,7 @@ const educationApi = require("./apiEducation");
 
 app.use(educationApi);
 app.use(routerApply);
-
+app.use(routerLoggin);
 app.use(router);
 
 app.listen(8080, () => {
