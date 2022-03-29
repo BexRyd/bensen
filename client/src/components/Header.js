@@ -9,7 +9,7 @@ export default function Header() {
   const [user, setUser] = useState("");
   const [passWord, setPassWord] = useState("");
   const [authorized, setAuthorized] = useState(false);
-  const [failedLoggIn, setfailedLoggIn] = useState(false);
+
   return (
     <div>
       <div className="headerBackgroundImg"></div>
@@ -78,7 +78,15 @@ export default function Header() {
               Logga In
             </button>
           ) : (
-            <button className="inloggBtnHeader">Logga Ut</button>
+            <button
+              className="inloggBtnHeader"
+              onClick={() => {
+                setLoggaIn(false);
+                setAuthorized(false);
+              }}
+            >
+              Logga Ut
+            </button>
           )}
           <img className="logo" src={bensenLogo} alt="logo" />
         </ul>
