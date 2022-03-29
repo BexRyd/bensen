@@ -37,8 +37,8 @@
   justify-content: center;
   justify-items: center;
 
-  right: 100px;
-  top: 500px;
+  top: 100px;
+  right: 150px;
   border-radius: 50px;
 
   background-color: rgba(127, 255, 212, 0.356);
@@ -53,7 +53,7 @@
   align-items: center;
 
   margin-top: 5%;
-  margin-left: 5%;
+  margin-left: 10%;
 
   padding-bottom: 5%;
 

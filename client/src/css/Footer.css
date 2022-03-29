@@ -1,15 +1,16 @@
 body {
   position: relative;
+  margin: 0;
 }
 
 footer {
-  position: fixed;
+  position: relative;
   text-align: center;
-  bottom: 0%;
 
   width: 100%;
   height: 5rem;
   background-color: rgb(13, 97, 97);
+  margin-top: 300px;
 }
 footer p {
   color: white;
