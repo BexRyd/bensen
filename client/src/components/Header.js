@@ -21,7 +21,7 @@ export default function Header() {
           </li>
           <li>
             <Link className="link" to="/Staff">
-              4 Personal
+              Personal
             </Link>
           </li>
           <li>
