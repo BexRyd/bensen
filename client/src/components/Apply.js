@@ -14,8 +14,7 @@ function Apply() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [getEducation, setGetEducation] = useState([]);
-
-  let loggedIn = false;
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Apply").then((response) => setApply(response.data));
@@ -23,9 +22,9 @@ function Apply() {
   }, []);
   return (
     <div>
-      <Header />
+      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
       <div className="containerApply">
-        {loggedIn ? (
+        {authorized ? (
           <div className="applyContainer">
             <h1 className="h1Apply">Ansökningar</h1>
             <ul>
@@ -60,12 +59,12 @@ function Apply() {
         <div className="formApply">
           <div className="formToApply">
             <div className="inputApply">
-              {!loggedIn ? (
+              {!authorized ? (
                 <h1 className="h1Apply">Ansökan till Utbildning</h1>
               ) : (
                 <h1 className="h1Apply">Ta bort Ansökan</h1>
               )}
-              {loggedIn ? (
+              {authorized ? (
                 <div>
                   <select
                     className="selectApply"
@@ -84,7 +83,7 @@ function Apply() {
                   </select>
                 </div>
               ) : null}
-              {!loggedIn ? (
+              {!authorized ? (
                 <div>
                   <select
                     className="selectApply"
@@ -126,7 +125,7 @@ function Apply() {
               </div>
             </div>
 
-            {loggedIn ? (
+            {authorized ? (
               <div>
                 <button
                   className="applyBtn"

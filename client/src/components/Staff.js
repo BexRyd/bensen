@@ -5,7 +5,7 @@ import girl from "../img/girl.png";
 import "../css/Staff.css";
 import { get, post, put, taBort } from "../util/apiStaffUtil";
 
-function Staff({ sharedState }) {
+function Staff() {
   const [id, setId] = useState(0);
   const [counter, setcounter] = useState(Date.now());
   const [staff, setStaff] = useState([]);
@@ -14,8 +14,7 @@ function Staff({ sharedState }) {
   const [profession, setProfession] = useState("");
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
-
-  /*  let loggedIn = true; */
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
@@ -23,7 +22,7 @@ function Staff({ sharedState }) {
 
   return (
     <div>
-      <Header />
+      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Personal Lista</h1>
@@ -33,7 +32,7 @@ function Staff({ sharedState }) {
                 return (
                   <div>
                     <li className="staffName" key={staff.id}>
-                      {sharedState ? (
+                      {authorized ? (
                         <p>
                           <b>id:</b> {staff.id}
                         </p>
@@ -49,7 +48,7 @@ function Staff({ sharedState }) {
                       <p>
                         <b>Mejl:</b> {staff.email}
                       </p>
-                      {sharedState ? (
+                      {authorized ? (
                         <p>
                           <b>Bank-konto:</b> {staff.account}
                         </p>
@@ -61,7 +60,7 @@ function Staff({ sharedState }) {
             </ul>
           </div>
         </div>
-        {sharedState ? (
+        {authorized ? (
           <div className="form">
             <div>
               <div className="input">
