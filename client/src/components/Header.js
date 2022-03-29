@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../css/Header.css";
 import bensenLogo from "../img/bensenLogo.png";
-import { get, post } from "../util/apiStaffUtil";
+import { post } from "../util/apiStaffUtil";
 
 export default function Header() {
   const [loggaIn, setLoggaIn] = useState(false);
   const [user, setUser] = useState("");
   const [passWord, setPassWord] = useState("");
   const [authorized, setAuthorized] = useState(false);
+  const [failedLoggIn, setfailedLoggIn] = useState(false);
   return (
     <div>
       <div className="headerBackgroundImg"></div>
@@ -101,17 +102,21 @@ export default function Header() {
               placeholder="Lösenord"
             ></input>
             <button
+              className="btnHeader"
               onClick={() => {
                 post("/Loggin", {
                   user: user,
                   passWord: passWord,
-                });
-                get("/Loggin").then((response) => setAuthorized(response.data));
+                }).then((response) => {
+                  setAuthorized(response.data);
 
-                setLoggaIn(false);
-                console.log(authorized);
+                  if (response.data === false) {
+                    alert("Antingen fel Användarnamn eller Lösenord");
+                  }
+
+                  setLoggaIn(false);
+                });
               }}
-              className="btnHeader"
             >
               Logga in
             </button>
