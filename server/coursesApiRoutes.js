@@ -3,17 +3,31 @@ const routes = express.Router();
 let courses = [
   {
     courseId: 1213213,
-    courseName: "BackendUtveckling",
+    courseName: "Eat",
     teacher: "Dan",
     courseLength: 40,
-    courseDescription: "BackendUtveckling",
+    courseDescription: "Eat",
   },
   {
     courseId: 1213213,
-    courseName: "FrontendUtveckling",
+    courseName: "Sleep",
     teacher: "Rebecca",
     courseLength: 20,
-    courseDescription: "FrontendUtveckling",
+    courseDescription: "Sleep",
+  },
+  {
+    courseId: 1213213,
+    courseName: "Code",
+    teacher: "Rebecca",
+    courseLength: 20,
+    courseDescription: "Code",
+  },
+  {
+    courseId: 1213213,
+    courseName: "Repeat",
+    teacher: "Rebecca",
+    courseLength: 20,
+    courseDescription: "Repeat",
   },
 ];
 

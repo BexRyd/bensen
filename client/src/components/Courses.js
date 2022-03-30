@@ -139,7 +139,10 @@ function Courses() {
             </button>
           </div>
         ) : (
-          <img className="codeRep" src={codeRep} alt="mobile with text" />
+          <div>
+            {" "}
+            <img className="codeRep" src={codeRep} alt="mobile with text" />
+          </div>
         )}
       </div>
 

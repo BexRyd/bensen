@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Co from "../img/co.3.png";
+import { get } from "../util/apiStaffUtil";
 
 import "../css/Home.css";
 
 function Home() {
   const [authorized, setAuthorized] = useState(false);
+  const [education, setEducation] = useState([]);
+
+  useEffect(() => {
+    get("/Education").then((response) => setEducation(response.data));
+  }, []);
+
   return (
     <div className="containerHome">
       <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
@@ -14,11 +21,9 @@ function Home() {
       <div classN1ame="homeContainer">
         <img className="co" src={Co} alt="computer" />
         <ul className="textAnimation">
-          <li className="textAnimation">Frontend</li>
-          <li className="textAnimation">Backend</li>
-          <li className="textAnimation">UX/UI</li>
-          <li className="textAnimation">Designer</li>
-          <li className="textAnimation">Graisk Design</li>
+          {education.map((educations) => {
+            <li className="textAnimation">{educations.Utbildning}</li>;
+          })}
         </ul>
       </div>
 
