@@ -27,7 +27,7 @@ body {
   padding-bottom: 5%;
 
   border-radius: 30px;
-  width: 600px;
+  width: 400px;
 
   background-color: rgba(127, 255, 212, 0.356);
 }
@@ -45,7 +45,7 @@ body {
 
   font-family: "Lora", serif;
   background-color: aliceblue;
-  width: 400px;
+  width: 300px;
   box-shadow: 5px 2px 2px rgba(0, 0, 0, 0.322), 0 2px 20px #00000059;
 }
 
@@ -61,7 +61,7 @@ body {
   border-radius: 50px;
   height: 400px;
   background-color: rgba(127, 255, 212, 0.356);
-  width: 700px;
+  width: 500px;
 }
 
 .inputApply {
@@ -75,14 +75,14 @@ body {
   margin-top: 20px;
 }
 .inputFieldApply {
-  width: 500px;
+  width: 300px;
   height: 30px;
   margin: 1%;
 }
 .selectApply {
   font-family: "Lora", serif;
   font-weight: bold;
-  width: 500px;
+  width: 300px;
 
   height: 30px;
   border-radius: 10px;
@@ -96,7 +96,7 @@ body {
   color: #fdf7f7;
   background-color: black;
   height: 40px;
-  width: 500px;
+  width: 300px;
   border-radius: 50px;
   border: none;
 
