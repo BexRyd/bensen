@@ -22,7 +22,7 @@ function Home() {
         <img className="co" src={Co} alt="computer" />
         <ul className="textAnimation">
           {education.map((educations) => {
-            <li className="textAnimation">{educations.Utbildning}</li>;
+            return <li className="textAnimation">{educations.Utbildning}</li>;
           })}
         </ul>
       </div>
