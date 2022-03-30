@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import "../css/Courses.css";
 import { get, post, put, remove } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
 import { useState, useEffect } from "react";
+import codeRep from "../img/code_repeat.jpg";
 
 function Courses() {
   const [id, setId] = useState("");
@@ -14,6 +15,8 @@ function Courses() {
   const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
+  const [authorized, setAuthorized] = useState(false);
+
   useEffect(() => {
     get("/Courses").then((response) => setCourse(response.data));
   }, []);
@@ -23,7 +26,7 @@ function Courses() {
 
   return (
     <div className="courseContainer">
-      <Header />
+      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
       <div className="coursesMainSection">
         <div className="addedCoursesList">
           <h2 className="courseListHeader">Kurslista</h2>
@@ -32,7 +35,7 @@ function Courses() {
               return (
                 <div>
                   <li key={courses.courseId}>
-                    <p>KursID: {courses.courseId}</p>
+                    {authorized ? <p>KursID: {courses.courseId}</p> : null}
                     <p>Kursnamn: {courses.courseName}</p>
                     <p>Kursbeskrivning: {courses.courseDescription}</p>
                     <p>Lärare: {courses.teacher} </p>
@@ -43,99 +46,106 @@ function Courses() {
             })}
           </ul>
         </div>
+        {authorized ? (
+          <div className="createCourseForm">
+            <h2 className="courseListHeader">Skapa kurs</h2>
+            <input
+              value={courseName}
+              className="inputField"
+              placeholder="Kursnamn"
+              onChange={(e) => setCourseName(e.target.value)}
+            ></input>
+            <input
+              value={courseDescription}
+              className="inputField"
+              placeholder="Kursbeskrivning"
+              onChange={(e) => setCourseDescription(e.target.value)}
+            ></input>
+            {/* varför skriver den in lit om och om igen varje gång man klickar */}
+            <select
+              className="teacherSelect"
+              value={chooseTeacher}
+              onChange={(event) => setChooseTeacher(event.target.value)}
+            >
+              <option value="" selected disabled hidden>
+                Välj
+              </option>
+              {teacher.map((teachers) => {
+                if (teachers.profession === "lärare") {
+                  return (
+                    <option className="option" key={teachers.id}>
+                      {`${teachers.firstName} ${teachers.lastName}  `}
+                    </option>
+                  );
+                }
+              })}
+            </select>
+            <input
+              className="inputLength"
+              value={courseLength}
+              placeholder="Kurslängd i veckor"
+              onChange={(e) => setCourseLength(e.target.value)}
+            ></input>
+            <input
+              className="inputField"
+              value={id}
+              placeholder="KursID"
+              onChange={(e) => {
+                console.log(e.target.value);
+                setId(e.target.value);
+              }}
+            ></input>
+            <button
+              className="btnCourse"
+              onClick={() => {
+                post("/Courses", {
+                  id: counter,
+                  courseName: courseName,
+                  teacher: chooseTeacher,
+                  courseLength: courseLength,
+                  courseDescription: courseDescription,
+                });
 
-        <div className="createCourseForm">
-          <h2 className="courseListHeader">Skapa kurs</h2>
-          <input
-            value={courseName}
-            className="inputField"
-            placeholder="Kursnamn"
-            onChange={(e) => setCourseName(e.target.value)}
-          ></input>
-          <input
-            value={courseDescription}
-            className="inputField"
-            placeholder="Kursbeskrivning"
-            onChange={(e) => setCourseDescription(e.target.value)}
-          ></input>
-          {/* varför skriver den in lit om och om igen varje gång man klickar */}
-          <select
-            className="teacherSelect"
-            value={chooseTeacher}
-            onChange={(event) => setChooseTeacher(event.target.value)}
-          >
-            <option value="" selected disabled hidden>
-              Välj
-            </option>
-            {teacher.map((teachers) => {
-              if (teachers.profession === "lärare") {
-                return (
-                  <option className="option" key={teachers.id}>
-                    {`${teachers.firstName} ${teachers.lastName}  `}
-                  </option>
-                );
-              }
-            })}
-          </select>
-          <input
-            className="inputLength"
-            value={courseLength}
-            placeholder="Kurslängd i veckor"
-            onChange={(e) => setCourseLength(e.target.value)}
-          ></input>
-          <input
-            className="inputField"
-            value={id}
-            placeholder="KursID"
-            onChange={(e) => {
-              console.log(e.target.value);
-              setId(e.target.value);
-            }}
-          ></input>
-          <button
-            className="btnCourse"
-            onClick={() => {
-              post("/Courses", {
-                id: counter,
-                courseName: courseName,
-                teacher: chooseTeacher,
-                courseLength: courseLength,
-                courseDescription: courseDescription,
-              });
-
-              setCounter(Date.now());
-              get("/Courses").then((response) => setCourse(response.data));
-            }}
-          >
-            Skapa ny kurs
-          </button>
-          <button
-            className="btnCourse"
-            onClick={() => {
-              console.log("hej", id);
-              put(`/Courses/${id}`, {
-                id: id,
-                courseName: courseName,
-                teacher: chooseTeacher,
-                courseLength: courseLength,
-                courseDescription: courseDescription,
-              }).then((response) => console.log(response));
-              get("/Courses").then((response) => setCourse(response.data));
-            }}
-          >
-            Uppdatera
-          </button>
-          <button
-            className="btnCourse"
-            onClick={() => {
-              remove(`/Courses/${id}`);
-              get("/Courses").then((response) => setCourse(response.data));
-            }}
-          >
-            Ta bort
-          </button>
-        </div>
+                setCounter(Date.now());
+                get("/Courses").then((response) => setCourse(response.data));
+              }}
+            >
+              Skapa ny kurs
+            </button>
+            <button
+              className="btnCourse"
+              onClick={() => {
+                console.log("hej", id);
+                put(`/Courses/${id}`, {
+                  id: id,
+                  courseName: courseName,
+                  teacher: chooseTeacher,
+                  courseLength: courseLength,
+                  courseDescription: courseDescription,
+                }).then((response) => console.log(response));
+                get("/Courses").then((response) => setCourse(response.data));
+              }}
+            >
+              Uppdatera
+            </button>
+            <button
+              className="btnCourse"
+              onClick={() => {
+                remove(`/Courses/${id}`);
+                get("/Courses").then((response) => setCourse(response.data));
+              }}
+            >
+              Ta bort
+            </button>
+          </div>
+        ) : (
+          <div>
+            {" "}
+            <img className="codeRep" src={codeRep} alt="mobile with text" />
+          </div>
+        )}
       </div>
+
       <Footer />
     </div>
   );
