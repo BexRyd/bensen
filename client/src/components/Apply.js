@@ -14,8 +14,7 @@ function Apply() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [getEducation, setGetEducation] = useState([]);
-
-  let loggedIn = false;
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Apply").then((response) => setApply(response.data));
@@ -23,9 +22,9 @@ function Apply() {
   }, []);
   return (
     <div>
-      <Header />
+      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
       <div className="containerApply">
-        {loggedIn ? (
+        {authorized ? (
           <div className="applyContainer">
             <h1 className="h1Apply">Ansökningar</h1>
             <ul>
@@ -58,14 +57,14 @@ function Apply() {
         ) : null}
 
         <div className="formApply">
-          <div>
+          <div className="formToApply">
             <div className="inputApply">
-              {!loggedIn ? (
+              {!authorized ? (
                 <h1 className="h1Apply">Ansökan till Utbildning</h1>
               ) : (
                 <h1 className="h1Apply">Ta bort Ansökan</h1>
               )}
-              {loggedIn ? (
+              {authorized ? (
                 <div>
                   <select
                     className="selectApply"
@@ -84,7 +83,7 @@ function Apply() {
                   </select>
                 </div>
               ) : null}
-              {!loggedIn ? (
+              {!authorized ? (
                 <div>
                   <select
                     className="selectApply"
@@ -103,32 +102,30 @@ function Apply() {
                 </div>
               ) : null}
 
-              {!loggedIn ? (
-                <div>
-                  <input
-                    className="inputApply"
-                    value={firstName}
-                    onChange={(event) => setFirstName(event.target.value)}
-                    placeholder="First Name"
-                  ></input>
-                  <input
-                    className="inputApply"
-                    value={lastName}
-                    onChange={(event) => setLastName(event.target.value)}
-                    placeholder="Last Name"
-                  ></input>
-                  <input
-                    className="inputApply"
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder="Email"
-                    type="email"
-                  ></input>
-                </div>
-              ) : null}
+              <div className="inputApply">
+                <input
+                  className="inputFieldApply"
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                  placeholder="First Name"
+                ></input>
+                <input
+                  className="inputFieldApply"
+                  value={lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                  placeholder="Last Name"
+                ></input>
+                <input
+                  className="inputFieldApply"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="Email"
+                  type="email"
+                ></input>
+              </div>
             </div>
 
-            {loggedIn ? (
+            {authorized ? (
               <div>
                 <button
                   className="applyBtn"

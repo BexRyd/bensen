@@ -14,6 +14,7 @@ function Staff() {
   const [profession, setProfession] = useState("");
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
@@ -21,7 +22,7 @@ function Staff() {
 
   return (
     <div>
-      <Header />
+      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Personal Lista</h1>
@@ -31,25 +32,27 @@ function Staff() {
                 return (
                   <div>
                     <li className="staffName" key={staff.id}>
-                      <p>
-                        <b>id:</b> {staff.id}
-                      </p>{" "}
+                      {authorized ? (
+                        <p>
+                          <b>id:</b> {staff.id}
+                        </p>
+                      ) : null}
                       <p>
                         {" "}
-                        <b>Förnamn:</b> {staff.firstName}{" "}
-                      </p>{" "}
-                      <p>
-                        <b>Efternamn:</b> {staff.lastName}
-                      </p>{" "}
+                        <b>Namn: </b>
+                        {staff.firstName} {staff.lastName}
+                      </p>
                       <p>
                         <b>Yrke:</b> {staff.profession}
-                      </p>{" "}
+                      </p>
                       <p>
                         <b>Mejl:</b> {staff.email}
-                      </p>{" "}
-                      <p>
-                        <b>Bank-konto:</b> {staff.account}
                       </p>
+                      {authorized ? (
+                        <p>
+                          <b>Bank-konto:</b> {staff.account}
+                        </p>
+                      ) : null}
                     </li>
                   </div>
                 );
@@ -57,109 +60,110 @@ function Staff() {
             </ul>
           </div>
         </div>
+        {authorized ? (
+          <div className="form">
+            <div>
+              <div className="input">
+                <h1 className="h1Staff">Lägg till Personal</h1>
+                <select
+                  className="select"
+                  value={id}
+                  onChange={(event) => setId(event.target.value)}
+                  placeholder="Id för den du vill ändra"
+                >
+                  {staff.map((staff) => {
+                    return (
+                      <option className="option" key={staff.id}>
+                        {`${staff.id}  `}
+                      </option>
+                    );
+                  })}
+                </select>
 
-        <div className="form">
-          <div>
-            <div className="input">
-              <h1 className="h1Staff">Lägg till Personal</h1>
-              <select
-                className="select"
-                value={id}
-                onChange={(event) => setId(event.target.value)}
-                placeholder="Id för den du vill ändra"
+                <select
+                  className="select"
+                  onChange={(event) => setProfession(event.target.value)}
+                  placeholder="Välj"
+                >
+                  <option>lärare</option>
+                  <option>Utbildningsledare</option>
+                </select>
+
+                <input
+                  className="inputClass"
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                  placeholder="First Name"
+                ></input>
+                <input
+                  className="inputClass"
+                  value={lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                  placeholder="Last Name"
+                ></input>
+                <input
+                  className="inputClass"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="Email"
+                  type="email"
+                ></input>
+                <input
+                  className="inputClass"
+                  value={account}
+                  onChange={(event) => setAccount(event.target.value)}
+                  placeholder="Bank konto"
+                ></input>
+              </div>
+
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  post("/Staff", {
+                    id: counter,
+                    firstName: firstName,
+                    lastName: lastName,
+                    profession: profession,
+                    email: email,
+                    account: account,
+                  });
+
+                  setcounter(Date.now());
+                  get("/Staff").then((response) => setStaff(response.data));
+                }}
               >
-                {staff.map((staff) => {
-                  return (
-                    <option className="option" key={staff.id}>
-                      {`${staff.id}  `}
-                    </option>
-                  );
-                })}
-              </select>
-
-              <select
-                className="select"
-                onChange={(event) => setProfession(event.target.value)}
-                placeholder="Välj"
+                Lägg till
+              </button>
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  put(`/Staff/${id}`, {
+                    id: staff.id,
+                    firstName: firstName,
+                    lastName: lastName,
+                    profession: profession,
+                    email: email,
+                    account: account,
+                  }).then((response) => console.log(response));
+                  get("/Staff").then((response) => setStaff(response.data));
+                }}
               >
-                <option>lärare</option>
-                <option>Utbildningsledare</option>
-              </select>
-
-              <input
-                className="inputClass"
-                value={firstName}
-                onChange={(event) => setFirstName(event.target.value)}
-                placeholder="First Name"
-              ></input>
-              <input
-                className="inputClass"
-                value={lastName}
-                onChange={(event) => setLastName(event.target.value)}
-                placeholder="Last Name"
-              ></input>
-              <input
-                className="inputClass"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="Email"
-                type="email"
-              ></input>
-              <input
-                className="inputClass"
-                value={account}
-                onChange={(event) => setAccount(event.target.value)}
-                placeholder="Bank konto"
-              ></input>
+                Uppdatera
+              </button>
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  taBort(`/Staff/${id}`);
+                  get("/Staff").then((response) => setStaff(response.data));
+                }}
+              >
+                Ta bort
+              </button>
             </div>
-
-            <button
-              className="inputBtn"
-              onClick={() => {
-                post("/Staff", {
-                  id: counter,
-                  firstName: firstName,
-                  lastName: lastName,
-                  profession: profession,
-                  email: email,
-                  account: account,
-                });
-
-                setcounter(Date.now());
-                get("/Staff").then((response) => setStaff(response.data));
-              }}
-            >
-              Lägg till
-            </button>
-            <button
-              className="inputBtn"
-              onClick={() => {
-                put(`/Staff/${id}`, {
-                  id: staff.id,
-                  firstName: firstName,
-                  lastName: lastName,
-                  profession: profession,
-                  email: email,
-                  account: account,
-                }).then((response) => console.log(response));
-                get("/Staff").then((response) => setStaff(response.data));
-              }}
-            >
-              Uppdatera
-            </button>
-            <button
-              className="inputBtn"
-              onClick={() => {
-                taBort(`/Staff/${id}`);
-                get("/Staff").then((response) => setStaff(response.data));
-              }}
-            >
-              Ta bort
-            </button>
           </div>
-        </div>
-
-        <img className="girlImg" src={girl} alt="computer" />
+        ) : (
+          <img className="girlImg" src={girl} alt="computer" />
+        )}
       </div>
 
       <Footer />

@@ -6,36 +6,46 @@ import { get, post, put, remove } from "../utilities/apiCourses"; // get the sam
 import { useState, useEffect } from "react";
 
 function Courses() {
-  const [courseId, setCourseId] = useState(Date.now());
+  const [id, setId] = useState("");
+  const [counter, setCounter] = useState(Date.now());
   const [teacher, setTeacher] = useState([]);
   const [chooseTeacher, setChooseTeacher] = useState("");
-  const [courseName, setCourseName] = useState([]);
+  const [course, setCourse] = useState([]);
+  const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
-  // useEffect(() => {
-  //   get("/Courses").then((res) => setCourseName(res.data));
-  // }, []);
+  useEffect(() => {
+    get("/Courses").then((response) => setCourse(response.data));
+  }, []);
   useEffect(() => {
     get("/Staff").then((response) => setTeacher(response.data));
   }, []);
-
-  // const addedId = (e) => setCourseId(e.target.value);
-
-  // const courseTeacher = teacher.map((teachers) => {
-  //   return (
-  //     <div>
-  //       <option className="courseStaffName">
-  //         {`${teachers.firstName} ${teachers.lastName}`}
-  //       </option>
-  //     </div>
-  //   );
-  // });
 
   return (
     <div className="courseContainer">
       <Header />
       <div className="coursesMainSection">
-        <form className="createCourseForm">
+        <div className="addedCoursesList">
+          <h2 className="courseListHeader">Kurslista</h2>
+          <ul>
+            {course.map((courses) => {
+              return (
+                <div>
+                  <li key={courses.courseId}>
+                    <p>KursID: {courses.courseId}</p>
+                    <p>Kursnamn: {courses.courseName}</p>
+                    <p>Kursbeskrivning: {courses.courseDescription}</p>
+                    <p>Lärare: {courses.teacher} </p>
+                    <p>Kurslängd: {courses.courseLength}</p>
+                  </li>
+                </div>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div className="createCourseForm">
+          <h2 className="courseListHeader">Skapa kurs</h2>
           <input
             value={courseName}
             className="inputField"
@@ -44,22 +54,27 @@ function Courses() {
           ></input>
           <input
             value={courseDescription}
+            className="inputField"
             placeholder="Kursbeskrivning"
             onChange={(e) => setCourseDescription(e.target.value)}
           ></input>
-
-          {/* varför skriver den in listan om och om igen varje gång man klickar */}
+          {/* varför skriver den in lit om och om igen varje gång man klickar */}
           <select
-            className="teachersselect"
+            className="teacherSelect"
             value={chooseTeacher}
             onChange={(event) => setChooseTeacher(event.target.value)}
           >
+            <option value="" selected disabled hidden>
+              Välj
+            </option>
             {teacher.map((teachers) => {
-              return (
-                <option className="option" key={Date.now()}>
-                  {`${teachers.firstName}  `}
-                </option>
-              );
+              if (teachers.profession === "lärare") {
+                return (
+                  <option className="option" key={teachers.id}>
+                    {`${teachers.firstName} ${teachers.lastName}  `}
+                  </option>
+                );
+              }
             })}
           </select>
           <input
@@ -68,33 +83,57 @@ function Courses() {
             placeholder="Kurslängd i veckor"
             onChange={(e) => setCourseLength(e.target.value)}
           ></input>
-
+          <input
+            className="inputField"
+            value={id}
+            placeholder="KursID"
+            onChange={(e) => {
+              console.log(e.target.value);
+              setId(e.target.value);
+            }}
+          ></input>
           <button
+            className="btnCourse"
             onClick={() => {
               post("/Courses", {
-                courseId: courseId,
-                coursename: courseName,
+                id: counter,
+                courseName: courseName,
                 teacher: chooseTeacher,
-                courselength: courseLength,
-                coursedescription: courseDescription,
+                courseLength: courseLength,
+                courseDescription: courseDescription,
               });
 
-              setCourseId(Date.now());
-              get("/Courses").then((res) => setCourseName(res.data));
+              setCounter(Date.now());
+              get("/Courses").then((response) => setCourse(response.data));
             }}
           >
             Skapa ny kurs
           </button>
-        </form>
-        <div className="addedCoursesList">
-          <h3>TILLGÄNGLIGA KURSER</h3>
-          <h4>Kursnamn: {courseName}</h4>
-          <p>Kursbeskrivning: {courseDescription}</p>
-          <p>
-            Lärare: {teacher.firstName} {teacher.lastName}
-          </p>
-
-          <p>Kurslängd: {courseLength} veckor</p>
+          <button
+            className="btnCourse"
+            onClick={() => {
+              console.log("hej", id);
+              put(`/Courses/${id}`, {
+                id: id,
+                courseName: courseName,
+                teacher: chooseTeacher,
+                courseLength: courseLength,
+                courseDescription: courseDescription,
+              }).then((response) => console.log(response));
+              get("/Courses").then((response) => setCourse(response.data));
+            }}
+          >
+            Uppdatera
+          </button>
+          <button
+            className="btnCourse"
+            onClick={() => {
+              remove(`/Courses/${id}`);
+              get("/Courses").then((response) => setCourse(response.data));
+            }}
+          >
+            Ta bort
+          </button>
         </div>
       </div>
       <Footer />

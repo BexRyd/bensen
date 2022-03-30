@@ -107,7 +107,10 @@ router.put("/Staff/:staffId", (request, response) => {
 router.delete("/Staff/:staffId", (request, response) => {
   const staffId = request.params.staffId;
   const staffIndex = staffs.findIndex((staff) => staff.id == staffId);
-  staffs.splice(staffIndex, 1);
+
+  if (staffIndex > -1) {
+    staffs.splice(staffIndex, 1);
+  }
 
   response.json({
     status: "success",
