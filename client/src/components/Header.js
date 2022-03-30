@@ -4,7 +4,7 @@ import "../css/Header.css";
 import bensenLogo from "../img/bensenLogo.png";
 import { post } from "../util/apiStaffUtil";
 
-export default function Header() {
+export default function Header(props) {
   const [loggaIn, setLoggaIn] = useState(false);
   const [user, setUser] = useState("");
   const [passWord, setPassWord] = useState("");
@@ -83,6 +83,7 @@ export default function Header() {
               onClick={() => {
                 setLoggaIn(false);
                 setAuthorized(false);
+                props.setLoggInPage(false);
               }}
             >
               Logga Ut
@@ -117,6 +118,7 @@ export default function Header() {
                   passWord: passWord,
                 }).then((response) => {
                   setAuthorized(response.data);
+                  props.setLoggInPage(response.data);
 
                   if (response.data === false) {
                     alert("Antingen fel Användarnamn eller Lösenord");

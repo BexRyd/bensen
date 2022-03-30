@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Co from "../img/co.3.png";
@@ -6,9 +6,10 @@ import Co from "../img/co.3.png";
 import "../css/Home.css";
 
 function Home() {
+  const [authorized, setAuthorized] = useState(false);
   return (
     <div className="containerHome">
-      <Header />
+      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
 
       <div classN1ame="homeContainer">
         <img className="co" src={Co} alt="computer" />
