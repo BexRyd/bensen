@@ -9,6 +9,7 @@ export default function Header(props) {
   const [user, setUser] = useState("");
   const [passWord, setPassWord] = useState("");
   const [authorized, setAuthorized] = useState(false);
+  const [popup, setpopup] = useState(false)
 
   return (
     <div>
@@ -110,6 +111,7 @@ export default function Header(props) {
               required
               placeholder="Lösenord"
             ></input>
+            <div className="btnBox">
             <button
               className="btnHeader"
               onClick={() => {
@@ -121,7 +123,7 @@ export default function Header(props) {
                   props.setLoggInPage(response.data);
 
                   if (response.data === false) {
-                    alert("Antingen fel Användarnamn eller Lösenord");
+                    setpopup(true)
                   }
 
                   setLoggaIn(false);
@@ -130,9 +132,19 @@ export default function Header(props) {
             >
               Logga in
             </button>
+            <button className="btnHeader" onClick={()=>setLoggaIn(false)}>Avbryt</button>
+            </div>
           </div>
         </div>
       ) : null}
+      {popup?(
+      <div className="popUp">
+         
+        <p>Gick ej att logga in.</p>
+        <p>Fel Användarnamn eller Lösenord</p>
+        <button className="popupBtn" onClick={()=>setpopup(false)}>Ok</button>
+      </div>
+      ):null}
     </div>
   );
 }

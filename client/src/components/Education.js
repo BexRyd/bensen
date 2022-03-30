@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import Footer from "./Footer";
-// import guy from "../img/guy.png";
-import { get, post, put, erase } from "../utility/educationApi";
-import { useState, useEffect } from "react";
-import "../css/Education.css";
+import Footer from "./Footer"; import guy from "../img/guy.png";
+import {get,post,put,erase} from "../utility/educationApi"
+import {useState,useEffect} from 'react'
+import "../css/Education.css"
+
 
 function Education() {
   const [id, setId] = useState(Date.now());
@@ -18,6 +18,7 @@ function Education() {
   const [chooseEvent, setChooseEvent] = useState("");
   const [chooseLeader, setChooseLeader] = useState("");
   const [chooseDescription, setChooseDescription] = useState("");
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Education").then((response) => seteventLists(response.data));
@@ -27,7 +28,52 @@ function Education() {
 
   return (
     <div>
-      <Header />
+    <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
+     
+   <div  className="Box">
+   
+        
+        
+    <div className="createdEducationBox">
+      
+    {eventLists.map((eventList) => {
+                return (
+                  <div>
+                    <li className="getLi" key={eventList.id}>
+                    {authorized ?(
+                      <p>
+                        <b>id:</b> {eventList.id}
+                      </p>):null}
+                      
+                      <p>
+                      
+                        {" "}
+                        <b>Utbildningsledare:</b> {eventList.Utbildningsledare}{" "}
+                      </p>{" "}
+                      <p>
+                        <b>Utbildning:</b> {eventList.Utbildning}
+                      </p>{" "}
+                      <p>
+                        <b>Kurs:</b> {eventList.Kursnamn}
+                      </p>{" "}
+                      <p>
+                        <b>Beskrivning:</b> {eventList.Beskrivning}
+                      </p>{" "}
+                     
+                    </li>
+                  </div>
+                );
+              })}
+       
+        
+    
+        
+     </div> 
+
+     {authorized ?(
+    
+     <div className="createEducationbox"> 
+  
 
       <div className="Box">
         <div className="createdEducationBox">
@@ -103,14 +149,17 @@ function Education() {
             <option value="" selected disabled hidden>
               Välj Kurs
             </option>
-            {courses.map((course) => {
-              return (
-                <option className="CourseLi" key={course.id}>
-                  {` ${course.courseName}`}
-                </option>
-              );
-            })}
-          </select>
+                {courses.map((course) => { 
+                 
+                  return (
+                   
+                    <option className="CourseLi" key={course.id}>
+                 
+                     {` ${course.courseName}`}
+                    </option>
+                  );
+                })}
+        </select>
 
           <textarea
             className="beskrivningBox"
@@ -170,9 +219,12 @@ function Education() {
             DELETE
           </button>
         </div>
-
-        {/* <img className="girlImg" src={guy} alt="computer" /> */}
-      </div>
+        ):(<img className="girlImg" src={guy} alt="computer" />) }
+      
+      
+      
+     
+     </div>
       <Footer />
     </div>
   );
