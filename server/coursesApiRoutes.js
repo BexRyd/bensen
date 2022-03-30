@@ -1,6 +1,21 @@
 const express = require("express");
 const routes = express.Router();
-let courses = [];
+let courses = [
+  {
+    courseId: 1213213,
+    courseName: "BackendUtveckling",
+    teacher: "Dan",
+    courseLength: 40,
+    courseDescription: "BackendUtveckling",
+  },
+  {
+    courseId: 1213213,
+    courseName: "FrontendUtveckling",
+    teacher: "Rebecca",
+    courseLength: 20,
+    courseDescription: "FrontendUtveckling",
+  },
+];
 
 // om jag ska hämta lärare från Staff, är de då den routen jag ska ha här eller Courses
 routes.get("/Courses", (req, res) => {
