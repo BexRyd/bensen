@@ -53,6 +53,36 @@ routerApply.post("/Apply", (request, response) => {
   });
 });
 
+routerApply.put("/Apply/:applyId", (request, response) => {
+  const applyId = Number(request.params.applyId);
+  const firstName = request.body.firstName;
+  const lastName = request.body.lastName;
+  const education = request.body.education;
+  const email = request.body.email;
+
+  const newApply = {
+    id: applyId,
+    firstName,
+    lastName,
+    email,
+    education,
+  };
+  const applyIndex = Applys.findIndex((apply) => apply.id == applyId);
+
+  Applys[applyIndex] = newApply;
+
+  console.log({
+    method: request.method,
+    body: request.body,
+    data: newApply,
+  });
+  response.json({
+    status: "success",
+    method: request.method,
+    data: newApply,
+  });
+});
+
 routerApply.delete("/Apply/:applyId", (request, response) => {
   const applyId = request.params.applyId;
   const applyIndex = Applys.findIndex((apply) => apply.id == applyId);
