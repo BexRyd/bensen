@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./Header";
-import Footer from "./Footer";
-// import guy from "../img/guy.png";
+import Footer from "./Footer"; import guy from "../img/guy.png";
 import {get,post,put,erase} from "../utility/educationApi"
 import {useState,useEffect} from 'react'
 import "../css/Education.css"
+
 
 function Education() {
   const [id, setId] = useState(Date.now())
@@ -18,6 +18,7 @@ function Education() {
   const [chooseEvent, setChooseEvent] = useState("")
   const [chooseLeader, setChooseLeader] = useState("")
   const [chooseDescription,setChooseDescription]=useState("")
+  const [authorized, setAuthorized] = useState(false);
 
   
   
@@ -33,7 +34,7 @@ function Education() {
   
   return (
     <div>
-     <Header />
+    <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
      
    <div  className="Box">
    
@@ -45,10 +46,13 @@ function Education() {
                 return (
                   <div>
                     <li className="getLi" key={eventList.id}>
+                    {authorized ?(
                       <p>
                         <b>id:</b> {eventList.id}
-                      </p>{" "}
+                      </p>):null}
+                      
                       <p>
+                      
                         {" "}
                         <b>Utbildningsledare:</b> {eventList.Utbildningsledare}{" "}
                       </p>{" "}
@@ -71,6 +75,8 @@ function Education() {
     
         
      </div> 
+
+     {authorized ?(
     
      <div className="createEducationbox"> 
   
@@ -131,7 +137,7 @@ function Education() {
                    
                     <option className="CourseLi" key={course.id}>
                  
-                     {` ${course.coursename}`}
+                     {` ${course.courseName}`}
                     </option>
                   );
                 })}
@@ -226,9 +232,10 @@ function Education() {
         
         
         </div>
+        ):(<img className="girlImg" src={guy} alt="computer" />) }
       
       
-      {/* <img className="girlImg" src={guy} alt="computer" /> */}
+      
      
      </div>
       <Footer />
