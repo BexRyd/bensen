@@ -10,10 +10,14 @@ app.use(bodyParser.json())
 
 let educationLists = [
   {
-    ID: 52512562161216,
-    utbildning:"Frontend Utveckling",
+    id: 2121211223,
+    Utbildning: "Frontend Utveckling", 
+    Utbildningsledare: "Alex the king",
+    Kursnamn: "Avancerad Javascript",
+    Beskrivning:"Object och Class orienterad javascript" 
+    
    
-    kurs: " Avancerad Javascript "
+   
   },
  
 ] 
@@ -35,13 +39,19 @@ router.post('/Education',(request,response)=>{            // bodyparser behövs 
   console.log({
       method: request.method,
       body: request.body,
+      data: educationLists,
+      
       
 
   })
   const educationList = {
-    id: request.body.id,
-    utbildningsledare: request.body.utbildningsledare,
-    utbildning: request.body.utbildning,
+    id: request.body.id, 
+   Utbildningsledare: request.body.Utbildningsledare,
+   
+   Utbildning: request.body.Utbildning,
+   Kursnamn: request.body.Kursnamn,
+   Beskrivning:request.body.Beskrivning,
+    
 
   }
 educationLists.push(educationList)
@@ -49,21 +59,34 @@ educationLists.push(educationList)
   response.json({
     status: 'success',
     method: request.method,
-    data: educationList,
+    data: educationLists,
   });
 
 })
+
+ 
+
+
+ 
 // fetch('/api/update/7') // frontend
 router.put('/Education/:educationListId', (request,response)=>{
   const educationListId = Number (request.params.educationListId)
 
-  const utbildningsledare = request.body.utbildningsledare
-  const utbildning = request.body.utbildning
+  const Utbildningsledare = request.body.Utbildningsledare
+  const Utbildning = request.body.Utbildning
+  const Kursnamn = request.body.Kursnamn
+  const Beskrivning = request.body.Beskrivning
+ 
   
   const newEducationList ={
-    educationid:educationListId,
-    utbildningsledare: utbildningsledare,
-    utbildning:utbildning,
+    id:educationListId,
+    Utbildningsledare,
+    Utbildning,
+    Kursnamn,
+    Beskrivning,
+    
+    
+   
   }
 
  
@@ -83,9 +106,13 @@ router.put('/Education/:educationListId', (request,response)=>{
 
 router.delete('/Education/:educationListId', (request,response)=>{
   const educationListId = request.params.educationListId
-
+  
   const  educationListIndex = educationLists.findIndex((educationList)=>educationList.id == educationListId)
-  educationLists.splice(educationListIndex, 1)
+
+  if (educationListIndex > -1){
+ educationLists.splice(educationListIndex, 1)
+  }
+  
   
   response.json({             // skickar tillbaka svar .status- success, metod -put 
     status: 'success',
