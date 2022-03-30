@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../css/Header.css";
 import bensenLogo from "../img/bensenLogo.png";
-import { get, post } from "../util/apiStaffUtil";
+import { post } from "../util/apiStaffUtil";
 
-export default function Header() {
+export default function Header(props) {
   const [loggaIn, setLoggaIn] = useState(false);
   const [user, setUser] = useState("");
   const [passWord, setPassWord] = useState("");
   const [authorized, setAuthorized] = useState(false);
+
   return (
     <div>
       <div className="headerBackgroundImg"></div>
@@ -77,7 +78,16 @@ export default function Header() {
               Logga In
             </button>
           ) : (
-            <button className="inloggBtnHeader">Logga Ut</button>
+            <button
+              className="inloggBtnHeader"
+              onClick={() => {
+                setLoggaIn(false);
+                setAuthorized(false);
+                props.setLoggInPage(false);
+              }}
+            >
+              Logga Ut
+            </button>
           )}
           <img className="logo" src={bensenLogo} alt="logo" />
         </ul>
@@ -101,17 +111,22 @@ export default function Header() {
               placeholder="Lösenord"
             ></input>
             <button
+              className="btnHeader"
               onClick={() => {
                 post("/Loggin", {
                   user: user,
                   passWord: passWord,
-                });
-                get("/Loggin").then((response) => setAuthorized(response.data));
+                }).then((response) => {
+                  setAuthorized(response.data);
+                  props.setLoggInPage(response.data);
 
-                setLoggaIn(false);
-                console.log(authorized);
+                  if (response.data === false) {
+                    alert("Antingen fel Användarnamn eller Lösenord");
+                  }
+
+                  setLoggaIn(false);
+                });
               }}
-              className="btnHeader"
             >
               Logga in
             </button>

@@ -14,8 +14,7 @@ function Staff() {
   const [profession, setProfession] = useState("");
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
-
-  let loggedIn = true;
+  const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
@@ -23,7 +22,7 @@ function Staff() {
 
   return (
     <div>
-      <Header />
+      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Personal Lista</h1>
@@ -33,7 +32,7 @@ function Staff() {
                 return (
                   <div>
                     <li className="staffName" key={staff.id}>
-                      {loggedIn ? (
+                      {authorized ? (
                         <p>
                           <b>id:</b> {staff.id}
                         </p>
@@ -49,7 +48,7 @@ function Staff() {
                       <p>
                         <b>Mejl:</b> {staff.email}
                       </p>
-                      {loggedIn ? (
+                      {authorized ? (
                         <p>
                           <b>Bank-konto:</b> {staff.account}
                         </p>
@@ -61,7 +60,7 @@ function Staff() {
             </ul>
           </div>
         </div>
-        {loggedIn ? (
+        {authorized ? (
           <div className="form">
             <div>
               <div className="input">

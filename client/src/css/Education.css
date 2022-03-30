@@ -74,18 +74,28 @@ display: flex;
 }
 
 .leader1select,
-.course1select,
-.event1select{
+.course1select{
     width: 250px;
     margin-right: 10px;
+   
 }
+
+.event1select{
+    width: 226px;
+    
+}
+
+
+
 .input1Id{
    
-    width: 220px;
+   
+    width: 226px;
+
 }
 
 .beskrivningBox{
-    width: 250px;
+    width: 245px;
     margin-right: 5px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: bolder;
@@ -99,7 +109,7 @@ display: flex;
 
    
    
-    row-gap: 10px;
+   
 
 
 }

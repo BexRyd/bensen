@@ -5,23 +5,8 @@ const credentials = { secretUser: "user", secretPassword: "password" };
 
 let authorized = true;
 
-const userArray = [];
-routerLoggin.get("/Loggin", (request, response) => {
-  console.log({
-    method: request.method,
-    data: authorized,
-  });
-  if (
-    credentials.secretUser === userArray.user &&
-    credentials.secretPassword == userArray.password
-  ) {
-    response.json({
-      status: "success",
-      method: request.method,
-      data: userArray,
-    });
-  }
-});
+let logginUser = "";
+let logginPassword = "";
 
 routerLoggin.post("/Loggin", (request, response) => {
   console.log({
@@ -29,18 +14,25 @@ routerLoggin.post("/Loggin", (request, response) => {
     body: request.body,
   });
 
-  const newUser = {
-    user: request.body.user,
-    password: request.body.passWord,
-  };
+  logginUser = request.body.user;
+  logginPassword = request.body.passWord;
 
-  userArray.push(newUser);
-
-  response.json({
-    status: "success",
-    method: request.method,
-    data: userArray,
-  });
+  if (
+    credentials.secretUser === logginUser &&
+    credentials.secretPassword === logginPassword
+  ) {
+    response.json({
+      status: "success",
+      method: request.method,
+      data: authorized,
+    });
+  } else {
+    response.json({
+      status: "failed",
+      method: request.method,
+      data: false,
+    });
+  }
 });
 
 module.exports = routerLoggin;
