@@ -94,7 +94,7 @@ function Apply() {
                     {getEducation.map((education) => {
                       return (
                         <option className="optionApply" key={id}>
-                          {`${education.utbildning}  `}
+                          {`${education.Utbildning}  `}
                         </option>
                       );
                     })}
