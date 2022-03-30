@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import "../css/Courses.css";
 import { get, post, put, remove } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
 import { useState, useEffect } from "react";
+import codeRep from "../img/code_repeat.jpg";
 
 function Courses() {
   const [id, setId] = useState("");
@@ -137,7 +138,9 @@ function Courses() {
               Ta bort
             </button>
           </div>
-        ) : null}
+        ) : (
+          <img className="codeRep" src={codeRep} alt="mobile with text" />
+        )}
       </div>
 
       <Footer />
