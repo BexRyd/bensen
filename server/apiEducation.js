@@ -12,12 +12,23 @@ let educationLists = [
   {
     id: 2121211223,
     Utbildning: "Frontend Utveckling", 
-    Utbildningsledare: "Alex the king",
+    Utbildningsledare: "Alexander Wiklund",
     Kursnamn: "Avancerad Javascript",
     Beskrivning:"Object och Class orienterad javascript" 
-    
-   
-   
+  },
+  {
+    id: 2121211223,
+    Utbildning: "Backeend Utveckling", 
+    Utbildningsledare: "Arne Olofsson",
+    Kursnamn: "Server",
+    Beskrivning:"Mongo Databas, express server" 
+  },
+  {
+    id: 2121211223,
+    Utbildning: "UI/UX", 
+    Utbildningsledare: "wisman desi",
+    Kursnamn: "Visuell design",
+    Beskrivning:"Layout verktyg och hemsida kunskap" 
   },
  
 ] 
