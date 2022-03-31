@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Co from "../img/co.3.png";
-import { get } from "../util/apiStaffUtil";
+import { get } from "../utility/educationApi.js";
 
 import "../css/Home.css";
 

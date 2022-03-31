@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import "../css/App.css";
-import { get, post, put, remove } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
+import { get, post, put, erase } from "../utility/educationApi.js"; // get the same from Rebecca to add api to teacher
 import { useState, useEffect } from "react";
 import codeRep from "../img/code_repeat.jpg";
 
@@ -152,7 +152,7 @@ function Courses() {
               <button
                 className="inputBtn"
                 onClick={() => {
-                  remove(`/Courses/${id}`);
+                  erase(`/Courses/${id}`);
                   get("/Courses").then((response) => setCourse(response.data));
                 }}
               >

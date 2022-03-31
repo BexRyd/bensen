@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import color from "../img/color.jpg";
-import { get, post, taBort, put } from "../util/apiStaffUtil";
+import { get, post, put, erase } from "../utility/educationApi.js";
 import "../css/App.css";
 
 function Apply() {
@@ -130,7 +130,7 @@ function Apply() {
                   <button
                     className="inputBtn"
                     onClick={() => {
-                      taBort(`/Apply/${id}`);
+                      erase(`/Apply/${id}`);
                       get("/Apply").then((response) => setApply(response.data));
                     }}
                   >

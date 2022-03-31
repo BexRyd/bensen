@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import "../css/Header.css";
 import bensenLogo from "../img/bensenLogo.png";
-import { post } from "../util/apiStaffUtil";
+import { post } from "../utility/educationApi.js";
 
 export default function Header(props) {
   const [loggaIn, setLoggaIn] = useState(false);
   const [user, setUser] = useState("");
   const [passWord, setPassWord] = useState("");
   const [authorized, setAuthorized] = useState(false);
-  const [popup, setpopup] = useState(false)
+  const [popup, setpopup] = useState(false);
 
   return (
     <div>
@@ -112,39 +112,42 @@ export default function Header(props) {
               placeholder="Lösenord"
             ></input>
             <div className="btnBox">
-            <button
-              className="btnHeader"
-              onClick={() => {
-                post("/Loggin", {
-                  user: user,
-                  passWord: passWord,
-                }).then((response) => {
-                  setAuthorized(response.data);
-                  props.setLoggInPage(response.data);
+              <button
+                className="btnHeader"
+                onClick={() => {
+                  post("/Loggin", {
+                    user: user,
+                    passWord: passWord,
+                  }).then((response) => {
+                    setAuthorized(response.data);
+                    props.setLoggInPage(response.data);
 
-                  if (response.data === false) {
-                    setpopup(true)
-                  }
+                    if (response.data === false) {
+                      setpopup(true);
+                    }
 
-                  setLoggaIn(false);
-                });
-              }}
-            >
-              Logga in
-            </button>
-            <button className="btnHeader" onClick={()=>setLoggaIn(false)}>Avbryt</button>
+                    setLoggaIn(false);
+                  });
+                }}
+              >
+                Logga in
+              </button>
+              <button className="btnHeader" onClick={() => setLoggaIn(false)}>
+                Avbryt
+              </button>
             </div>
           </div>
         </div>
       ) : null}
-      {popup?(
-      <div className="popUp">
-         
-        <p>Gick ej att logga in.</p>
-        <p>Fel Användarnamn eller Lösenord</p>
-        <button className="popupBtn" onClick={()=>setpopup(false)}>Ok</button>
-      </div>
-      ):null}
+      {popup ? (
+        <div className="popUp">
+          <p>Gick ej att logga in.</p>
+          <p>Fel Användarnamn eller Lösenord</p>
+          <button className="popupBtn" onClick={() => setpopup(false)}>
+            Ok
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import girl from "../img/girl.png";
 import "../css/App.css";
-import { get, post, put, taBort } from "../util/apiStaffUtil";
+import { get, post, put, erase } from "../utility/educationApi.js";
 
 function Staff() {
   const [id, setId] = useState(0);
@@ -157,7 +157,7 @@ function Staff() {
               <button
                 className="inputBtn"
                 onClick={() => {
-                  taBort(`/Staff/${id}`);
+                  erase(`/Staff/${id}`);
                   get("/Staff").then((response) => setStaff(response.data));
                 }}
               >
