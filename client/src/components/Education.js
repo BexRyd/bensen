@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import guy from "../img/guy.png";
 import { get, post, put, erase } from "../utility/educationApi";
 import { useState, useEffect } from "react";
-import "../css/Education.css";
+import "../css/App.css";
 
 function Education() {
   const [id, setId] = useState(Date.now());
@@ -30,152 +30,166 @@ function Education() {
     <div>
       <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
 
-      <div className="Box">
-        <div className="createdEducationBox">
-          {eventLists.map((eventList) => {
-            return (
-              <div>
-                <li className="getLi" key={eventList.id}>
-                  {authorized ? (
-                    <p>
-                      <b>id:</b> {eventList.id}
-                    </p>
-                  ) : null}
-                  <p>
-                    {" "}
-                    <b>Utbildningsledare:</b> {eventList.Utbildningsledare}{" "}
-                  </p>{" "}
-                  <p>
-                    <b>Utbildning:</b> {eventList.Utbildning}
-                  </p>{" "}
-                  <p>
-                    <b>Kurs:</b> {eventList.Kursnamn}
-                  </p>{" "}
-                  <p>
-                    <b>Beskrivning:</b> {eventList.Beskrivning}
-                  </p>{" "}
-                </li>
-              </div>
-            );
-          })}
+      <div className="container">
+        <div className="staffList">
+          <h1 className="h1Staff">Utbildningslista</h1>
+          <div className="staffContainer">
+            <ul>
+              {eventLists.map((eventList) => {
+                return (
+                  <div>
+                    <li className="staffName" key={eventList.id}>
+                      {authorized ? (
+                        <p>
+                          <b>id:</b> {eventList.id}
+                        </p>
+                      ) : null}
+                      <p>
+                        {" "}
+                        <b>Utbildningsledare:</b> {eventList.Utbildningsledare}{" "}
+                      </p>{" "}
+                      <p>
+                        <b>Utbildning:</b> {eventList.Utbildning}
+                      </p>{" "}
+                      <p>
+                        <b>Kurs:</b> {eventList.Kursnamn}
+                      </p>{" "}
+                      <p>
+                        <b>Beskrivning:</b> {eventList.Beskrivning}
+                      </p>{" "}
+                    </li>
+                  </div>
+                );
+              })}
+            </ul>
+          </div>
         </div>
 
         {authorized ? (
-          <div className="createEducationbox">
-            <input
-              className="input1Id"
-              value={eventLists.id}
-              onChange={(event) => {
-                console.log(event.target.value);
-                setId(event.target.value);
-              }}
-              placeholder="Id för den du vill ändra"
-            ></input>
-            <select
-              className="leader1select"
-              value={chooseLeader}
-              onChange={(event) => setChooseLeader(event.target.value)}
-            >
-              {" "}
-              <option value="" selected disabled hidden>
-                Välj Utbildningsledare
-              </option>
-              {leaders.map((leader) => {
-                if (leader.profession === "Utbildningsledare") {
-                  return (
-                    <option className="educationLi" key={leaders.id}>
-                      {`${leader.firstName} ${leader.lastName} `}
-                    </option>
-                  );
-                }
-              })}
-            </select>
-
-            <input
-              className="event1select"
-              value={chooseEvent}
-              onChange={(event) => setChooseEvent(event.target.value)}
-              placeholder="Utbildningsnamn"
-            ></input>
-
-            <select
-              className="course1select"
-              value={chooseCourse}
-              onChange={(event) => setChooseCourse(event.target.value)}
-            >
-              {" "}
-              <option value="" selected disabled hidden>
-                Välj Kurs
-              </option>
-              {courses.map((course) => {
-                return (
-                  <option className="CourseLi" key={course.id}>
-                    {` ${course.courseName}`}
+          <div className="form">
+            <div className="createFormDiv">
+              <div className="input">
+                <h2 className="h1Staff">Skapa Utbildning</h2>
+                <input
+                  className="inputClass"
+                  value={eventLists.id}
+                  onChange={(event) => {
+                    console.log(event.target.value);
+                    setId(event.target.value);
+                  }}
+                  placeholder="Id för den du vill ändra"
+                ></input>
+                <select
+                  className="inputClass"
+                  value={chooseLeader}
+                  onChange={(event) => setChooseLeader(event.target.value)}
+                >
+                  {" "}
+                  <option value="" selected disabled hidden>
+                    Välj Utbildningsledare
                   </option>
-                );
-              })}
-            </select>
+                  {leaders.map((leader) => {
+                    if (leader.profession === "Utbildningsledare") {
+                      return (
+                        <option className="inputClass" key={leaders.id}>
+                          {`${leader.firstName} ${leader.lastName} `}
+                        </option>
+                      );
+                    }
+                  })}
+                </select>
 
-            <textarea
-              className="beskrivningBox"
-              value={chooseDescription}
-              onChange={(event) => setChooseDescription(event.target.value)}
-              rows="10"
-              cols="30"
-            ></textarea>
+                <input
+                  className="inputClass"
+                  value={chooseEvent}
+                  onChange={(event) => setChooseEvent(event.target.value)}
+                  placeholder="Utbildningsnamn"
+                ></input>
 
-            <button
-              onClick={() => {
-                post("/Education", {
-                  id: newId,
-                  Utbildningsledare: chooseLeader,
-                  Utbildning: chooseEvent,
-                  Kursnamn: chooseCourse,
-                  Beskrivning: chooseDescription,
-                }).then((response) => console.log(response));
-                setNewId(Date.now());
-                get("/Education").then((response) =>
-                  seteventLists(response.data)
-                );
-                get("/Courses").then((response) => setCourses(response.data));
-                get("/Staff").then((response) => setLeaders(response.data));
-              }}
-            >
-              CREATE
-            </button>
+                <select
+                  className="inputClass"
+                  value={chooseCourse}
+                  onChange={(event) => setChooseCourse(event.target.value)}
+                >
+                  {" "}
+                  <option value="" selected disabled hidden>
+                    Välj Kurs
+                  </option>
+                  {courses.map((course) => {
+                    return (
+                      <option className="option" key={course.id}>
+                        {` ${course.courseName}`}
+                      </option>
+                    );
+                  })}
+                </select>
 
-            <button
-              onClick={() => {
-                put(`/Education/${id}`, {
-                  id: eventLists.id,
-                  Utbildningsledare: chooseLeader,
-                  Utbildning: chooseEvent,
-                  Kursnamn: chooseCourse,
-                  Beskrivning: chooseDescription,
-                }).then((response) => console.log(response));
-                get("/Education").then((response) =>
-                  seteventLists(response.data)
-                );
-              }}
-            >
-              UPDATE
-            </button>
-
-            <button
-              onClick={() => {
-                erase(`/Education/${id}`);
-                {
+                <textarea
+                  className="beskrivningBox"
+                  value={chooseDescription}
+                  onChange={(event) => setChooseDescription(event.target.value)}
+                  rows="10"
+                  cols="30"
+                ></textarea>
+              </div>
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  post("/Education", {
+                    id: newId,
+                    Utbildningsledare: chooseLeader,
+                    Utbildning: chooseEvent,
+                    Kursnamn: chooseCourse,
+                    Beskrivning: chooseDescription,
+                  }).then((response) => console.log(response));
+                  setNewId(Date.now());
                   get("/Education").then((response) =>
                     seteventLists(response.data)
                   );
-                }
-              }}
-            >
-              DELETE
-            </button>
+                  get("/Courses").then((response) => setCourses(response.data));
+                  get("/Staff").then((response) => setLeaders(response.data));
+                }}
+              >
+                Lägg till
+              </button>
+              <div className="space"></div>
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  put(`/Education/${id}`, {
+                    id: eventLists.id,
+                    Utbildningsledare: chooseLeader,
+                    Utbildning: chooseEvent,
+                    Kursnamn: chooseCourse,
+                    Beskrivning: chooseDescription,
+                  }).then((response) => console.log(response));
+                  get("/Education").then((response) =>
+                    seteventLists(response.data)
+                  );
+                }}
+              >
+                Uppdatera
+              </button>
+              <div className="space"></div>
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  erase(`/Education/${id}`);
+                  {
+                    get("/Education").then((response) =>
+                      seteventLists(response.data)
+                    );
+                  }
+                }}
+              >
+                Radera
+              </button>
+            </div>
           </div>
         ) : (
-          <img className="girlImg" src={guy} alt="computer" />
+          <div>
+            <img className="manImg" src={guy} alt="computer" />
+          </div>
         )}
       </div>
       <Footer />

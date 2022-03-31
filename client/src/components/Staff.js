@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import girl from "../img/girl.png";
-import "../css/Staff.css";
+import "../css/App.css";
 import { get, post, put, taBort } from "../util/apiStaffUtil";
 
 function Staff() {
@@ -60,13 +60,14 @@ function Staff() {
             </ul>
           </div>
         </div>
+
         {authorized ? (
           <div className="form">
-            <div>
+            <div className="createFormDiv">
               <div className="input">
                 <h1 className="h1Staff">Lägg till Personal</h1>
                 <select
-                  className="select"
+                  className="inputClass"
                   value={id}
                   onChange={(event) => setId(event.target.value)}
                   placeholder="Id för den du vill ändra"
@@ -81,7 +82,7 @@ function Staff() {
                 </select>
 
                 <select
-                  className="select"
+                  className="inputClass"
                   onChange={(event) => setProfession(event.target.value)}
                   placeholder="Välj"
                 >
@@ -134,6 +135,8 @@ function Staff() {
               >
                 Lägg till
               </button>
+
+              <div className="space"></div>
               <button
                 className="inputBtn"
                 onClick={() => {
@@ -150,6 +153,7 @@ function Staff() {
               >
                 Uppdatera
               </button>
+              <div className="space"></div>
               <button
                 className="inputBtn"
                 onClick={() => {
@@ -157,12 +161,14 @@ function Staff() {
                   get("/Staff").then((response) => setStaff(response.data));
                 }}
               >
-                Ta bort
+                Radera
               </button>
             </div>
           </div>
         ) : (
-          <img className="girlImg" src={girl} alt="computer" />
+          <div>
+            <img className="girlImg" src={girl} alt="computer" />
+          </div>
         )}
       </div>
 
