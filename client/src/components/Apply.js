@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import color from "../img/color.jpg";
-import { get, post, taBort } from "../util/apiStaffUtil";
+import { get, post, taBort, put } from "../util/apiStaffUtil";
 import "../css/Apply.css";
 
 function Apply() {
@@ -83,24 +83,23 @@ function Apply() {
                   </select>
                 </div>
               ) : null}
-              {!authorized ? (
-                <div>
-                  <select
-                    className="selectApply"
-                    value={education}
-                    onChange={(event) => setEducation(event.target.value)}
-                  >
-                    <option>Välj utbildning</option>
-                    {getEducation.map((education) => {
-                      return (
-                        <option className="optionApply" key={id}>
-                          {`${education.Utbildning}  `}
-                        </option>
-                      );
-                    })}
-                  </select>
-                </div>
-              ) : null}
+
+              <div>
+                <select
+                  className="selectApply"
+                  value={education}
+                  onChange={(event) => setEducation(event.target.value)}
+                >
+                  <option>Välj utbildning</option>
+                  {getEducation.map((education) => {
+                    return (
+                      <option className="optionApply" key={id}>
+                        {`${education.Utbildning}  `}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
 
               <div className="inputApply">
                 <input
@@ -123,48 +122,78 @@ function Apply() {
                   type="email"
                 ></input>
               </div>
+
+              {authorized ? (
+                <div className="btnSpace">
+                  <button
+                    className="applyBtn"
+                    onClick={() => {
+                      taBort(`/Apply/${id}`);
+                      get("/Apply").then((response) => setApply(response.data));
+                    }}
+                  >
+                    Ta bort
+                  </button>
+
+                  <button
+                    className="applyBtn"
+                    onClick={() => {
+                      put(`/Apply/${id}`, {
+                        id: apply.id,
+                        firstName: firstName,
+                        lastName: lastName,
+                        education: education,
+                        email: email,
+                      }).then((response) => console.log(response));
+                      get("/Apply").then((response) => setApply(response.data));
+                    }}
+                  >
+                    Uppdatera
+                  </button>
+                </div>
+              ) : (
+                <div>
+                  <button
+                    className="applyBtn"
+                    onClick={() => {
+                      post("/Apply", {
+                        id: dateId,
+                        firstName: firstName,
+                        lastName: lastName,
+                        education: education,
+                        email: email,
+                      });
+
+                      setDateId(Date.now());
+                      get("/Apply").then((response) => setApply(response.data));
+                      get("/Education").then((response) =>
+                        setGetEducation(response.data)
+                      );
+                    }}
+                  >
+                    Skicka Ansökan
+                  </button>
+                </div>
+              )}
             </div>
-
-            {authorized ? (
-              <div>
-                <button
-                  className="applyBtn"
-                  onClick={() => {
-                    taBort(`/Apply/${id}`);
-                    get("/Apply").then((response) => setApply(response.data));
-                  }}
-                >
-                  Ta bort
-                </button>
-              </div>
-            ) : (
-              <div>
-                <button
-                  className="applyBtn"
-                  onClick={() => {
-                    post("/Apply", {
-                      id: dateId,
-                      firstName: firstName,
-                      lastName: lastName,
-                      education: education,
-                      email: email,
-                    });
-
-                    setDateId(Date.now());
-                    get("/Apply").then((response) => setApply(response.data));
-                    get("/Education").then((response) =>
-                      setGetEducation(response.data)
-                    );
-                  }}
-                >
-                  Skicka Ansökan
-                </button>
-              </div>
-            )}
           </div>
         </div>
+        {!authorized ? (
+          <div>
+            <img className="girlImg" src={color} alt="computer" />
 
-        <img className="girlImg" src={color} alt="computer" />
+            <div className="applyEducationPosition">
+              <ul className="applyEducation">
+                <h2 className="applyH2">Våra Utbildningar</h2>
+                {getEducation.map((educations) => {
+                  return (
+                    <li className="applyEducation">{educations.Utbildning}</li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        ) : null}
       </div>
 
       <Footer />
