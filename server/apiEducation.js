@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+ const educationCtrl = require('./controller/educationController')
 
 const bodyParser = require('body-parser')
 
@@ -17,14 +18,14 @@ let educationLists = [
     Beskrivning:"Object och Class orienterad javascript" 
   },
   {
-    id: 2121211223,
+    id: 2121211224,
     Utbildning: "Backeend Utveckling", 
     Utbildningsledare: "Arne Olofsson",
     Kursnamn: "Server",
     Beskrivning:"Mongo Databas, express server" 
   },
   {
-    id: 2121211223,
+    id: 2121211225,
     Utbildning: "UI/UX", 
     Utbildningsledare: "wisman desi",
     Kursnamn: "Visuell design",
@@ -34,7 +35,7 @@ let educationLists = [
 ] 
   // todos
 
-router.get('/Education', (request, response)=>{
+router.get('/Education',educationCtrl.getEducation, (request, response)=>{
     console.log({
         method: request.method,
 
@@ -46,7 +47,7 @@ router.get('/Education', (request, response)=>{
     })
 })
 
-router.post('/Education',(request,response)=>{            // bodyparser behövs för att rendera text vi vill posta in
+router.post('/Education',educationCtrl.createEducation,(request,response)=>{            // bodyparser behövs för att rendera text vi vill posta in
   console.log({
       method: request.method,
       body: request.body,
@@ -65,7 +66,7 @@ router.post('/Education',(request,response)=>{            // bodyparser behövs 
     
 
   }
-educationLists.push(educationList)
+   educationLists.push(educationList)
   
   response.json({
     status: 'success',
@@ -80,7 +81,7 @@ educationLists.push(educationList)
 
  
 // fetch('/api/update/7') // frontend
-router.put('/Education/:educationListId', (request,response)=>{
+router.put('/Education/:educationListId', educationCtrl.updateEducation, (request,response)=>{
   const educationListId = Number (request.params.educationListId)
 
   const Utbildningsledare = request.body.Utbildningsledare
