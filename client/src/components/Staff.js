@@ -69,8 +69,10 @@ function Staff() {
                   className="select"
                   value={id}
                   onChange={(event) => setId(event.target.value)}
-                  placeholder="Id för den du vill ändra"
                 >
+                  <option value="" selected disabled hidden>
+                    Välj Id
+                  </option>
                   {staff.map((staff) => {
                     return (
                       <option className="option" key={staff.id}>
@@ -85,6 +87,9 @@ function Staff() {
                   onChange={(event) => setProfession(event.target.value)}
                   placeholder="Välj"
                 >
+                  <option value="" selected disabled hidden>
+                    Välj personal
+                  </option>
                   <option>lärare</option>
                   <option>Utbildningsledare</option>
                 </select>
