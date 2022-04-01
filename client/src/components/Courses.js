@@ -1,6 +1,4 @@
 import React from "react";
-
-
 import "../css/App.css";
 import { get, post, put, erase } from "../utility/educationApi.js"; // get the same from Rebecca to add api to teacher
 import { useState, useEffect } from "react";
@@ -16,6 +14,8 @@ function Courses() {
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
   const [authorized, setAuthorized] = useState(false);
+
+  const loggaIn = true;
 
   useEffect(() => {
     get("/Courses").then((response) => setCourse(response.data));
@@ -35,10 +35,10 @@ function Courses() {
               {course.map((courses) => {
                 return (
                   <div>
-                    <li className="staffName" key={courses.courseId}>
-                      {authorized ? (
+                    <li className="staffName" key={courses.id}>
+                      {loggaIn ? (
                         <p>
-                          <b>KursID:</b> {courses.courseId}
+                          <b>KursID:</b> {courses.id}
                         </p>
                       ) : null}
                       <p>
@@ -60,7 +60,7 @@ function Courses() {
             </ul>
           </div>
         </div>
-        {authorized ? (
+        {loggaIn ? (
           <div className="form">
             <div className="createFormDiv">
               <div className="input">
@@ -167,8 +167,6 @@ function Courses() {
           </div>
         )}
       </div>
-
-     
     </div>
   );
 }
