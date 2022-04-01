@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+// import Header from "./Header";
+// import Footer from "./Footer";
 import Co from "../img/co.3.png";
 import { get } from "../utility/educationApi.js";
 
@@ -16,7 +16,7 @@ function Home() {
 
   return (
     <div className="containerHome">
-      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
+      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
 
       <div classN1ame="homeContainer">
         <img className="co" src={Co} alt="computer" />
@@ -27,7 +27,7 @@ function Home() {
         </ul>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

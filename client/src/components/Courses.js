@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+
+
 import "../css/App.css";
 import { get, post, put, erase } from "../utility/educationApi.js"; // get the same from Rebecca to add api to teacher
 import { useState, useEffect } from "react";
@@ -26,7 +26,7 @@ function Courses() {
 
   return (
     <div className="courseContainer">
-      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
+      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Kurslista</h1>
@@ -168,7 +168,7 @@ function Courses() {
         )}
       </div>
 
-      <Footer />
+     
     </div>
   );
 }

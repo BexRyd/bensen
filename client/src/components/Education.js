@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+// import Header from "./Header";
+// import Footer from "./Footer";
 import guy from "../img/guy.png";
 import { get, post, put, erase } from "../utility/educationApi";
 import { useState, useEffect } from "react";
@@ -28,7 +28,7 @@ function Education() {
 
   return (
     <div>
-      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
+      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
 
       <div className="container">
         <div className="staffList">
@@ -192,7 +192,7 @@ function Education() {
           </div>
         )}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
@@ -13,7 +17,7 @@ li {
 }
 
 .headerList {
-  width: 100%;
+  width: 100vw;
   background-color: rgb(13, 97, 97);
   height: 70px;
   display: flex;
@@ -35,7 +39,7 @@ li {
 
 .headerBackgroundImg {
   background-image: url("../img/binary.jpg");
-
+  width: 100vw;
   height: 100px;
   margin-bottom: -20px;
 }
@@ -45,7 +49,7 @@ li {
   height: 300px;
   position: absolute;
   top: -110px;
-  right: 200px;
+  right: 50px;
 }
 
 .formHeader {
@@ -88,7 +92,7 @@ li {
 .inloggBtnHeader {
   width: 100px;
   height: 40px;
-  margin: 6% 5% 5% 5%;
+  margin: 6% 0 5% 5%;
   border-radius: 10px;
   border: none;
   color: #fdf7f7;

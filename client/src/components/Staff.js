@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+// import Header from "./Header";
+// import Footer from "./Footer";
 import girl from "../img/girl.png";
 import "../css/App.css";
 import { get, post, put, erase } from "../utility/educationApi.js";
@@ -22,7 +22,7 @@ function Staff() {
 
   return (
     <div>
-      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
+      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Personal Lista</h1>
@@ -172,7 +172,7 @@ function Staff() {
         )}
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

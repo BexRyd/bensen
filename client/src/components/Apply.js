@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+// import Header from "./Header";
+// import Footer from "./Footer";
 import color from "../img/color.jpg";
 import { get, post, put, erase } from "../utility/educationApi.js";
 import "../css/App.css";
@@ -22,7 +22,7 @@ function Apply() {
   }, []);
   return (
     <div>
-      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
+      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         {authorized ? (
           <div className="staffList">
@@ -182,7 +182,7 @@ function Apply() {
         </div>
         {!authorized ? (
           <div>
-            <img className="girlImg" src={color} alt="computer" />
+            {/* <img className="girlImg" src={color} alt="computer" /> */}
 
             <div className="applyEducationPosition">
               <ul className="applyEducation">
@@ -198,7 +198,7 @@ function Apply() {
         ) : null}
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
