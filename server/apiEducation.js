@@ -81,7 +81,7 @@ router.post('/Education',educationCtrl.createEducation,(request,response)=>{    
 
  
 // fetch('/api/update/7') // frontend
-router.put('/Education/:educationListId', educationCtrl.updateEducation, (request,response)=>{
+router.put('/Education/:educationListId',educationCtrl.updateEducation,  (request,response)=>{
   const educationListId = Number (request.params.educationListId)
 
   const Utbildningsledare = request.body.Utbildningsledare
