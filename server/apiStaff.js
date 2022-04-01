@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const staffController = require("./controller/StaffController");
 
 let staffs = [
   {
@@ -36,7 +37,7 @@ let staffs = [
   },
 ];
 
-router.get("/Staff", (request, response) => {
+router.get("/Staff", staffController.getStaff, (request, response) => {
   console.log({
     method: request.method,
   });
@@ -48,7 +49,7 @@ router.get("/Staff", (request, response) => {
   });
 });
 
-router.post("/Staff", (request, response) => {
+router.post("/Staff", staffController.createStaff, (request, response) => {
   console.log({
     method: request.method,
     body: request.body,
@@ -72,51 +73,60 @@ router.post("/Staff", (request, response) => {
   });
 });
 
-router.put("/Staff/:staffId", (request, response) => {
-  const staffId = Number(request.params.staffId);
-  const firstName = request.body.firstName;
-  const lastName = request.body.lastName;
-  const profession = request.body.profession;
-  const email = request.body.email;
-  const account = request.body.account;
+router.put(
+  "/Staff/:staffId",
+  staffController.updateStaff,
 
-  const newStaff = {
-    id: staffId,
-    firstName,
-    lastName,
-    profession,
-    email,
-    account,
-  };
-  const staffIndex = staffs.findIndex((staff) => staff.id == staffId);
+  (request, response) => {
+    const staffId = Number(request.params.staffId);
+    const firstName = request.body.firstName;
+    const lastName = request.body.lastName;
+    const profession = request.body.profession;
+    const email = request.body.email;
+    const account = request.body.account;
 
-  staffs[staffIndex] = newStaff;
+    const newStaff = {
+      id: staffId,
+      firstName,
+      lastName,
+      profession,
+      email,
+      account,
+    };
+    const staffIndex = staffs.findIndex((staff) => staff.id == staffId);
 
-  console.log({
-    method: request.method,
-    body: request.body,
-    data: newStaff,
-  });
-  response.json({
-    status: "success",
-    method: request.method,
-    data: newStaff,
-  });
-});
+    staffs[staffIndex] = newStaff;
 
-router.delete("/Staff/:staffId", (request, response) => {
-  const staffId = request.params.staffId;
-  const staffIndex = staffs.findIndex((staff) => staff.id == staffId);
-
-  if (staffIndex > -1) {
-    staffs.splice(staffIndex, 1);
+    console.log({
+      method: request.method,
+      body: request.body,
+      data: newStaff,
+    });
+    response.json({
+      status: "success",
+      method: request.method,
+      data: newStaff,
+    });
   }
+);
 
-  response.json({
-    status: "success",
-    method: request.method,
-    data: staffId,
-  });
-});
+router.delete(
+  "/Staff/:staffId",
+  staffController.deleteStaff,
+  (request, response) => {
+    const staffId = request.params.staffId;
+    const staffIndex = staffs.findIndex((staff) => staff.id == staffId);
+
+    if (staffIndex > -1) {
+      staffs.splice(staffIndex, 1);
+    }
+
+    response.json({
+      status: "success",
+      method: request.method,
+      data: staffId,
+    });
+  }
+);
 
 module.exports = router;

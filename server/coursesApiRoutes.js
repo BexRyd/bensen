@@ -1,5 +1,6 @@
 const express = require("express");
 const routes = express.Router();
+
 let courses = [
   {
     courseId: 1213213,
