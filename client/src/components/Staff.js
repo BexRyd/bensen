@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+// import Header from "./Header";
+// import Footer from "./Footer";
 import girl from "../img/girl.png";
-import "../css/Staff.css";
-import { get, post, put, taBort } from "../util/apiStaffUtil";
+import "../css/App.css";
+import { get, post, put, erase } from "../utility/educationApi.js";
 
 function Staff() {
   const [id, setId] = useState(0);
@@ -22,7 +22,7 @@ function Staff() {
 
   return (
     <div>
-      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
+      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Personal Lista</h1>
@@ -60,13 +60,14 @@ function Staff() {
             </ul>
           </div>
         </div>
+
         {authorized ? (
           <div className="form">
-            <div>
+            <div className="createFormDiv">
               <div className="input">
                 <h1 className="h1Staff">Lägg till Personal</h1>
                 <select
-                  className="select"
+                  className="inputClass"
                   value={id}
                   onChange={(event) => setId(event.target.value)}
                 >
@@ -83,7 +84,7 @@ function Staff() {
                 </select>
 
                 <select
-                  className="select"
+                  className="inputClass"
                   onChange={(event) => setProfession(event.target.value)}
                   placeholder="Välj"
                 >
@@ -139,6 +140,8 @@ function Staff() {
               >
                 Lägg till
               </button>
+
+              <div className="space"></div>
               <button
                 className="inputBtn"
                 onClick={() => {
@@ -155,23 +158,26 @@ function Staff() {
               >
                 Uppdatera
               </button>
+              <div className="space"></div>
               <button
                 className="inputBtn"
                 onClick={() => {
-                  taBort(`/Staff/${id}`);
+                  erase(`/Staff/${id}`);
                   get("/Staff").then((response) => setStaff(response.data));
                 }}
               >
-                Ta bort
+                Radera
               </button>
             </div>
           </div>
         ) : (
-          <img className="girlImg" src={girl} alt="computer" />
+          <div>
+            <img className="girlImg" src={girl} alt="computer" />
+          </div>
         )}
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

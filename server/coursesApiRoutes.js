@@ -1,37 +1,38 @@
 const express = require("express");
 const routes = express.Router();
+const courseController = require("./controller/courseController");
 
 let courses = [
   {
-    courseId: 1213213,
+    id: 1213213,
     courseName: "HTML",
     teacher: "Dan",
     courseLength: 40,
     courseDescription: "Eat, Sleep, Code, Repeat",
   },
   {
-    courseId: 1213213,
+    id: 1213213,
     courseName: "CSS",
     teacher: "Rebecca",
     courseLength: 20,
     courseDescription: "Eat, Sleep, Code, Repeat",
   },
   {
-    courseId: 1213213,
+    id: 1213213,
     courseName: "Javascript",
     teacher: "Rebecca",
     courseLength: 20,
     courseDescription: "Eat, Sleep, Code, Repeat",
   },
   {
-    courseId: 1213213,
+    id: 1213213,
     courseName: "NODE JS",
     teacher: "Rebecca",
     courseLength: 20,
     courseDescription: "Eat, Sleep, Code, Repeat",
   },
   {
-    courseId: 1213213,
+    id: 1213213,
     courseName: "REACT",
     teacher: "Rebecca",
     courseLength: 20,
@@ -40,7 +41,7 @@ let courses = [
 ];
 
 // om jag ska hämta lärare från Staff, är de då den routen jag ska ha här eller Courses
-routes.get("/Courses", (req, res) => {
+routes.get("/Courses", courseController.getCourse, (req, res) => {
   console.log({
     method: req.method,
     data: courses,
@@ -52,14 +53,14 @@ routes.get("/Courses", (req, res) => {
   });
 });
 
-routes.post("/Courses", (req, res) => {
+routes.post("/Courses", courseController.createCourse, (req, res) => {
   console.log({
     method: req.method,
     body: req.body,
   });
 
   const course = {
-    courseId: req.body.id,
+    id: req.body.id,
     courseName: req.body.courseName,
     teacher: req.body.teacher,
     courseLength: req.body.courseLength,
@@ -75,25 +76,23 @@ routes.post("/Courses", (req, res) => {
   });
 });
 
-routes.put("/Courses/:courseId", (req, res) => {
-  const courseId = Number(req.params.courseId);
-  console.log(courseId);
+routes.put("/Courses/:id", courseController.updateCourse, (req, res) => {
+  const id = Number(req.params.id);
+  console.log(id);
   const courseName = req.body.courseName;
   const teacher = req.body.teacher;
   const courseLength = req.body.courseLength;
   const courseDescription = req.body.courseDescription;
 
   const newCourse = {
-    courseId: courseId,
+    id: id,
     courseName: courseName,
     teacher: teacher,
     courseLength: courseLength,
     courseDescription: courseDescription,
   };
 
-  const courseIndex = courses.findIndex(
-    (course) => course.courseId == courseId
-  );
+  const courseIndex = courses.findIndex((course) => course.id == id);
   courses[courseIndex] = newCourse;
 
   console.log({
@@ -109,26 +108,29 @@ routes.put("/Courses/:courseId", (req, res) => {
   });
 });
 
-routes.delete("/Courses/:courseId", (req, res) => {
-  const courseId = req.params.courseId;
+routes.delete(
+  "/Courses/:id",
+  courseController.deleteCourse,
 
-  const courseIndex = courses.findIndex(
-    (course) => course.courseId == courseId
-  );
-  //removes amount of elements (1 in this case)
-  if (courseIndex > -1) {
-    courses.splice(courseIndex, 1);
+  (req, res) => {
+    const id = req.params.id;
+
+    const courseIndex = courses.findIndex((course) => course.id == id);
+    //removes amount of elements (1 in this case)
+    if (courseIndex > -1) {
+      courses.splice(courseIndex, 1);
+    }
+    console.log({
+      method: req.method,
+      body: req.body,
+    });
+    //sends back the response that we have removed the course
+    res.json({
+      status: "deleted course",
+      method: req.method,
+      data: id,
+    });
   }
-  console.log({
-    method: req.method,
-    body: req.body,
-  });
-  //sends back the response that we have removed the course
-  res.json({
-    status: "deleted course",
-    method: req.method,
-    data: courseId,
-  });
-});
+);
 
 module.exports = routes;

@@ -1,18 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   position: relative;
   margin: 0;
 }
 
 footer {
+  display: block;
   position: relative;
   text-align: center;
-
-  width: 100%;
+  width: 100vw;
   height: 5rem;
   background-color: rgb(13, 97, 97);
-  margin-top: 300px;
+  margin-top: 100px;
 }
 footer p {
   color: white;
   font-family: "Lora", serif;
+  padding-top: 20px;
 }

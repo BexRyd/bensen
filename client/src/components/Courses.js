@@ -1,8 +1,6 @@
 import React from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import "../css/Courses.css";
-import { get, post, put, remove } from "../utilities/apiCourses"; // get the same from Rebecca to add api to teacher
+import "../css/App.css";
+import { get, post, put, erase } from "../utility/educationApi.js"; // get the same from Rebecca to add api to teacher
 import { useState, useEffect } from "react";
 import codeRep from "../img/code_repeat.jpg";
 
@@ -17,6 +15,8 @@ function Courses() {
   const [courseLength, setCourseLength] = useState("");
   const [authorized, setAuthorized] = useState(false);
 
+  const loggaIn = true;
+
   useEffect(() => {
     get("/Courses").then((response) => setCourse(response.data));
   }, []);
@@ -26,117 +26,139 @@ function Courses() {
 
   return (
     <div className="courseContainer">
-      <Header setLoggInPage={(authorized) => setAuthorized(authorized)} />
-      <div className="coursesMainSection">
-        <div className="addedCoursesList">
-          <h2 className="courseListHeader">Kurslista</h2>
-          <ul>
-            {course.map((courses) => {
-              return (
-                <div>
-                  <li key={courses.courseId}>
-                    {authorized ? <p>KursID: {courses.courseId}</p> : null}
-                    <p>Kursnamn: {courses.courseName}</p>
-                    <p>Kursbeskrivning: {courses.courseDescription}</p>
-                    <p>Lärare: {courses.teacher} </p>
-                    <p>Kurslängd: {courses.courseLength}</p>
-                  </li>
-                </div>
-              );
-            })}
-          </ul>
-        </div>
-        {authorized ? (
-          <div className="createCourseForm">
-            <h2 className="courseListHeader">Skapa kurs</h2>
-            <input
-              value={courseName}
-              className="inputField"
-              placeholder="Kursnamn"
-              onChange={(e) => setCourseName(e.target.value)}
-            ></input>
-            <input
-              value={courseDescription}
-              className="inputField"
-              placeholder="Kursbeskrivning"
-              onChange={(e) => setCourseDescription(e.target.value)}
-            ></input>
-            {/* varför skriver den in lit om och om igen varje gång man klickar */}
-            <select
-              className="teacherSelect"
-              value={chooseTeacher}
-              onChange={(event) => setChooseTeacher(event.target.value)}
-            >
-              <option value="" selected disabled hidden>
-                Välj
-              </option>
-              {teacher.map((teachers) => {
-                if (teachers.profession === "lärare") {
-                  return (
-                    <option className="option" key={teachers.id}>
-                      {`${teachers.firstName} ${teachers.lastName}  `}
-                    </option>
-                  );
-                }
+      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
+      <div className="container">
+        <div className="staffList">
+          <h1 className="h1Staff">Kurslista</h1>
+          <div className="staffContainer">
+            <ul>
+              {course.map((courses) => {
+                return (
+                  <div>
+                    <li className="staffName" key={courses.id}>
+                      {loggaIn ? (
+                        <p>
+                          <b>KursID:</b> {courses.id}
+                        </p>
+                      ) : null}
+                      <p>
+                        <b>Kursnamn:</b> {courses.courseName}
+                      </p>
+                      <p>
+                        <b>Kursbeskrivning:</b> {courses.courseDescription}
+                      </p>
+                      <p>
+                        <b>Lärare:</b> {courses.teacher}{" "}
+                      </p>
+                      <p>
+                        <b>Kurslängd:</b> {courses.courseLength}
+                      </p>
+                    </li>
+                  </div>
+                );
               })}
-            </select>
-            <input
-              className="inputLength"
-              value={courseLength}
-              placeholder="Kurslängd i veckor"
-              onChange={(e) => setCourseLength(e.target.value)}
-            ></input>
-            <input
-              className="inputField"
-              value={id}
-              placeholder="KursID"
-              onChange={(e) => {
-                console.log(e.target.value);
-                setId(e.target.value);
-              }}
-            ></input>
-            <button
-              className="btnCourse"
-              onClick={() => {
-                post("/Courses", {
-                  id: counter,
-                  courseName: courseName,
-                  teacher: chooseTeacher,
-                  courseLength: courseLength,
-                  courseDescription: courseDescription,
-                });
+            </ul>
+          </div>
+        </div>
+        {loggaIn ? (
+          <div className="form">
+            <div className="createFormDiv">
+              <div className="input">
+                <h2 className="h1Staff">Skapa kurs</h2>
 
-                setCounter(Date.now());
-                get("/Courses").then((response) => setCourse(response.data));
-              }}
-            >
-              Skapa ny kurs
-            </button>
-            <button
-              className="btnCourse"
-              onClick={() => {
-                console.log("hej", id);
-                put(`/Courses/${id}`, {
-                  id: id,
-                  courseName: courseName,
-                  teacher: chooseTeacher,
-                  courseLength: courseLength,
-                  courseDescription: courseDescription,
-                }).then((response) => console.log(response));
-                get("/Courses").then((response) => setCourse(response.data));
-              }}
-            >
-              Uppdatera
-            </button>
-            <button
-              className="btnCourse"
-              onClick={() => {
-                remove(`/Courses/${id}`);
-                get("/Courses").then((response) => setCourse(response.data));
-              }}
-            >
-              Ta bort
-            </button>
+                <input
+                  value={courseName}
+                  className="inputClass"
+                  placeholder="Kursnamn"
+                  onChange={(e) => setCourseName(e.target.value)}
+                ></input>
+                <input
+                  value={courseDescription}
+                  className="inputClass"
+                  placeholder="Kursbeskrivning"
+                  onChange={(e) => setCourseDescription(e.target.value)}
+                ></input>
+                {/* varför skriver den in lit om och om igen varje gång man klickar */}
+                <select
+                  className="inputClass"
+                  value={chooseTeacher}
+                  onChange={(event) => setChooseTeacher(event.target.value)}
+                >
+                  <option value="" selected disabled hidden>
+                    Välj
+                  </option>
+                  {teacher.map((teachers) => {
+                    if (teachers.profession === "lärare") {
+                      return (
+                        <option className="option" key={teachers.id}>
+                          {`${teachers.firstName} ${teachers.lastName}  `}
+                        </option>
+                      );
+                    }
+                  })}
+                </select>
+                <input
+                  className="inputClass"
+                  value={courseLength}
+                  placeholder="Kurslängd i veckor"
+                  onChange={(e) => setCourseLength(e.target.value)}
+                ></input>
+                <input
+                  className="inputClass"
+                  value={id}
+                  placeholder="KursID"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setId(e.target.value);
+                  }}
+                ></input>
+              </div>
+
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  post("/Courses", {
+                    id: counter,
+                    courseName: courseName,
+                    teacher: chooseTeacher,
+                    courseLength: courseLength,
+                    courseDescription: courseDescription,
+                  });
+
+                  setCounter(Date.now());
+                  get("/Courses").then((response) => setCourse(response.data));
+                }}
+              >
+                Lägg till
+              </button>
+              <div className="space"></div>
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  console.log("hej", id);
+                  put(`/Courses/${id}`, {
+                    id: id,
+                    courseName: courseName,
+                    teacher: chooseTeacher,
+                    courseLength: courseLength,
+                    courseDescription: courseDescription,
+                  }).then((response) => console.log(response));
+                  get("/Courses").then((response) => setCourse(response.data));
+                }}
+              >
+                Uppdatera
+              </button>
+              <div className="space"></div>
+              <button
+                className="inputBtn"
+                onClick={() => {
+                  erase(`/Courses/${id}`);
+                  get("/Courses").then((response) => setCourse(response.data));
+                }}
+              >
+                Radera
+              </button>
+            </div>
           </div>
         ) : (
           <div>
@@ -145,8 +167,6 @@ function Courses() {
           </div>
         )}
       </div>
-
-      <Footer />
     </div>
   );
 }
