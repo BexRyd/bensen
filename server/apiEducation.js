@@ -116,7 +116,7 @@ router.put('/Education/:educationListId',educationCtrl.updateEducation,  (reques
 })
 
 
-router.delete('/Education/:educationListId', (request,response)=>{
+router.delete('/Education/:educationListId',educationCtrl.deleteEducation, (request,response)=>{
   const educationListId = request.params.educationListId
   
   const  educationListIndex = educationLists.findIndex((educationList)=>educationList.id == educationListId)
