@@ -101,6 +101,7 @@ module.exports = {
     createEducation,
     updateEducation,
     getEducation,
+    deleteEducation,
     
     
    
