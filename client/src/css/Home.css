@@ -17,8 +17,8 @@ body {
   }
   to {
     display: block;
-    left: 180px;
-    top: -25vh;
+    left: 300px;
+    top: -22vh;
 
     color: white;
   }
@@ -32,8 +32,8 @@ body {
   width: 50%;
   animation: textFlow 5s ease;
   display: hidden;
-  left: 180px;
-  top: -25vh;
+  left: 300px;
+  top: -22vh;
 
   height: 70px;
   display: flex;
@@ -54,4 +54,26 @@ body {
   margin-top: 150px;
 
   width: 50%;
+}
+
+@media screen and (min-width: 1400px) {
+  @keyframes textFlow {
+    from {
+      color: black;
+      left: -50%;
+      top: -25vh;
+    }
+    to {
+      display: block;
+      left: 350px;
+      top: -25vh;
+
+      color: white;
+    }
+  }
+
+  .textAnimation {
+    left: 350px;
+    top: -25vh;
+  }
 }
