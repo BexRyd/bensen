@@ -139,8 +139,9 @@ function Courses(props) {
                     teacher: chooseTeacher,
                     courseLength: courseLength,
                     courseDescription: courseDescription,
-                  }).then((response) => console.log(response));
-                  get("/Courses").then((response) => setCourse(response.data));
+                  }).then((response) =>
+                    get("/Courses").then((response) => setCourse(response.data))
+                  );
                 }}
               >
                 Uppdatera
