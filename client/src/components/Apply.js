@@ -74,7 +74,9 @@ function Apply(props) {
                     onChange={(event) => setId(event.target.value)}
                     placeholder="Id för den du vill ändra"
                   >
-                    <option>Välj id för att ta bort</option>
+                    <option value="" selected display hidden>
+                      Välj id för att ta bort
+                    </option>
                     {apply.map((applys) => {
                       return (
                         <option className="option" key={applys.id}>
