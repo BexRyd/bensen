@@ -4,7 +4,7 @@ import { get, post, put, erase } from "../utility/educationApi.js"; // get the s
 import { useState, useEffect } from "react";
 import codeRep from "../img/code_repeat.jpg";
 
-function Courses() {
+function Courses(props) {
   const [id, setId] = useState("");
   const [counter, setCounter] = useState(Date.now());
   const [teacher, setTeacher] = useState([]);
@@ -13,9 +13,7 @@ function Courses() {
   const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
-  const [authorized, setAuthorized] = useState(false);
-
-  const loggaIn = true;
+  // const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Courses").then((response) => setCourse(response.data));
@@ -23,7 +21,7 @@ function Courses() {
   useEffect(() => {
     get("/Staff").then((response) => setTeacher(response.data));
   }, []);
-
+  console.log(props);
   return (
     <div className="courseContainer">
       {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
@@ -36,7 +34,7 @@ function Courses() {
                 return (
                   <div>
                     <li className="staffName" key={courses.id}>
-                      {loggaIn ? (
+                      {props.authorized ? (
                         <p>
                           <b>KursID:</b> {courses.id}
                         </p>
@@ -60,7 +58,7 @@ function Courses() {
             </ul>
           </div>
         </div>
-        {loggaIn ? (
+        {props.authorized ? (
           <div className="form">
             <div className="createFormDiv">
               <div className="input">
@@ -108,7 +106,6 @@ function Courses() {
                   value={id}
                   placeholder="KursID"
                   onChange={(e) => {
-                    console.log(e.target.value);
                     setId(e.target.value);
                   }}
                 ></input>

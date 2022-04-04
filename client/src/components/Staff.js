@@ -5,7 +5,7 @@ import girl from "../img/girl.png";
 import "../css/App.css";
 import { get, post, put, erase } from "../utility/educationApi.js";
 
-function Staff() {
+function Staff(props) {
   const [id, setId] = useState(0);
   const [counter, setcounter] = useState(Date.now());
   const [staff, setStaff] = useState([]);
@@ -14,7 +14,7 @@ function Staff() {
   const [profession, setProfession] = useState("");
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
-  const [authorized, setAuthorized] = useState(false);
+  // const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
@@ -32,7 +32,7 @@ function Staff() {
                 return (
                   <div>
                     <li className="staffName" key={staff.id}>
-                      {authorized ? (
+                      {props.authorized ? (
                         <p>
                           <b>id:</b> {staff.id}
                         </p>
@@ -48,7 +48,7 @@ function Staff() {
                       <p>
                         <b>Mejl:</b> {staff.email}
                       </p>
-                      {authorized ? (
+                      {props.authorized ? (
                         <p>
                           <b>Bank-konto:</b> {staff.account}
                         </p>
@@ -61,7 +61,7 @@ function Staff() {
           </div>
         </div>
 
-        {authorized ? (
+        {props.authorized ? (
           <div className="form">
             <div className="createFormDiv">
               <div className="input">
