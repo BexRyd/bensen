@@ -5,8 +5,7 @@ import guy from "../img/guy.png";
 import { get, post, put, erase } from "../utility/educationApi";
 import { useState, useEffect } from "react";
 import "../css/App.css";
-
-function Education() {
+function Education(props) {
   const [id, setId] = useState(Date.now());
   const [newId, setNewId] = useState(Date.now());
 
@@ -18,7 +17,7 @@ function Education() {
   const [chooseEvent, setChooseEvent] = useState("");
   const [chooseLeader, setChooseLeader] = useState("");
   const [chooseDescription, setChooseDescription] = useState("");
-  const [authorized, setAuthorized] = useState(false);
+  // const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Education").then((response) => seteventLists(response.data));
@@ -39,7 +38,7 @@ function Education() {
                 return (
                   <div>
                     <li className="staffName" key={eventList.id}>
-                      {authorized ? (
+                      {props.authorized ? (
                         <p>
                           <b>id:</b> {eventList.id}
                         </p>
@@ -65,7 +64,7 @@ function Education() {
           </div>
         </div>
 
-        {authorized ? (
+        {props.authorized ? (
           <div className="form">
             <div className="createFormDiv">
               <div className="input">

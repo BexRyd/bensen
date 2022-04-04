@@ -5,7 +5,7 @@ import color from "../img/color.jpg";
 import { get, post, put, erase } from "../utility/educationApi.js";
 import "../css/App.css";
 
-function Apply() {
+function Apply(props) {
   const [id, setId] = useState(0);
   const [dateId, setDateId] = useState(Date.now());
   const [apply, setApply] = useState([]);
@@ -14,7 +14,7 @@ function Apply() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [getEducation, setGetEducation] = useState([]);
-  const [authorized, setAuthorized] = useState(false);
+  // const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Apply").then((response) => setApply(response.data));
@@ -24,7 +24,7 @@ function Apply() {
     <div>
       {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
-        {authorized ? (
+        {props.authorized ? (
           <div className="staffList">
             <h1 className="h1Staff">Ansökningar</h1>
             <div className="staffContainer">
@@ -61,12 +61,12 @@ function Apply() {
         <div className="form">
           <div className="createFormDiv">
             <div className="input">
-              {!authorized ? (
+              {!props.authorized ? (
                 <h1 className="h1Staff">Ansökan till Utbildning</h1>
               ) : (
                 <h1 className="h1Staff">Ta bort Ansökan</h1>
               )}
-              {authorized ? (
+              {props.authorized ? (
                 <div>
                   <select
                     className="inputClass"
@@ -125,7 +125,7 @@ function Apply() {
                 ></input>
               </div>
 
-              {authorized ? (
+              {props.authorized ? (
                 <div className="btnSpace">
                   <button
                     className="inputBtn"
@@ -180,7 +180,7 @@ function Apply() {
             </div>
           </div>
         </div>
-        {!authorized ? (
+        {!props.authorized ? (
           <div>
             {/* <img className="girlImg" src={color} alt="computer" /> */}
 
