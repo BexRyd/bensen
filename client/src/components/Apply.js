@@ -14,7 +14,7 @@ function Apply(props) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [getEducation, setGetEducation] = useState([]);
-  // const [authorized, setAuthorized] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   useEffect(() => {
     get("/Apply").then((response) => setApply(response.data));
@@ -170,9 +170,11 @@ function Apply(props) {
 
                       setDateId(Date.now());
                       get("/Apply").then((response) => setApply(response.data));
-                      get("/Education").then((response) =>
-                        setGetEducation(response.data)
-                      );
+                      get("/Education").then((response) => {
+                        setGetEducation(response.data);
+
+                        setPopup(true);
+                      });
                     }}
                   >
                     Skicka Ansökan
@@ -180,6 +182,16 @@ function Apply(props) {
                 </div>
               )}
             </div>
+
+            {popup ? (
+              <div className="poppUp">
+                <p>Tack för din ansökan!</p>
+
+                <button className="poppupBtn" onClick={() => setPopup(false)}>
+                  Ok
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
         {!props.authorized ? (

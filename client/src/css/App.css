@@ -160,3 +160,23 @@
     left: 600px;
   }
 }
+.poppUp {
+  background-color: white;
+  width: 350px;
+  height: 150px;
+  position: absolute;
+  z-index: 3;
+  top: 100px;
+  left: 40%;
+  padding: 1% 2% 2% 2%;
+}
+.poppupBtn {
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(13, 132, 211, 0.734);
+  border: none;
+  font-family: "Lora", serif;
+}
