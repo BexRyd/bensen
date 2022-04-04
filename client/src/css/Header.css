@@ -107,8 +107,8 @@ li {
 
 .popUp {
   background-color: white;
-  width: 250px;
-  height: 100px;
+  width: 350px;
+  height: 150px;
   position: absolute;
   z-index: 3;
   top: 300px;
