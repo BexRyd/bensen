@@ -1,7 +1,6 @@
-import React from "react";
 import "../css/App.css";
 import { get, post, put, erase } from "../utility/educationApi.js"; // get the same from Rebecca to add api to teacher
-import { useState, useEffect } from "react";
+import { useState, useEffect, React } from "react";
 import codeRep from "../img/code_repeat.jpg";
 
 function Courses(props) {
@@ -13,7 +12,6 @@ function Courses(props) {
   const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
-  // const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Courses").then((response) => setCourse(response.data));
@@ -139,7 +137,7 @@ function Courses(props) {
                     teacher: chooseTeacher,
                     courseLength: courseLength,
                     courseDescription: courseDescription,
-                  }).then((response) =>
+                  }).then(() =>
                     get("/Courses").then((response) => setCourse(response.data))
                   );
                 }}
