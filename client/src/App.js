@@ -1,6 +1,6 @@
 import "./css/App.css";
 import { Routes, Route } from "react-router-dom";
-import "./components/Home";
+
 import Education from "./components/Education";
 import Courses from "./components/Courses";
 import Staff from "./components/Staff";
@@ -12,21 +12,30 @@ import { useState } from "react";
 
 //import Home from "./components/Home";
 
-
 function App() {
-const [authorized, setAuthorized] = useState(false)
+  const [authorized, setAuthorized] = useState(false);
 
   return (
     <div className="App">
-    <Header setLoggInPage={() => setAuthorized(authorized)} />
-     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Education" element={<Education />} />
-        <Route path="/Courses" element={<Courses />} />
-        <Route path="/Staff" element={<Staff />} />
-        <Route path="/Apply" element={<Apply />} />
+      <Header
+        setLoggInPage={(logginValue) => {
+          setAuthorized(logginValue);
+          console.log(logginValue);
+        }}
+      />
+
+      <Routes>
+        <Route path="/" element={<Home authorized={authorized} />} />
+        <Route
+          path="/Education"
+          element={<Education authorized={authorized} />}
+        />
+        <Route path="/Courses" element={<Courses authorized={authorized} />} />
+        <Route path="/Staff" element={<Staff authorized={authorized} />} />
+        <Route path="/Apply" element={<Apply authorized={authorized} />} />
       </Routes>
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }

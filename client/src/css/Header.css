@@ -45,10 +45,10 @@ li {
 }
 
 .logo {
-  width: 450px;
-  height: 300px;
+  width: 350px;
+  height: auto;
   position: absolute;
-  top: -110px;
+  top: -90px;
   right: 50px;
 }
 
@@ -123,4 +123,15 @@ li {
   background-color: rgba(13, 132, 211, 0.734);
   border: none;
   font-family: "Lora", serif;
+}
+
+@media screen and (min-width: 1400px) {
+  .headerBackgroundImg {
+    height: 200px;
+  }
+  .logo {
+    width: 450px;
+    top: -110px;
+    right: 50px;
+  }
 }
