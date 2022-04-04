@@ -58,8 +58,8 @@ updateEducation = async (req, res) => {
                 message: 'Education not found!',
             })
         }
-        education.Utbildningsledare = body.Utbildningsledare
         education.Utbildning =body.Utbildning
+        education.Utbildningsledare = body.Utbildningsledare
         education.Kursnamn = body.Kursnamn
         education.Beskrivning = body.Beskrivning
         

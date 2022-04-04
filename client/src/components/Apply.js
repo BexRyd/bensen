@@ -184,7 +184,7 @@ function Apply(props) {
         </div>
         {!props.authorized ? (
           <div>
-            {/* <img className="girlImg" src={color} alt="computer" /> */}
+            <img className="colorImg" src={color} alt="computer" />
 
             <div className="applyEducationPosition">
               <ul className="applyEducation">
