@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import color from "../img/color.jpg";
 import { get, post, put, erase } from "../utility/educationApi.js";
 import "../css/App.css";
@@ -20,7 +21,6 @@ function Apply(props) {
   }, []);
   return (
     <div>
-      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         {props.authorized ? (
           <div className="staffList">
@@ -209,8 +209,6 @@ function Apply(props) {
           </div>
         ) : null}
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
 }
