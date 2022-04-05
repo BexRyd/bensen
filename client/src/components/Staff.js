@@ -68,8 +68,8 @@ function Staff(props) {
                   value={id}
                   onChange={(event) => setId(event.target.value)}
                 >
-                  <option value="" selected disabled hidden>
-                    Välj Id
+                  <option value="" selected display hidden>
+                    Välj id för att ta bort
                   </option>
                   {staff.map((staff) => {
                     return (

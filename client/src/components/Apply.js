@@ -134,7 +134,7 @@ function Apply(props) {
                       get("/Apply").then((response) => setApply(response.data));
                     }}
                   >
-                    Ta bort
+                    Radera
                   </button>
                   <div className="space"></div>
                   <button
