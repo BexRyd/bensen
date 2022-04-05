@@ -1,6 +1,6 @@
 const Course = require("../models/courseModels");
 
-createCourse = (req, res) => {
+const createCourse = (req, res) => {
   const body = req.body;
 
   if (!body) {
@@ -19,7 +19,7 @@ createCourse = (req, res) => {
   course.save();
 };
 
-getCourse = async (req, res) => {
+const getCourse = async (_req, res) => {
   await Course.find({}, (err, course) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
@@ -35,7 +35,7 @@ getCourse = async (req, res) => {
     .catch((err) => console.log(err));
 };
 
-updateCourse = async (req, res) => {
+const updateCourse = async (req, res) => {
   const body = req.body;
 
   if (!body) {
@@ -69,7 +69,7 @@ updateCourse = async (req, res) => {
     .catch((err) => console.log(err));
 };
 
-deleteCourse = async (req, res) => {
+const deleteCourse = async (req, res) => {
   await Course.findOneAndDelete({ id: req.params.id }, (err, course) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
