@@ -149,8 +149,9 @@ function Staff(props) {
                     profession: profession,
                     email: email,
                     account: account,
-                  }).then((response) => console.log(response));
-                  get("/Staff").then((response) => setStaff(response.data));
+                  }).then((response) =>
+                    get("/Staff").then((response) => setStaff(response.data))
+                  );
                 }}
               >
                 Uppdatera

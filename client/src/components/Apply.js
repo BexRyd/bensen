@@ -146,8 +146,11 @@ function Apply(props) {
                         lastName: lastName,
                         education: education,
                         email: email,
-                      }).then((response) => console.log(response));
-                      get("/Apply").then((response) => setApply(response.data));
+                      }).then((response) =>
+                        get("/Apply").then((response) =>
+                          setApply(response.data)
+                        )
+                      );
                     }}
                   >
                     Uppdatera
