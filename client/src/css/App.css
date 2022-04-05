@@ -65,7 +65,9 @@
   font-family: "Lora", serif;
   background-color: white;
   box-shadow: 5px 2px 2px rgba(0, 0, 0, 0.322), 0 2px 20px #00000059;
-  line-height: 0;
+}
+.courseDescription {
+  word-wrap: break-word;
 }
 .container {
   position: relative;

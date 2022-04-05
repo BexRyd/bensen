@@ -39,7 +39,7 @@ function Courses(props) {
                       <p>
                         <b>Kursnamn:</b> {courses.courseName}
                       </p>
-                      <p>
+                      <p className="courseDescription">
                         <b>Kursbeskrivning:</b> {courses.courseDescription}
                       </p>
                       <p>
