@@ -22,7 +22,6 @@ function Courses(props) {
   console.log(props);
   return (
     <div className="courseContainer">
-      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Kurslista</h1>
@@ -74,7 +73,7 @@ function Courses(props) {
                   placeholder="Kursbeskrivning"
                   onChange={(e) => setCourseDescription(e.target.value)}
                 ></input>
-                {/* varför skriver den in lit om och om igen varje gång man klickar */}
+
                 <select
                   className="inputClass"
                   value={chooseTeacher}
