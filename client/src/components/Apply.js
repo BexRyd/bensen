@@ -73,7 +73,7 @@ function Apply(props) {
                     placeholder="Id för den du vill ändra"
                   >
                     <option value="" selected display hidden>
-                      Välj id för att ta bort
+                      Välj id
                     </option>
                     {apply.map((applys) => {
                       return (
