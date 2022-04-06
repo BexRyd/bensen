@@ -64,7 +64,9 @@
   font-family: "Lora", serif;
   background-color: white;
   box-shadow: 5px 2px 2px rgba(0, 0, 0, 0.322), 0 2px 20px #00000059;
-  line-height: 0;
+ 
+  
+  
 }
 .container {
   position: relative;
@@ -96,6 +98,14 @@
   height: auto;
   color: white;
   padding: 0 0 40px 10px;
+}
+
+.staffList1{
+  overflow:scroll ;
+  word-break:break-all;
+  overflow-wrap:break-all;
+  overflow-y:scroll;
+  padding:20px;
 }
 
 .input {
@@ -160,3 +170,8 @@
     left: 600px;
   }
 }
+
+.pDescription{
+  word-wrap: break-word;
+}
+
