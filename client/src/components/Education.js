@@ -32,12 +32,12 @@ function Education(props) {
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Utbildningslista</h1>
-          <div className="staffContainer">
+          <div className="staffContainer staffContainer1">
             <ul>
               {eventLists.map((eventList) => {
                 return (
-                  <div>
-                    <li className="staffName" key={eventList.id}>
+                  <div className="paragaraphBox">
+                    <li className="staffName textp" key={eventList.id}>
                       {props.authorized ? (
                         <p>
                           <b>id:</b> {eventList.id}
@@ -53,9 +53,11 @@ function Education(props) {
                       <p>
                         <b>Kurs:</b> {eventList.Kursnamn}
                       </p>{" "}
-                      <p>
+                       
+                      <p className="pDescription">
                         <b>Beskrivning:</b> {eventList.Beskrivning}
-                      </p>{" "}
+                      </p>
+                    
                     </li>
                   </div>
                 );
@@ -69,35 +71,75 @@ function Education(props) {
             <div className="createFormDiv">
               <div className="input">
                 <h2 className="h1Staff">Skapa Utbildning</h2>
-                <input
+                
+                
+                
+                <select
                   className="inputClass"
                   value={eventLists.id}
-                  onChange={(event) => {
-                    console.log(event.target.value);
-                    setId(event.target.value);
-                  }}
-                  placeholder="Id för den du vill ändra"
-                ></input>
+                  onChange={(event) => setId(event.target.value)}
+                 >
+                  <option value="" selected disabled hidden>
+                    Välj Id
+                  </option>
+                  {eventLists.map((eventList) => {
+                    return (
+                  <option className="option" key={eventList.id}>
+                        {`${eventList.id}  `}
+                  </option>
+                    );
+                  })}
+
+                </select>
+               
+               
+               
                 <select
                   className="inputClass"
                   value={chooseLeader}
                   onChange={(event) => setChooseLeader(event.target.value)}
-                >
-                  {" "}
+                 >
+                  
                   <option value="" selected disabled hidden>
                     Välj Utbildningsledare
                   </option>
-                  {leaders.map((leader) => {
+
+                    {leaders.map((leader) => {
                     if (leader.profession === "Utbildningsledare") {
                       return (
-                        <option className="inputClass" key={leaders.id}>
+
+                  <option className="inputClass" key={leaders.id}>
                           {`${leader.firstName} ${leader.lastName} `}
-                        </option>
+                  </option>
                       );
                     }
                   })}
+
                 </select>
 
+               
+
+                <select
+                  className="inputClass"
+                  value={chooseCourse}
+                  onChange={(event) => setChooseCourse(event.target.value)}
+                 >
+                  
+                  <option value="" selected disabled hidden>
+                    Välj Kurs
+                  </option>
+                    {courses.map((course) => {
+                     return (
+
+                  <option className="option" key={course.id}>
+                    {` ${course.courseName}`}
+                  </option>
+                    );
+                  })}
+                </select>
+
+                
+                
                 <input
                   className="inputClass"
                   value={chooseEvent}
@@ -105,32 +147,19 @@ function Education(props) {
                   placeholder="Utbildningsnamn"
                 ></input>
 
-                <select
-                  className="inputClass"
-                  value={chooseCourse}
-                  onChange={(event) => setChooseCourse(event.target.value)}
-                >
-                  {" "}
-                  <option value="" selected disabled hidden>
-                    Välj Kurs
-                  </option>
-                  {courses.map((course) => {
-                    return (
-                      <option className="option" key={course.id}>
-                        {` ${course.courseName}`}
-                      </option>
-                    );
-                  })}
-                </select>
-
+                
+                
                 <textarea
                   className="beskrivningBox"
                   value={chooseDescription}
                   onChange={(event) => setChooseDescription(event.target.value)}
                   rows="10"
                   cols="30"
-                ></textarea>
+                  >
+
+                </textarea>
               </div>
+             
               <button
                 className="inputBtn"
                 onClick={() => {
@@ -140,7 +169,7 @@ function Education(props) {
                     Utbildning: chooseEvent,
                     Kursnamn: chooseCourse,
                     Beskrivning: chooseDescription,
-                  }).then((response) => console.log(response));
+                  })
                   setNewId(Date.now());
                   get("/Education").then((response) =>
                     seteventLists(response.data)
@@ -148,10 +177,12 @@ function Education(props) {
                   get("/Courses").then((response) => setCourses(response.data));
                   get("/Staff").then((response) => setLeaders(response.data));
                 }}
-              >
+                >
                 Lägg till
               </button>
+
               <div className="space"></div>
+              
               <button
                 className="inputBtn"
                 onClick={() => {
@@ -161,15 +192,16 @@ function Education(props) {
                     Utbildning: chooseEvent,
                     Kursnamn: chooseCourse,
                     Beskrivning: chooseDescription,
-                  }).then((response) => console.log(response));
-                  get("/Education").then((response) =>
+                  }).then((response) => get("/Education").then((response) =>
                     seteventLists(response.data)
-                  );
+                  ));
                 }}
-              >
+                 >
                 Uppdatera
               </button>
+              
               <div className="space"></div>
+              
               <button
                 className="inputBtn"
                 onClick={() => {
@@ -180,16 +212,20 @@ function Education(props) {
                     );
                   }
                 }}
-              >
+                >
                 Radera
               </button>
+            
             </div>
+
           </div>
         ) : (
+          
           <div>
             <img className="manImg" src={guy} alt="computer" />
           </div>
         )}
+      
       </div>
       {/* <Footer /> */}
     </div>
