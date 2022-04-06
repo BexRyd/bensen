@@ -65,15 +65,12 @@
   font-family: "Lora", serif;
   background-color: white;
   box-shadow: 5px 2px 2px rgba(0, 0, 0, 0.322), 0 2px 20px #00000059;
-<<<<<<< HEAD
  
   
   
-=======
 }
 .courseDescription {
   word-wrap: break-word;
->>>>>>> 3620fc5ec44900c994a017462332d9e9a5f412bc
 }
 .container {
   position: relative;
