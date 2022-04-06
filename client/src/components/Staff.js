@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import Header from "./Header";
-// import Footer from "./Footer";
+
 import girl from "../img/girl.png";
 import "../css/App.css";
 import { get, post, put, erase } from "../utility/educationApi.js";
@@ -14,7 +13,6 @@ function Staff(props) {
   const [profession, setProfession] = useState("");
   const [email, setEmail] = useState("");
   const [account, setAccount] = useState("");
-  // const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Staff").then((response) => setStaff(response.data));
@@ -22,7 +20,6 @@ function Staff(props) {
 
   return (
     <div>
-      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Personal Lista</h1>
@@ -71,8 +68,8 @@ function Staff(props) {
                   value={id}
                   onChange={(event) => setId(event.target.value)}
                 >
-                  <option value="" selected disabled hidden>
-                    Välj Id
+                  <option value="" selected display hidden>
+                    Välj id
                   </option>
                   {staff.map((staff) => {
                     return (
@@ -152,8 +149,9 @@ function Staff(props) {
                     profession: profession,
                     email: email,
                     account: account,
-                  }).then((response) => console.log(response));
-                  get("/Staff").then((response) => setStaff(response.data));
+                  }).then((response) =>
+                    get("/Staff").then((response) => setStaff(response.data))
+                  );
                 }}
               >
                 Uppdatera
@@ -176,8 +174,6 @@ function Staff(props) {
           </div>
         )}
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
 }

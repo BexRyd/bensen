@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import Header from "./Header";
-// import Footer from "./Footer";
+
 import color from "../img/color.jpg";
 import { get, post, put, erase } from "../utility/educationApi.js";
 import "../css/App.css";
@@ -14,7 +13,7 @@ function Apply(props) {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [getEducation, setGetEducation] = useState([]);
-  // const [authorized, setAuthorized] = useState(false);
+  const [popup, setPopup] = useState(false);
 
   useEffect(() => {
     get("/Apply").then((response) => setApply(response.data));
@@ -22,7 +21,6 @@ function Apply(props) {
   }, []);
   return (
     <div>
-      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         {props.authorized ? (
           <div className="staffList">
@@ -75,7 +73,7 @@ function Apply(props) {
                     placeholder="Id för den du vill ändra"
                   >
                     <option value="" selected display hidden>
-                      Välj id för att ta bort
+                      Välj id
                     </option>
                     {apply.map((applys) => {
                       return (
@@ -136,7 +134,7 @@ function Apply(props) {
                       get("/Apply").then((response) => setApply(response.data));
                     }}
                   >
-                    Ta bort
+                    Radera
                   </button>
                   <div className="space"></div>
                   <button
@@ -148,8 +146,11 @@ function Apply(props) {
                         lastName: lastName,
                         education: education,
                         email: email,
-                      }).then((response) => console.log(response));
-                      get("/Apply").then((response) => setApply(response.data));
+                      }).then((response) =>
+                        get("/Apply").then((response) =>
+                          setApply(response.data)
+                        )
+                      );
                     }}
                   >
                     Uppdatera
@@ -170,9 +171,11 @@ function Apply(props) {
 
                       setDateId(Date.now());
                       get("/Apply").then((response) => setApply(response.data));
-                      get("/Education").then((response) =>
-                        setGetEducation(response.data)
-                      );
+                      get("/Education").then((response) => {
+                        setGetEducation(response.data);
+
+                        setPopup(true);
+                      });
                     }}
                   >
                     Skicka Ansökan
@@ -180,6 +183,16 @@ function Apply(props) {
                 </div>
               )}
             </div>
+
+            {popup ? (
+              <div className="poppUp">
+                <p>Tack för din ansökan!</p>
+
+                <button className="poppupBtn" onClick={() => setPopup(false)}>
+                  Ok
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
         {!props.authorized ? (
@@ -199,8 +212,6 @@ function Apply(props) {
           </div>
         ) : null}
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
 }

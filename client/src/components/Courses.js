@@ -1,7 +1,6 @@
-import React from "react";
 import "../css/App.css";
 import { get, post, put, erase } from "../utility/educationApi.js"; // get the same from Rebecca to add api to teacher
-import { useState, useEffect } from "react";
+import { useState, useEffect, React } from "react";
 import codeRep from "../img/code_repeat.jpg";
 
 function Courses(props) {
@@ -13,7 +12,6 @@ function Courses(props) {
   const [courseName, setCourseName] = useState("");
   const [courseDescription, setCourseDescription] = useState("");
   const [courseLength, setCourseLength] = useState("");
-  // const [authorized, setAuthorized] = useState(false);
 
   useEffect(() => {
     get("/Courses").then((response) => setCourse(response.data));
@@ -24,7 +22,6 @@ function Courses(props) {
   console.log(props);
   return (
     <div className="courseContainer">
-      {/* <Header setLoggInPage={(authorized) => setAuthorized(authorized)} /> */}
       <div className="container">
         <div className="staffList">
           <h1 className="h1Staff">Kurslista</h1>
@@ -42,7 +39,7 @@ function Courses(props) {
                       <p>
                         <b>Kursnamn:</b> {courses.courseName}
                       </p>
-                      <p>
+                      <p className="courseDescription">
                         <b>Kursbeskrivning:</b> {courses.courseDescription}
                       </p>
                       <p>
@@ -76,7 +73,7 @@ function Courses(props) {
                   placeholder="Kursbeskrivning"
                   onChange={(e) => setCourseDescription(e.target.value)}
                 ></input>
-                {/* varför skriver den in lit om och om igen varje gång man klickar */}
+
                 <select
                   className="inputClass"
                   value={chooseTeacher}
@@ -139,8 +136,9 @@ function Courses(props) {
                     teacher: chooseTeacher,
                     courseLength: courseLength,
                     courseDescription: courseDescription,
-                  }).then((response) => console.log(response));
-                  get("/Courses").then((response) => setCourse(response.data));
+                  }).then(() =>
+                    get("/Courses").then((response) => setCourse(response.data))
+                  );
                 }}
               >
                 Uppdatera
